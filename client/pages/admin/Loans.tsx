@@ -221,8 +221,17 @@ export default function AdminLoans() {
   const [riskFilter, setRiskFilter] = useState("all");
   const [selectedLoan, setSelectedLoan] = useState<any>(null);
   const [actionDialog, setActionDialog] = useState<{ type: string; loan: any } | null>(null);
+  const [allLoans, setAllLoans] = useState(mockLoans);
   const [filteredLoans, setFilteredLoans] = useState(mockLoans);
   const [activeTab, setActiveTab] = useState("applications");
+
+  // Load real applications on mount
+  useEffect(() => {
+    const realApplications = loadApplicationsFromStorage();
+    const combined = [...realApplications, ...mockLoans];
+    setAllLoans(combined);
+    setFilteredLoans(combined);
+  }, []);
 
   useEffect(() => {
     let filtered = mockLoans;
