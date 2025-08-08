@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Brand Colors -->
+    <color name="primary_color">#2563eb</color>
+    <color name="primary_dark">#1d4ed8</color>
+    <color name="primary_light">#3b82f6</color>
+    
+    <!-- Secondary Colors -->
+    <color name="secondary_color">#10b981</color>
+    <color name="secondary_dark">#059669</color>
+    <color name="secondary_light">#34d399</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_color">#f59e0b</color>
+    <color name="accent_dark">#d97706</color>
+    <color name="accent_light">#fbbf24</color>
+    
+    <!-- Status Colors -->
+    <color name="success_color">#10b981</color>
+    <color name="warning_color">#f59e0b</color>
+    <color name="error_color">#ef4444</color>
+    <color name="info_color">#3b82f6</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#1f2937</color>
+    <color name="text_secondary">#6b7280</color>
+    <color name="text_tertiary">#9ca3af</color>
+    <color name="text_white">#ffffff</color>
+    
+    <!-- Background Colors -->
+    <color name="background_primary">#ffffff</color>
+    <color name="background_secondary">#f9fafb</color>
+    <color name="background_tertiary">#f3f4f6</color>
+    <color name="background_dark">#1f2937</color>
+    
+    <!-- Border Colors -->
+    <color name="border_light">#e5e7eb</color>
+    <color name="border_medium">#d1d5db</color>
+    <color name="border_dark">#9ca3af</color>
+    
+    <!-- Special Colors -->
+    <color name="overlay_dark">#80000000</color>
+    <color name="overlay_light">#80ffffff</color>
+    <color name="transparent">#00000000</color>
+    
+    <!-- Loan Status Colors -->
+    <color name="loan_pending">#f59e0b</color>
+    <color name="loan_approved">#10b981</color>
+    <color name="loan_rejected">#ef4444</color>
+    <color name="loan_disbursed">#3b82f6</color>
+    
+    <!-- Admin Panel Colors -->
+    <color name="admin_primary">#1e40af</color>
+    <color name="admin_secondary">#059669</color>
+    <color name="admin_background">#f8fafc</color>
+    
+</resources>
