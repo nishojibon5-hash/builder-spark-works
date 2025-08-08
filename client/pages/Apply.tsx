@@ -66,7 +66,7 @@ export default function Apply() {
   const text = {
     bn: {
       title: "ঋণের আবেদন",
-      subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন ��রুন",
+      subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন করুন",
       steps: {
         loan: "ঋণের তথ্য",
         personal: "ব্যক্তিগত তথ্য",
@@ -74,7 +74,7 @@ export default function Apply() {
         review: "পর্যালোচনা"
       },
       loanDetails: {
-        title: "ঋণের বিবরণ",
+        title: "ঋণের বি���রণ",
         type: "ঋণের ধরন",
         amount: "ঋণের পরিমাণ (টাকা)",
         tenure: "মেয়াদ (মাস)",
@@ -98,7 +98,7 @@ export default function Apply() {
         dob: "জন্ম তারিখ",
         nid: "জাতীয় পরিচয়পত্র যাচাইকরণ",
         address: "ঠিকানা",
-        enterName: "আপনার পূর্ণ নাম লিখুন",
+        enterName: "��পনার পূর্ণ নাম লিখুন",
         enterPhone: "মোবাইল নম্বর লিখুন",
         enterEmail: "ইমেইল ঠিকানা লিখুন",
         enterAddress: "সম্পূর্ণ ঠিকানা ল��খুন"
@@ -112,7 +112,7 @@ export default function Apply() {
         selectEmployment: "চাকর���র ধরন নির্বাচন করুন",
         enterEmployer: "প্রতিষ্ঠানের নাম লিখুন",
         enterIncome: "মাসিক আয় লিখুন",
-        enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখ���ন (যদি থাকে)"
+        enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখুন (যদি থাকে)"
       },
       employmentTypes: {
         salaried: "বেতনভোগী কর্মচারী",
@@ -145,7 +145,7 @@ export default function Apply() {
         calculate: "গণনা করুন"
       },
       validation: {
-        required: "এই ক্ষেত্রটি আবশ্যক",
+        required: "এই ক্ষেত্রটি আবশ্��ক",
         invalidPhone: "সঠিক মোবাইল নম্বর দিন",
         invalidEmail: "সঠিক ইমেইল ঠিকানা দিন",
         invalidAmount: "সঠিক পরিমাণ দিন"
@@ -311,7 +311,7 @@ export default function Apply() {
       case 1:
         return formData.loanType && formData.amount && formData.tenure && formData.purpose;
       case 2:
-        return formData.name && formData.phone && formData.dob && formData.nid && formData.address;
+        return formData.name && formData.phone && formData.dob && formData.nidVerified && formData.address;
       case 3:
         return formData.employmentType && formData.employer && formData.monthlyIncome;
       default:
@@ -381,7 +381,7 @@ export default function Apply() {
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনার ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
