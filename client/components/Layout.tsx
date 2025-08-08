@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe, Phone, CreditCard, Calculator, User, Shield } from "lucide-react";
+import { Menu, X, Globe, Phone, CreditCard, Calculator, User, Shield, Smartphone, Download } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -314,7 +314,7 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="border-t border-border mt-8 pt-6">
             <p className="text-center text-sm text-muted-foreground">
-              © 2024 {currentText.companyName}. {language === 'bn' ? 'সকল অধিকার সংরক্ষিত।' : 'All rights reserved.'}
+              © 2024 {currentText.companyName}. {language === 'bn' ? 'স���ল অধিকার সংরক্ষিত।' : 'All rights reserved.'}
             </p>
           </div>
         </div>
