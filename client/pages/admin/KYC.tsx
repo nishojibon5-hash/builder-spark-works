@@ -47,7 +47,7 @@ import {
   FileText,
   Upload,
   Image as ImageIcon,
-  Zoom,
+  ZoomIn,
   RotateCw,
   RotateCcw,
   User,
