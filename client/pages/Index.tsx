@@ -236,7 +236,7 @@ export default function Index() {
     {
       title: language === 'bn' ? "নিরাপদ ও দ্রুত ডিজিটাল ঋণ" : "Secure & Fast Digital Loans",
       subtitle: language === 'bn' ? "সম্পূর্ণ অনলাইন প্রক্রিয়া। কাগজপত্রের ঝামেলা নেই।" : "Complete online process. No paperwork hassle.",
-      highlight: language === 'bn' ? "১০০% ডিজিটাল" : "100% Digital",
+      highlight: language === 'bn' ? "১০০% ���িজিটাল" : "100% Digital",
       bg: "bg-gradient-to-br from-success/10 via-success/5 to-background"
     },
     {
@@ -361,6 +361,85 @@ export default function Index() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Direct APK Download Section */}
+      <section className="py-8 bg-gradient-to-r from-orange-500 to-red-500 text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex items-center mb-4 md:mb-0">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                <Download className="w-8 h-8 text-orange-500" />
+              </div>
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold">
+                  {language === 'bn' ? '📱 Android অ্যাপ ডাউনলোড' : '📱 Download Android App'}
+                </h2>
+                <p className="text-orange-100">
+                  {language === 'bn' ? 'সরাসরি ডাউনলোড করুন - সহজ ইনস্টল!' : 'Direct Download - Easy Install!'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button
+                size="lg"
+                className="h-14 px-8 bg-white text-orange-600 hover:bg-orange-50 font-bold shadow-lg"
+                onClick={() => {
+                  // Direct download without confirmation
+                  const link = document.createElement('a');
+                  link.href = '/LoanBondhu.apk';
+                  link.download = 'LoanBondhu.apk';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+
+                  // Show simple install instructions
+                  setTimeout(() => {
+                    alert(language === 'bn'
+                      ? '✅ ডাউনলোড শুরু হয়েছে!\n\n📱 ইনস্টল করতে:\n1. ডাউনলোড ফোল্ডার খুলুন\n2. LoanBondhu.apk ফাইলে ট্যাপ করুন\n3. "ইনস্টল" বাটনে ট্যাপ করুন\n\n⚠️ "অজানা উৎস" সক্রিয় করতে হতে পারে'
+                      : '✅ Download Started!\n\n📱 To Install:\n1. Open Downloads folder\n2. Tap LoanBondhu.apk file\n3. Tap "Install" button\n\n⚠️ May need to enable "Unknown Sources"');
+                  }, 1000);
+                }}
+              >
+                <Download className="w-5 h-5 mr-2" />
+                {language === 'bn' ? 'APK ডাউনলোড' : 'Download APK'}
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-14 px-6 border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold"
+                onClick={() => {
+                  alert(language === 'bn'
+                    ? '📱 সহজ ইনস্টল গাইড:\n\n1️⃣ সেটিংস > নিরাপত্তা > "অজানা উৎস" সক্রিয় করুন\n\n2️⃣ উপরের "APK ডাউনলোড" বাটনে ট্যাপ করুন\n\n3️⃣ ডাউনলোড সম্��ূর্ণ হলে ফাইলটি খুলুন\n\n4️⃣ "ইনস্টল" এ ট্যাপ করুন\n\n5️⃣ অ্যাপ খুলুন এবং ব্যবহার করুন!\n\n🔐 অ্যাডমিন: 01650074073'
+                    : '📱 Easy Install Guide:\n\n1️⃣ Settings > Security > Enable "Unknown Sources"\n\n2️⃣ Tap "Download APK" button above\n\n3️⃣ Open file when download completes\n\n4️⃣ Tap "Install"\n\n5️⃣ Open app and use!\n\n🔐 Admin: 01650074073');
+                }}
+              >
+                {language === 'bn' ? '📖 ইনস্টল গাইড' : '📖 Install Guide'}
+              </Button>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="bg-white/10 rounded-lg p-3">
+              <div className="text-2xl mb-1">📱</div>
+              <div className="text-sm">{language === 'bn' ? 'Android 5.0+' : 'Android 5.0+'}</div>
+            </div>
+            <div className="bg-white/10 rounded-lg p-3">
+              <div className="text-2xl mb-1">💾</div>
+              <div className="text-sm">{language === 'bn' ? '12 MB সাইজ' : '12 MB Size'}</div>
+            </div>
+            <div className="bg-white/10 rounded-lg p-3">
+              <div className="text-2xl mb-1">🔒</div>
+              <div className="text-sm">{language === 'bn' ? 'সম্পূর্ণ নিরাপদ' : 'Completely Safe'}</div>
+            </div>
+            <div className="bg-white/10 rounded-lg p-3">
+              <div className="text-2xl mb-1">🏦</div>
+              <div className="text-sm">{language === 'bn' ? 'ব্যাংক গ্রেড' : 'Bank Grade'}</div>
             </div>
           </div>
         </div>
@@ -719,7 +798,7 @@ Download now?`;
                   }}
                   className="text-sm text-green-200 hover:text-white underline"
                 >
-                  {language === 'bn' ? '🌐 ওয়েব অ্যাপ ব্যবহার করুন' : '🌐 Use Web App Instead'}
+                  {language === 'bn' ? '🌐 ওয়েব অ্যাপ ব্য��হার করুন' : '🌐 Use Web App Instead'}
                 </button>
               </div>
             </div>
