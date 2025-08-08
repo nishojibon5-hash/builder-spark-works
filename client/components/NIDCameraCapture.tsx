@@ -72,6 +72,10 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       verifying: "যাচাই করা হচ্ছে...",
       verified: "সফলভাবে যাচাই হয়েছে",
       failed: "যাচাই ব্যর্থ হয়েছে",
+      uploadOption: "ছবি আপলোড করুন",
+      useCamera: "ক্যামেরা ব্যবহার করুন",
+      selectFile: "এনআইডি ছবি নির্বাচন করুন",
+      troubleshoot: "ক্যামেরা কাজ করছে না?",
       instructions: {
         position: "আপনার এনআইডি কার্ডটি ক্যামেরার সামনে রাখুন",
         lighting: "ভালো আলোতে রাখুন",
@@ -82,7 +86,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
         cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
         nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
-        poorQuality: "ছবির মান ভালো নয়",
+        poorQuality: "ছবি�� মান ভালো নয়",
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
       },
       fields: {
@@ -462,7 +466,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                   <div>
                     <p className="text-sm font-medium">{language === 'bn' ? 'এনআইডি ছবি' : 'NID Image'}</p>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'সফলভাবে ক্যাপচার হয়েছে' : 'Successfully captured'}
+                      {language === 'bn' ? 'সফলভাবে ক্যাপচার হয়���ছে' : 'Successfully captured'}
                     </p>
                   </div>
                 </div>
