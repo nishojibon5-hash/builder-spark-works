@@ -23,7 +23,7 @@ export default function Layout({ children }: LayoutProps) {
         about: "আমাদের সম্পর্কে",
         contact: "যোগাযোগ",
         login: "লগইন",
-        adminLogin: "অ্যাডমিন লগইন",
+        adminLogin: "অ্যাডম���ন লগইন",
         apply: "আবেদন করুন"
       },
       contact: {
@@ -320,7 +320,7 @@ export default function Layout({ children }: LayoutProps) {
                   {language === 'bn' ? 'সুবিধাজনক মোবাইল অ্যাপ ডাউনলোড করুন' : 'Download our convenient mobile app'}
                 </p>
                 <Button
-                  className="w-full bg-green-600 hover:bg-green-700 text-white"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
                   onClick={() => {
                     // Check if already running in Android app
                     const isAndroidApp = navigator.userAgent.includes('LoanBondhuApp');
@@ -337,11 +337,45 @@ export default function Layout({ children }: LayoutProps) {
                     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
                     if (isMobile) {
-                      // For mobile, show installation instructions
-                      if (confirm(language === 'bn'
-                        ? 'LoanBondhu অ্যাপ ডাউনলোড করতে চান? ডাউনলোড শেষ হলে ফাইলটি খুলে ইনস্টল করুন।'
-                        : 'Download LoanBondhu app? After download completes, open the file to install the app.')) {
+                      // For mobile, show detailed installation instructions
+                      const instructions = language === 'bn'
+                        ? `📱 LoanBondhu অ্যাপ ইনস্টল করার নির্দেশনা:
 
+1. প্রথমে "অজানা উৎস" সক্রিয় করুন:
+   সেটিংস > নিরাপত্তা > অজানা উৎস (সক্রিয় করুন)
+
+2. APK ডাউনলোড করুন এবং খুলুন
+
+3. "ইনস্টল" বাটনে ট্যাপ করুন
+
+যদি "প্যাকেজ পার্স করতে সমস্যা" দেখায়:
+- Android 5.0+ প্রয়োজন
+- APK আবার ডাউনলোড করুন
+- পর্যাপ্ত স্টোরেজ স্পেস আছে কিনা দেখুন
+
+অ্যাডমিন অ্যাক্সেস: ফোন 01650074073
+
+এখনই ডাউনলোড করবেন?`
+                        : `📱 LoanBondhu App Installation Guide:
+
+1. Enable "Unknown Sources" first:
+   Settings > Security > Unknown Sources (Enable)
+   OR Settings > Privacy > Install Unknown Apps
+
+2. Download APK and open the file
+
+3. Tap "Install" when prompted
+
+If you see "Problem parsing package":
+- Ensure Android 5.0+ version
+- Re-download the APK file
+- Check sufficient storage space (50MB+)
+
+Admin Access: Phone 01650074073
+
+Download now?`;
+
+                      if (confirm(instructions)) {
                         // Download the APK file
                         const link = document.createElement('a');
                         link.href = '/LoanBondhu.apk';
@@ -350,21 +384,26 @@ export default function Layout({ children }: LayoutProps) {
                         link.click();
                         document.body.removeChild(link);
 
-                        // Show follow-up instructions
+                        // Show follow-up success message
                         setTimeout(() => {
                           alert(language === 'bn'
-                            ? 'ডাউনলোড সম্পূর্ণ হলে ফাইল ম্যানেজারে গিয়ে APK ফাইলটি খুলুন। "অজানা উৎস" থেকে ইনস্টলের অনুমতি দিন।'
-                            : 'Once download completes, go to file manager and open the APK file. Allow installation from unknown sources when prompted.');
-                        }, 1000);
+                            ? '✅ ডাউনলোড শুরু হয়েছে! ডাউনলোড ফোল্ডারে গিয়ে LoanBondhu.apk ফাইলটি খুলুন।'
+                            : '✅ Download started! Go to Downloads folder and open LoanBondhu.apk file.');
+                        }, 500);
                       }
                     } else {
-                      // For desktop, direct download
-                      const link = document.createElement('a');
-                      link.href = '/LoanBondhu.apk';
-                      link.download = 'LoanBondhu.apk';
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
+                      // For desktop, show instructions and download
+                      if (confirm(language === 'bn'
+                        ? 'এই APK ফাইলটি Android ডিভাইসে ইনস্টল করার জন্য। ডাউনলোড করবেন?'
+                        : 'This APK file is for Android devices. Download for transfer to your phone?')) {
+
+                        const link = document.createElement('a');
+                        link.href = '/LoanBondhu.apk';
+                        link.download = 'LoanBondhu.apk';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }
                     }
                   }}
                 >
