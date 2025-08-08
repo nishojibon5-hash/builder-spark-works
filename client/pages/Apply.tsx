@@ -10,19 +10,22 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import Layout from "@/components/Layout";
-import { 
-  Calculator, 
-  CreditCard, 
-  User, 
-  Building, 
-  FileText, 
-  CheckCircle, 
+import NIDCameraCapture from "@/components/NIDCameraCapture";
+import {
+  Calculator,
+  CreditCard,
+  User,
+  Building,
+  FileText,
+  CheckCircle,
   ArrowRight,
   ArrowLeft,
   Phone,
   Mail,
   Home,
-  Banknote
+  Banknote,
+  Camera,
+  Shield
 } from "lucide-react";
 
 export default function Apply() {
@@ -74,7 +77,7 @@ export default function Apply() {
         tenure: "মেয়াদ (মাস)",
         purpose: "ঋণের উদ্দেশ্য",
         selectType: "ঋণ��র ধরন নির্বাচন করুন",
-        selectTenure: "মেয়াদ নির্বাচন করুন",
+        selectTenure: "মেয়াদ নির��বাচন করুন",
         enterAmount: "পরিমাণ লি���ুন",
         describePurpose: "ঋণের উদ্দেশ্য বর্ণনা করুন"
       },
@@ -349,11 +352,11 @@ export default function Apply() {
               <CheckCircle className="w-10 h-10 text-green-600" />
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-4">
-              {language === 'bn' ? 'আবেদন সফলভাবে জমা হয়েছে!' : 'Application Submitted Successfully!'}
+              {language === 'bn' ? 'আবেদন সফলভাবে জমা ��য়েছে!' : 'Application Submitted Successfully!'}
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনার ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনার ঋণের আবে���ন আমাদের কাছে পৌঁছে���ে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
@@ -835,7 +838,7 @@ export default function Apply() {
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-4">
                     {language === 'bn' 
-                      ? 'আমাদের বিশেষজ্ঞ দল আপনাকে সাহায্য করতে প্রস্তুত।' 
+                      ? '��মাদের বিশেষজ্ঞ দল আপনাকে সাহায্য করতে প্রস্তুত।' 
                       : 'Our expert team is ready to help you.'}
                   </p>
                   <div className="space-y-2">
