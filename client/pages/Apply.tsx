@@ -63,7 +63,7 @@ export default function Apply() {
       subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন করুন",
       steps: {
         loan: "ঋণের তথ্য",
-        personal: "ব্যক���তিগত তথ্য",
+        personal: "ব্যক্তিগত তথ্য",
         employment: "চাকরির তথ্য",
         review: "পর্যালোচনা"
       },
@@ -109,7 +109,7 @@ export default function Apply() {
         enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখুন (যদি থাকে)"
       },
       employmentTypes: {
-        salaried: "বেতনভোগী কর্মচ���রী",
+        salaried: "বেতনভোগী কর্মচারী",
         business: "ব্যবসায়ী",
         freelancer: "ফ্রিল্যান্সার",
         other: "অন্যান্য"
@@ -139,7 +139,7 @@ export default function Apply() {
         calculate: "গণনা করুন"
       },
       validation: {
-        required: "এই ক্ষেত্রটি আবশ্যক",
+        required: "এই ক্ষেত্রটি আব��্যক",
         invalidPhone: "সঠিক মোবাইল নম্বর দিন",
         invalidEmail: "সঠিক ইমেইল ঠিকানা দিন",
         invalidAmount: "সঠিক পরিমাণ দিন"
@@ -680,9 +680,22 @@ export default function Apply() {
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     ) : (
-                      <Button className="flex items-center">
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        {currentText.buttons.submit}
+                      <Button
+                        className="flex items-center"
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2" />
+                            {language === 'bn' ? 'জমা দেওয়া হচ্ছে...' : 'Submitting...'}
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            {currentText.buttons.submit}
+                          </>
+                        )}
                       </Button>
                     )}
                   </div>
