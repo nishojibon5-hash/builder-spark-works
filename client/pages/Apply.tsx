@@ -66,9 +66,9 @@ export default function Apply() {
   const text = {
     bn: {
       title: "ঋণের আবেদন",
-      subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন করুন",
+      subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন ��রুন",
       steps: {
-        loan: "ঋণে�� তথ্য",
+        loan: "ঋণের তথ্য",
         personal: "ব্যক্তিগত তথ্য",
         employment: "চাকরির তথ্য",
         review: "পর্যালোচনা"
@@ -112,7 +112,7 @@ export default function Apply() {
         selectEmployment: "চাকর���র ধরন নির্বাচন করুন",
         enterEmployer: "প্রতিষ্ঠানের নাম লিখুন",
         enterIncome: "মাসিক আয় লিখুন",
-        enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখুন (যদি থাকে)"
+        enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখ���ন (যদি থাকে)"
       },
       employmentTypes: {
         salaried: "বেতনভোগী কর্মচারী",
@@ -279,11 +279,31 @@ export default function Apply() {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    
+
     // Auto-calculate when amount or tenure changes
     if (field === 'amount' || field === 'tenure' || field === 'loanType') {
       setTimeout(calculateLoan, 100);
     }
+  };
+
+  // Handle NID camera capture
+  const handleNIDCapture = (nidData: any, imageData: string) => {
+    setFormData(prev => ({
+      ...prev,
+      nid: nidData.nidNumber,
+      nidVerified: true,
+      nidImageData: imageData,
+      verifiedNidData: nidData,
+      // Auto-fill name and DOB if not already filled
+      name: prev.name || nidData.name,
+      dob: prev.dob || nidData.dateOfBirth
+    }));
+  };
+
+  // Handle NID verification error
+  const handleNIDError = (error: string) => {
+    console.error('NID verification error:', error);
+    // You could show a toast notification here
   };
 
   const validateStep = (currentStep: number) => {
@@ -826,7 +846,7 @@ export default function Apply() {
                   {calculation.emi === 0 && (
                     <div className="text-center text-muted-foreground py-8">
                       <Calculator className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                      <p>{language === 'bn' ? 'ঋণের তথ্�� পূরণ করুন গণনার জন্য' : 'Fill loan details to calculate'}</p>
+                      <p>{language === 'bn' ? 'ঋণের তথ্য পূরণ করুন গণনার জন্য' : 'Fill loan details to calculate'}</p>
                     </div>
                   )}
                 </CardContent>
