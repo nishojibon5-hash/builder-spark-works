@@ -257,11 +257,27 @@ export default function Layout({ children }: LayoutProps) {
                   {currentText.menu.login}
                 </Button>
 
-                <Button variant="outline" size="sm" className="w-full justify-start mb-2 border-orange-500 text-orange-600 hover:bg-orange-50" asChild>
-                  <Link to="/admin/login" onClick={() => setIsMenuOpen(false)}>
-                    <Shield className="w-4 h-4 mr-2" />
-                    {currentText.menu.adminLogin}
-                  </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-start mb-2 border-orange-500 text-orange-600 hover:bg-orange-50"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+
+                    // Check if running in Android app
+                    const isAndroidApp = navigator.userAgent.includes('LoanBondhuApp');
+
+                    if (isAndroidApp && (window as any).Android) {
+                      // Use native Android interface for admin access
+                      (window as any).Android.openAdmin('01650074073');
+                    } else {
+                      // Web browser - navigate normally
+                      window.location.href = '/admin/login';
+                    }
+                  }}
+                >
+                  <Shield className="w-4 h-4 mr-2" />
+                  {currentText.menu.adminLogin}
                 </Button>
               </div>
             </div>
