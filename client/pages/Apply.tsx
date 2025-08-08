@@ -83,7 +83,7 @@ export default function Apply() {
         selectType: "ঋণ��র ধরন নির্বাচন করুন",
         selectTenure: "মেয়াদ নির্বাচন করুন",
         enterAmount: "পরিমাণ লি���ুন",
-        describePurpose: "ঋণের উদ্��েশ্য বর্ণনা করুন"
+        describePurpose: "ঋণের উদ্দেশ্য বর্ণনা করুন"
       },
       loanTypes: {
         instant: "তাৎক্ষণিক মাইক্রোলোন",
@@ -109,7 +109,7 @@ export default function Apply() {
         type: "চাকরির ধরন",
         employer: "প্রতিষ্ঠানের নাম",
         income: "মাসিক আয় (টাকা)",
-        existingLoans: "বর্তমান ঋণ (টাকা)",
+        existingLoans: "বর্তমান ঋণ (��াকা)",
         selectEmployment: "চাকর���র ধরন নির্বাচন করুন",
         enterEmployer: "প্রতিষ্ঠানের নাম লিখুন",
         enterIncome: "মাসিক আয় লিখুন",
@@ -934,6 +934,11 @@ export default function Apply() {
                 </CardContent>
               </Card>
 
+              {/* Security Features Card - Only show on step 2 (NID verification) */}
+              {step === 2 && (
+                <SecurityFeatures language={language} />
+              )}
+
               {/* Help Card */}
               <Card>
                 <CardHeader>
@@ -944,14 +949,14 @@ export default function Apply() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-4">
-                    {language === 'bn' 
-                      ? 'আমাদের বিশেষজ্ঞ দল আপনাকে সাহায্য করতে প্রস্তুত।' 
+                    {language === 'bn'
+                      ? 'আমাদের বিশেষজ্ঞ দল আপনাকে সাহায্য করতে প্রস্তুত।'
                       : 'Our expert team is ready to help you.'}
                   </p>
                   <div className="space-y-2">
                     <Button variant="outline" size="sm" className="w-full justify-start">
                       <Phone className="w-4 h-4 mr-2" />
-                      017xxxxxxxx
+                      01650074073
                     </Button>
                     <Button variant="outline" size="sm" className="w-full justify-start">
                       <Mail className="w-4 h-4 mr-2" />
