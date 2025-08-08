@@ -37,7 +37,7 @@ export default function Index() {
       },
       products: {
         title: "আমাদের ঋণ পণ্য",
-        subtitle: "আপনা�� প্রয়োজন অনুযায়ী বিভিন্ন ধরনের ঋণ",
+        subtitle: "আপনার প্রয়োজন অনুযায়ী বিভিন্ন ধরনের ঋণ",
         instant: {
           title: "তাৎক্ষণিক মাইক্রোলোন",
           description: "জরুরি প্রয়োজনের জন্য দ্রুত ছোট ঋণ",
@@ -72,10 +72,10 @@ export default function Index() {
         }
       },
       features: {
-        title: "কেন আমাদের বেছে নিন",
+        title: "ক���ন আমাদের বেছে নিন",
         subtitle: "আমরা আপনার আর্থিক লক্ষ্য অর্জনে সহায়তা করি",
         fast: {
-          title: "দ্রুত অনুমোদ���",
+          title: "দ্রুত অনুমোদন",
           description: "স্বয়ংক্রিয় প্রক্রিয়ার মাধ্যমে ১০ মিনিটেই পূর্ব-অনুমোদন"
         },
         secure: {
@@ -424,7 +424,7 @@ export default function Index() {
                         <span className="font-medium">{productData.amount}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">{language === 'bn' ? 'মে��়াদ:' : 'Tenure:'}</span>
+                        <span className="text-muted-foreground">{language === 'bn' ? 'মেয়াদ:' : 'Tenure:'}</span>
                         <span className="font-medium">{productData.tenure}</span>
                       </div>
                       <div className="flex justify-between">
@@ -623,11 +623,11 @@ export default function Index() {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
-                  {language === 'bn' ? 'বাংলা ও ইংরেজি ভাষা' : 'Bengali & English support'}
+                  {language === 'bn' ? 'বাংলা ও ইংর���জি ভাষা' : 'Bengali & English support'}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
-                  {language === 'bn' ? 'ডকুমেন��ট আপলোড' : 'Document upload'}
+                  {language === 'bn' ? 'ডকুমেন্ট আপলোড' : 'Document upload'}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
@@ -696,11 +696,33 @@ Download now?`;
               {language === 'bn' ? 'APK ডাউনলোড করুন' : 'Download APK'}
             </Button>
 
-            <p className="text-sm text-green-100 mt-4">
-              {language === 'bn'
-                ? 'Android 5.0+ • ১২MB • সম্পূর্ণ নিরাপদ'
-                : 'Android 5.0+ • 12MB • Completely Safe'}
-            </p>
+            <div className="mt-6 space-y-2">
+              <p className="text-sm text-green-100">
+                {language === 'bn'
+                  ? 'Android 5.0+ • ১২MB • সম্পূর্ণ নিরাপদ'
+                  : 'Android 5.0+ • 12MB • Completely Safe'}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                <a
+                  href="/APK_INSTALL_GUIDE.html"
+                  target="_blank"
+                  className="text-sm text-green-200 hover:text-white underline"
+                >
+                  {language === 'bn' ? '📖 ইনস্টল গাইড দেখুন' : '📖 View Installation Guide'}
+                </a>
+                <span className="hidden sm:inline text-green-300">•</span>
+                <button
+                  onClick={() => {
+                    alert(language === 'bn'
+                      ? '💡 সহজ সমাধান: মোবাইল ব্রাউজারে loanbondhu.com ভিজিট করুন। সম্পূর্ণ ফিচার কাজ করবে!'
+                      : '💡 Easy solution: Visit loanbondhu.com in mobile browser. All features work perfectly!');
+                  }}
+                  className="text-sm text-green-200 hover:text-white underline"
+                >
+                  {language === 'bn' ? '🌐 ওয়েব অ্যাপ ব্যবহার করুন' : '🌐 Use Web App Instead'}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
