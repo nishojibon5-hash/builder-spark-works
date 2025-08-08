@@ -74,7 +74,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       failed: "যাচাই ব্যর্থ হয়েছে",
       uploadOption: "ছবি আপলোড করুন",
       useCamera: "ক্যামেরা ব্যবহার করুন",
-      selectFile: "এনআইডি ছবি নির্বাচন করুন",
+      selectFile: "এনআইড�� ছবি নির্বাচন করুন",
       troubleshoot: "ক্যামেরা কাজ করছে না?",
       instructions: {
         position: "আপনার এনআইডি কার্ডটি ক্যামেরার সামনে রাখুন",
@@ -84,7 +84,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       },
       errors: {
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
-        cameraNotFound: "ক্যামেরা প��ওয়া যায়নি",
+        cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
         nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
         poorQuality: "ছবির মান ভালো নয়",
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
@@ -152,16 +152,21 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
     try {
       setError('');
       setCameraError('');
-      
+
+      // Check if getUserMedia is supported
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Camera not supported');
+      }
+
       // Request camera permission
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
           width: { ideal: 1280 },
           height: { ideal: 720 },
           facingMode: 'environment' // Prefer back camera for better quality
-        } 
+        }
       });
-      
+
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -170,15 +175,23 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
     } catch (err: any) {
       console.error('Camera error:', err);
       let errorMessage = currentText.errors.cameraPermission;
-      
-      if (err.name === 'NotFoundError') {
+
+      if (err.name === 'NotFoundError' || err.message === 'Camera not supported') {
         errorMessage = currentText.errors.cameraNotFound;
       } else if (err.name === 'NotAllowedError') {
         errorMessage = currentText.errors.cameraPermission;
+      } else if (err.name === 'NotReadableError') {
+        errorMessage = language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে' : 'Camera is being used by another app';
       }
-      
+
       setCameraError(errorMessage);
       onError(errorMessage);
+
+      // Automatically suggest upload option after camera error
+      setTimeout(() => {
+        setUploadMethod('upload');
+        setShowUploadOption(true);
+      }, 2000);
     }
   };
 
@@ -198,7 +211,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ��য' : 'Only image files are allowed');
+      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
       return;
     }
 
@@ -426,7 +439,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                 </h4>
                 <ul className="text-sm text-green-800 space-y-1">
                   <li>• {language === 'bn' ? 'স্পষ্ট এবং পড়ার যোগ্য ছবি নির্বাচন করুন' : 'Select a clear and readable photo'}</li>
-                  <li>• {language === 'bn' ? 'ভালো আলোতে তোলা ছবি ব্যবহার করুন' : 'Use a photo taken in good lighting'}</li>
+                  <li>• {language === 'bn' ? 'ভা��ো আলোতে তোলা ছবি ব্যবহার করুন' : 'Use a photo taken in good lighting'}</li>
                   <li>• {language === 'bn' ? 'পুরো এনআইডি কার্ড দেখা যায় এমন ছবি' : 'Ensure the entire NID card is visible'}</li>
                   <li>• {language === 'bn' ? 'JPG, PNG বা JPEG ফরম্যাট (সর্বোচ্চ ৫MB)' : 'JPG, PNG or JPEG format (max 5MB)'}</li>
                 </ul>
@@ -442,7 +455,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                 </h4>
                 <ul className="text-sm text-yellow-800 space-y-1 mb-3">
                   <li>• {language === 'bn' ? 'ব্রাউজারে ক্যামেরা অনুমতি দিন' : 'Allow camera permission in browser'}</li>
-                  <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দেখু���' : 'Try using a different browser'}</li>
+                  <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দ��খুন' : 'Try using a different browser'}</li>
                   <li>• {language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে কিনা চেক করুন' : 'Check if camera is being used by another app'}</li>
                   <li>• {language === 'bn' ? 'পেজ রিফ্রেশ করে আবার চেষ্টা করুন' : 'Refresh the page and try again'}</li>
                 </ul>
