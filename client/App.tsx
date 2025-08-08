@@ -17,6 +17,8 @@ import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminMembers from "./pages/admin/Members";
 import AdminLoans from "./pages/admin/Loans";
+import AdminRepayments from "./pages/admin/Repayments";
+import AdminKYC from "./pages/admin/KYC";
 
 const queryClient = new QueryClient();
 
