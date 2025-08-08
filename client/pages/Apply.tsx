@@ -97,7 +97,7 @@ export default function Apply() {
         email: "ইমেইল (ঐচ্ছিক)",
         dob: "জন্ম তারিখ",
         nid: "জাতীয় পরিচয়পত্র যাচাইকরণ",
-        address: "ঠিকানা",
+        address: "ঠ��কানা",
         enterName: "��পনার পূর্ণ নাম লিখুন",
         enterPhone: "মোবাইল নম্বর লিখুন",
         enterEmail: "ইমেইল ঠিকানা লিখুন",
@@ -381,7 +381,7 @@ export default function Apply() {
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে প��ঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
@@ -626,7 +626,7 @@ export default function Apply() {
                               </div>
                               <Badge variant="secondary" className="bg-green-100 text-green-800">
                                 <Shield className="w-3 h-3 mr-1" />
-                                {language === 'bn' ? '��াচাইকৃত' : 'Verified'}
+                                {language === 'bn' ? 'যাচাইকৃত' : 'Verified'}
                               </Badge>
                             </div>
 
@@ -783,6 +783,30 @@ export default function Apply() {
                             </div>
                           </div>
                         </div>
+
+                        {/* NID Verification Summary */}
+                        {formData.verifiedNidData && (
+                          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-4">
+                            <h4 className="font-medium text-green-900 mb-2 flex items-center">
+                              <Shield className="w-4 h-4 mr-2" />
+                              {language === 'bn' ? 'এনআইডি যাচাইকরণ সারাংশ' : 'NID Verification Summary'}
+                            </h4>
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <span className="text-muted-foreground">
+                                  {language === 'bn' ? 'যাচাইকৃত নাম:' : 'Verified Name:'}
+                                </span>
+                                <p className="font-medium">{formData.verifiedNidData.name}</p>
+                              </div>
+                              <div>
+                                <span className="text-muted-foreground">
+                                  {language === 'bn' ? 'নির্ভুলতা:' : 'Confidence:'}
+                                </span>
+                                <p className="font-medium">{formData.verifiedNidData.confidence}%</p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       <Separator />
