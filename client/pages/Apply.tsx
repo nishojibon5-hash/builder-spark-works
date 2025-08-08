@@ -68,7 +68,7 @@ export default function Apply() {
       title: "ঋণের আবেদন",
       subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন করুন",
       steps: {
-        loan: "ঋণের তথ্য",
+        loan: "ঋণে�� তথ্য",
         personal: "ব্যক্তিগত তথ্য",
         employment: "চাকরির তথ্য",
         review: "পর্যালোচনা"
@@ -183,12 +183,14 @@ export default function Apply() {
         phone: "Mobile Number",
         email: "Email (Optional)",
         dob: "Date of Birth",
-        nid: "National ID Number",
+        nid: "National ID Verification",
         address: "Address",
         enterName: "Enter your full name",
         enterPhone: "Enter mobile number",
         enterEmail: "Enter email address",
-        enterAddress: "Enter complete address"
+        enterAddress: "Enter complete address",
+        nidCamera: "Scan your NID with camera",
+        nidVerified: "NID Verification Complete"
       },
       employmentInfo: {
         title: "Employment & Income Information",
@@ -824,7 +826,7 @@ export default function Apply() {
                   {calculation.emi === 0 && (
                     <div className="text-center text-muted-foreground py-8">
                       <Calculator className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                      <p>{language === 'bn' ? 'ঋণের তথ্য পূরণ করুন গণনার জন্য' : 'Fill loan details to calculate'}</p>
+                      <p>{language === 'bn' ? 'ঋণের তথ্�� পূরণ করুন গণনার জন্য' : 'Fill loan details to calculate'}</p>
                     </div>
                   )}
                 </CardContent>
