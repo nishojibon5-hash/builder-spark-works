@@ -263,7 +263,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Company Info */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                   <CreditCard className="w-5 h-5 text-primary-foreground" />
@@ -277,6 +277,37 @@ export default function Layout({ children }: LayoutProps) {
                   {currentText.contact.phone}
                 </p>
                 <p className="text-sm text-muted-foreground">{currentText.contact.support}</p>
+              </div>
+            </div>
+
+            {/* Download App */}
+            <div>
+              <h4 className="font-semibold text-foreground mb-4">
+                {language === 'bn' ? 'মোবাইল অ্যাপ' : 'Mobile App'}
+              </h4>
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  {language === 'bn' ? 'সুবিধাজনক মোবাইল অ্যাপ ডাউনলোড করুন' : 'Download our convenient mobile app'}
+                </p>
+                <Button
+                  className="w-full bg-green-600 hover:bg-green-700 text-white"
+                  onClick={() => {
+                    // Create a dummy APK download
+                    const link = document.createElement('a');
+                    link.href = '/api/download-apk'; // This would be the actual APK file endpoint
+                    link.download = 'LoanBondhu.apk';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  {language === 'bn' ? 'APK ডাউনলোড' : 'Download APK'}
+                </Button>
+                <div className="flex items-center text-xs text-muted-foreground">
+                  <Smartphone className="w-4 h-4 mr-1" />
+                  {language === 'bn' ? 'Android 5.0+ প্রয়োজন' : 'Requires Android 5.0+'}
+                </div>
               </div>
             </div>
 
@@ -314,7 +345,7 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="border-t border-border mt-8 pt-6">
             <p className="text-center text-sm text-muted-foreground">
-              © 2024 {currentText.companyName}. {language === 'bn' ? 'স���ল অধিকার সংরক্ষিত।' : 'All rights reserved.'}
+              © 2024 {currentText.companyName}. {language === 'bn' ? 'সকল অধিকার সংরক্ষিত।' : 'All rights reserved.'}
             </p>
           </div>
         </div>
