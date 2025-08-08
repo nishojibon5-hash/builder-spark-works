@@ -69,9 +69,9 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       capture: "ছবি তুলুন",
       retake: "আবার তুলুন",
       verify: "যাচাই করুন",
-      verifying: "যাচাই করা হচ্ছে...",
+      verifying: "যাচাই কর�� হচ্ছে...",
       verified: "সফলভাবে যাচাই হয়েছে",
-      failed: "যাচাই ব��যর্থ হয়েছে",
+      failed: "যাচাই ব্যর্থ হয়েছে",
       uploadOption: "ছবি আপলোড করুন",
       useCamera: "ক্যামেরা ব্যবহার করুন",
       selectFile: "এনআইডি ছবি নির্বাচন করুন",
@@ -90,7 +90,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
       },
       fields: {
-        nidNumber: "এনআই���ি নম্বর",
+        nidNumber: "এনআইডি নম্বর",
         name: "নাম",
         dateOfBirth: "জন্ম তারিখ",
         fatherName: "পিতার নাম",
@@ -498,7 +498,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
                 {language === 'bn'
-                  ? 'ক্লিক করুন বা এনআইডি কার্ডের ছবি ড্��্যাগ করুন'
+                  ? 'ক্লিক করুন বা এনআইডি কার্ডের ছবি ড্র্যাগ করুন'
                   : 'Click or drag your NID card photo here'}
               </p>
               <Button variant="outline">
@@ -632,9 +632,10 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-3">
-          {!isStreaming && !isCaptured && !nidData && (
-            <Button 
-              onClick={startCamera} 
+          {/* Camera method buttons */}
+          {uploadMethod === 'camera' && !isStreaming && !isCaptured && !nidData && (
+            <Button
+              onClick={startCamera}
               disabled={disabled}
               className="flex-1"
             >
@@ -643,17 +644,17 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             </Button>
           )}
 
-          {isStreaming && !isCaptured && (
+          {uploadMethod === 'camera' && isStreaming && !isCaptured && (
             <>
-              <Button 
+              <Button
                 onClick={capturePhoto}
                 className="flex-1"
               >
                 <Camera className="w-4 h-4 mr-2" />
                 {currentText.capture}
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={stopCamera}
               >
                 <CameraOff className="w-4 h-4 mr-2" />
@@ -662,17 +663,30 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             </>
           )}
 
+          {/* Upload method buttons */}
+          {uploadMethod === 'upload' && !isCaptured && !nidData && (
+            <Button
+              onClick={triggerFileUpload}
+              disabled={disabled}
+              className="flex-1"
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              {currentText.selectFile}
+            </Button>
+          )}
+
+          {/* Verification buttons (common for both methods) */}
           {isCaptured && !isVerifying && !nidData && (
             <>
-              <Button 
+              <Button
                 onClick={verifyNID}
                 className="flex-1"
               >
                 <Zap className="w-4 h-4 mr-2" />
                 {currentText.verify}
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={reset}
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
@@ -681,14 +695,15 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             </>
           )}
 
+          {/* Reset button after successful verification */}
           {nidData && (
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={reset}
               className="flex-1"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              {currentText.retake}
+              {language === 'bn' ? 'আবার ��্ক্যান/আপলোড করুন' : 'Scan/Upload Again'}
             </Button>
           )}
         </div>
@@ -703,7 +718,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               </p>
               <p>
                 {language === 'bn' 
-                  ? 'আপনার এনআইডি তথ্য এনক্রিপ্ট করা হয় এবং নিরাপদে সংরক্ষণ করা ���য়। আমরা আপনার গোপনীয়তা রক্ষা করি।'
+                  ? 'আপনার এনআইডি তথ্য এনক্রিপ্ট করা হয় এবং নিরাপদে সংরক্ষণ করা হয়। আমরা আপনার গোপনীয়তা রক্ষা করি।'
                   : 'Your NID information is encrypted and stored securely. We protect your privacy.'}
               </p>
             </div>
