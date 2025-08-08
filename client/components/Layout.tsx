@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
         apply: "আবেদন করুন",
       },
       contact: {
-        phone: "ফোন: ০১৭xxxxxxxx",
+        phone: "ফোন: ০১৬৫০০৭৪০৭৩",
         support: "সাহায্য: ২৪/৭",
       },
     },
