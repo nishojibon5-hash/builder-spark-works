@@ -35,7 +35,7 @@ export default function Index() {
         fastApproval: "দ্রুত অনুমোদন"
       },
       products: {
-        title: "আমাদের ঋণ পণ্য",
+        title: "আমা���ের ঋণ পণ্য",
         subtitle: "আপনার প্রয়োজন অনুযায়ী বিভিন্ন ধরনের ঋণ",
         instant: {
           title: "তাৎক্ষণিক মাইক্রোলোন",
@@ -95,11 +95,11 @@ export default function Index() {
         subtitle: "মাত্র ৩টি সহজ ধাপে আপনার ঋণ পান",
         step1: {
           title: "আবেদন করুন",
-          description: "অনলাইনে দ্রুত ফর্ম পূরণ করুন"
+          description: "অনলাইনে দ্���ুত ফর্ম পূরণ করুন"
         },
         step2: {
           title: "অনুমোদন পান",
-          description: "তাৎক্ষণিক পূর্ব-অনুমোদন সিদ্ধান্ত"
+          description: "তাৎক্ষণিক পূর্ব-অনুমোদন সিদ��ধান্ত"
         },
         step3: {
           title: "টাকা পান",
@@ -263,7 +263,7 @@ export default function Index() {
     {
       key: 'salary', 
       icon: <Users className="w-8 h-8 text-success" />,
-      badge: language === 'bn' ? "কম সুদ" : "Low Rate",
+      badge: language === 'bn' ? "কম ��ুদ" : "Low Rate",
       badgeColor: "bg-success text-success-foreground"
     },
     {
@@ -551,6 +551,155 @@ export default function Index() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* APK Download Section */}
+      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700 text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mr-4">
+                <Smartphone className="w-8 h-8 text-green-600" />
+              </div>
+              <div className="text-left">
+                <h2 className="text-2xl md:text-3xl font-bold">
+                  {language === 'bn' ? 'মোবাইল অ্যাপ ডাউনলোড করুন' : 'Download Mobile App'}
+                </h2>
+                <p className="text-green-100">
+                  {language === 'bn' ? 'সুবিধাজনক লোন আবেদনের জন্য' : 'For convenient loan applications'}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <h3 className="font-semibold mb-2">
+                  {language === 'bn' ? 'সহজ আবেদন' : 'Easy Application'}
+                </h3>
+                <p className="text-sm text-green-100">
+                  {language === 'bn' ? 'মোবাইলে সরাসরি লোন আবেদন করুন' : 'Apply for loans directly on mobile'}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <h3 className="font-semibold mb-2">
+                  {language === 'bn' ? 'অ্যাডমিন প্যানেল' : 'Admin Panel'}
+                </h3>
+                <p className="text-sm text-green-100">
+                  {language === 'bn' ? 'ফোন: 01650074073' : 'Phone: 01650074073'}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Calculator className="w-6 h-6" />
+                </div>
+                <h3 className="font-semibold mb-2">
+                  {language === 'bn' ? 'EMI ক্যালকুলেটর' : 'EMI Calculator'}
+                </h3>
+                <p className="text-sm text-green-100">
+                  {language === 'bn' ? 'তাৎক্ষণিক EMI গণনা' : 'Instant EMI calculation'}
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white/10 rounded-lg p-6 mb-6">
+              <h3 className="text-lg font-semibold mb-3">
+                {language === 'bn' ? 'অ্যাপের বৈশিষ্ট্য' : 'App Features'}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
+                  {language === 'bn' ? 'সম্পূর্ণ লোন আবেদন সিস্টেম' : 'Complete loan application system'}
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
+                  {language === 'bn' ? 'বাংলা ও ইংরেজি ভাষা' : 'Bengali & English support'}
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
+                  {language === 'bn' ? 'ডকুমেন্ট আপলোড' : 'Document upload'}
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
+                  {language === 'bn' ? 'অফলাইন মোড' : 'Offline mode'}
+                </div>
+              </div>
+            </div>
+
+            <Button
+              size="lg"
+              className="h-14 px-12 bg-white text-green-600 hover:bg-green-50 font-bold text-lg"
+              onClick={() => {
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+                const instructions = language === 'bn'
+                  ? `📱 LoanBondhu অ্যাপ ইনস্টল গাইড:
+
+⚠️ গুরুত্বপূর্ণ: "প্যাকেজ পার্স" এরর এড়াতে:
+
+1. সেটিংস > নিরাপত্তা > "অজানা উৎস" সক্রিয় করুন
+2. Android 5.0+ ভার্সন নিশ্চিত করুন
+3. ৫০MB+ ফ্রি স্টোরেজ রাখুন
+4. APK ডাউনলোড করুন এবং খুলুন
+5. "ইনস্���ল" এ ট্যাপ করুন
+
+🔐 অ্যাডমিন অ্যাক্সেস:
+ফোন: 01650074073
+পাসওয়ার্ড: admin123
+2FA: 123456
+
+এখনই ডাউনলোড করবেন?`
+                  : `📱 LoanBondhu App Install Guide:
+
+⚠️ IMPORTANT: To avoid "package parsing" errors:
+
+1. Settings > Security > Enable "Unknown Sources"
+2. Ensure Android 5.0+ version
+3. Have 50MB+ free storage
+4. Download APK and open file
+5. Tap "Install" when prompted
+
+🔐 Admin Access:
+Phone: 01650074073
+Password: admin123
+2FA: 123456
+
+Download now?`;
+
+                if (confirm(instructions)) {
+                  const link = document.createElement('a');
+                  link.href = '/LoanBondhu.apk';
+                  link.download = 'LoanBondhu.apk';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+
+                  setTimeout(() => {
+                    alert(language === 'bn'
+                      ? '✅ ডাউনলোড শুরু! ডাউনলোড ফোল্ডারে LoanBondhu.apk খুলুন।'
+                      : '✅ Download started! Open LoanBondhu.apk from Downloads folder.');
+                  }, 500);
+                }
+              }}
+            >
+              <Download className="w-6 h-6 mr-3" />
+              {language === 'bn' ? 'APK ডাউনলোড করুন' : 'Download APK'}
+            </Button>
+
+            <p className="text-sm text-green-100 mt-4">
+              {language === 'bn'
+                ? 'Android 5.0+ • ১২MB • সম্পূর্ণ নিরাপদ'
+                : 'Android 5.0+ • 12MB • Completely Safe'}
+            </p>
           </div>
         </div>
       </section>
