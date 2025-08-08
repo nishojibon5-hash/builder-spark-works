@@ -198,7 +198,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
+      setError(language === 'bn' ? 'শু���ুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
       return;
     }
 
@@ -285,7 +285,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         dateOfBirth: '1990-05-15',
         fatherName: language === 'bn' ? 'আব্দুল করিম' : 'Abdul Karim',
         motherName: language === 'bn' ? 'ফাতেমা খাতুন' : 'Fatema Khatun',
-        address: language === 'bn' ? 'গ্রাম: কমলাপুর, উপজেলা: ঢাকা, জেলা: ঢাকা' : 'Village: Komolapur, Upazila: Dhaka, District: Dhaka',
+        address: language === 'bn' ? 'গ্রাম: কমলাপুর, উপজেলা: ঢাকা, জেলা: ঢা���া' : 'Village: Komolapur, Upazila: Dhaka, District: Dhaka',
         bloodGroup: 'B+',
         verified: true,
         confidence: Math.floor(Math.random() * 15) + 85 // 85-99% confidence
@@ -358,20 +358,103 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
           </Alert>
         )}
 
-        {/* Camera Instructions */}
+        {/* Camera Instructions or Upload Option */}
         {!isCaptured && !nidData && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="font-medium text-blue-900 mb-2 flex items-center">
-              <Camera className="w-4 h-4 mr-2" />
-              {language === 'bn' ? 'নির্দেশাবলী:' : 'Instructions:'}
-            </h4>
-            <ul className="text-sm text-blue-800 space-y-1">
-              <li>• {currentText.instructions.position}</li>
-              <li>• {currentText.instructions.lighting}</li>
-              <li>• {currentText.instructions.steady}</li>
-              <li>• {currentText.instructions.visible}</li>
-            </ul>
-          </div>
+          <>
+            {/* Method Selection */}
+            <div className="flex space-x-2 mb-4">
+              <Button
+                variant={uploadMethod === 'camera' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setUploadMethod('camera');
+                  setShowUploadOption(false);
+                  setError('');
+                  setCameraError('');
+                }}
+                className="flex-1"
+              >
+                <Camera className="w-4 h-4 mr-2" />
+                {language === 'bn' ? 'ক্যামেরা' : 'Camera'}
+              </Button>
+              <Button
+                variant={uploadMethod === 'upload' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setUploadMethod('upload');
+                  setShowUploadOption(true);
+                  stopCamera();
+                  setError('');
+                  setCameraError('');
+                }}
+                className="flex-1"
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                {language === 'bn' ? 'আপলোড' : 'Upload'}
+              </Button>
+            </div>
+
+            {/* Camera Instructions */}
+            {uploadMethod === 'camera' && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 className="font-medium text-blue-900 mb-2 flex items-center">
+                  <Camera className="w-4 h-4 mr-2" />
+                  {language === 'bn' ? 'নির্দেশাবলী:' : 'Instructions:'}
+                </h4>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>• {currentText.instructions.position}</li>
+                  <li>• {currentText.instructions.lighting}</li>
+                  <li>• {currentText.instructions.steady}</li>
+                  <li>• {currentText.instructions.visible}</li>
+                </ul>
+              </div>
+            )}
+
+            {/* Upload Instructions */}
+            {uploadMethod === 'upload' && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h4 className="font-medium text-green-900 mb-2 flex items-center">
+                  <FileImage className="w-4 h-4 mr-2" />
+                  {language === 'bn' ? 'ছবি আপলোড নির্দেশাবলী:' : 'Photo Upload Instructions:'}
+                </h4>
+                <ul className="text-sm text-green-800 space-y-1">
+                  <li>• {language === 'bn' ? 'স্পষ্ট এবং পড়ার যোগ্য ছবি নির্বাচন করুন' : 'Select a clear and readable photo'}</li>
+                  <li>• {language === 'bn' ? 'ভালো আলোতে তোলা ছবি ব্যবহার করুন' : 'Use a photo taken in good lighting'}</li>
+                  <li>• {language === 'bn' ? 'পুরো এনআইডি কার্ড দেখা যায় এমন ছবি' : 'Ensure the entire NID card is visible'}</li>
+                  <li>• {language === 'bn' ? 'JPG, PNG বা JPEG ফরম্যাট (সর্বোচ্চ ৫MB)' : 'JPG, PNG or JPEG format (max 5MB)'}</li>
+                </ul>
+              </div>
+            )}
+
+            {/* Camera Troubleshooting */}
+            {(cameraError || error) && uploadMethod === 'camera' && (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <h4 className="font-medium text-yellow-900 mb-2 flex items-center">
+                  <HelpCircle className="w-4 h-4 mr-2" />
+                  {currentText.troubleshoot}
+                </h4>
+                <ul className="text-sm text-yellow-800 space-y-1 mb-3">
+                  <li>• {language === 'bn' ? 'ব্রাউজারে ক্যামেরা অনুমতি দিন' : 'Allow camera permission in browser'}</li>
+                  <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দেখুন' : 'Try using a different browser'}</li>
+                  <li>• {language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে কিনা চেক করুন' : 'Check if camera is being used by another app'}</li>
+                  <li>�� {language === 'bn' ? 'পেজ রিফ্রেশ করে আবার চেষ্টা করুন' : 'Refresh the page and try again'}</li>
+                </ul>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setUploadMethod('upload');
+                    setShowUploadOption(true);
+                    setError('');
+                    setCameraError('');
+                  }}
+                >
+                  <Upload className="w-4 h-4 mr-2" />
+                  {currentText.uploadOption}
+                </Button>
+              </div>
+            )}
+          </>
         )}
 
         {/* Camera View */}
