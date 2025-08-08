@@ -4,20 +4,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/Layout";
-import { 
-  CreditCard, 
-  Calculator, 
-  Shield, 
-  Clock, 
-  CheckCircle, 
-  Users, 
-  TrendingUp, 
+import {
+  CreditCard,
+  Calculator,
+  Shield,
+  Clock,
+  CheckCircle,
+  Users,
+  TrendingUp,
   Smartphone,
   ArrowRight,
   Star,
   Phone,
   FileText,
-  Banknote
+  Banknote,
+  Download
 } from "lucide-react";
 
 export default function Index() {
@@ -35,8 +36,8 @@ export default function Index() {
         fastApproval: "দ্রুত অনুমোদন"
       },
       products: {
-        title: "আমা���ের ঋণ পণ্য",
-        subtitle: "আপনার প্রয়োজন অনুযায়ী বিভিন্ন ধরনের ঋণ",
+        title: "আমাদের ঋণ পণ্য",
+        subtitle: "আপনা�� প্রয়োজন অনুযায়ী বিভিন্ন ধরনের ঋণ",
         instant: {
           title: "তাৎক্ষণিক মাইক্রোলোন",
           description: "জরুরি প্রয়োজনের জন্য দ্রুত ছোট ঋণ",
@@ -74,7 +75,7 @@ export default function Index() {
         title: "কেন আমাদের বেছে নিন",
         subtitle: "আমরা আপনার আর্থিক লক্ষ্য অর্জনে সহায়তা করি",
         fast: {
-          title: "দ্রুত অনুমোদন",
+          title: "দ্রুত অনুমোদ���",
           description: "স্বয়ংক্রিয় প্রক্রিয়ার মাধ্যমে ১০ মিনিটেই পূর্ব-অনুমোদন"
         },
         secure: {
@@ -95,11 +96,11 @@ export default function Index() {
         subtitle: "মাত্র ৩টি সহজ ধাপে আপনার ঋণ পান",
         step1: {
           title: "আবেদন করুন",
-          description: "অনলাইনে দ্���ুত ফর্ম পূরণ করুন"
+          description: "অনলাইনে দ্রুত ফর্ম পূরণ করুন"
         },
         step2: {
           title: "অনুমোদন পান",
-          description: "তাৎক্ষণিক পূর্ব-অনুমোদন সিদ��ধান্ত"
+          description: "তাৎক্ষণিক পূর্ব-অনুমোদন সিদ্ধান্ত"
         },
         step3: {
           title: "টাকা পান",
@@ -263,7 +264,7 @@ export default function Index() {
     {
       key: 'salary', 
       icon: <Users className="w-8 h-8 text-success" />,
-      badge: language === 'bn' ? "কম ��ুদ" : "Low Rate",
+      badge: language === 'bn' ? "কম সুদ" : "Low Rate",
       badgeColor: "bg-success text-success-foreground"
     },
     {
@@ -423,7 +424,7 @@ export default function Index() {
                         <span className="font-medium">{productData.amount}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">{language === 'bn' ? 'মেয়াদ:' : 'Tenure:'}</span>
+                        <span className="text-muted-foreground">{language === 'bn' ? 'মে��়াদ:' : 'Tenure:'}</span>
                         <span className="font-medium">{productData.tenure}</span>
                       </div>
                       <div className="flex justify-between">
@@ -626,7 +627,7 @@ export default function Index() {
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
-                  {language === 'bn' ? 'ডকুমেন্ট আপলোড' : 'Document upload'}
+                  {language === 'bn' ? 'ডকুমেন��ট আপলোড' : 'Document upload'}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 mr-2 text-green-300" />
@@ -650,7 +651,7 @@ export default function Index() {
 2. Android 5.0+ ভার্সন নিশ্চিত করুন
 3. ৫০MB+ ফ্রি স্টোরেজ রাখুন
 4. APK ডাউনলোড করুন এবং খুলুন
-5. "ইনস্���ল" এ ট্যাপ করুন
+5. "ইনস্টল" এ ট্যাপ করুন
 
 🔐 অ্যাডমিন অ্যাক্সেস:
 ফোন: 01650074073
