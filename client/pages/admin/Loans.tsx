@@ -262,7 +262,7 @@ export default function AdminLoans() {
     }
 
     setFilteredLoans(filtered);
-  }, [searchTerm, statusFilter, typeFilter, riskFilter]);
+  }, [searchTerm, statusFilter, typeFilter, riskFilter, allLoans]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-BD', {
