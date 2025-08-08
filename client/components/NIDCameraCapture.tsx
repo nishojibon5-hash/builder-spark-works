@@ -86,7 +86,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
         cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
         nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
-        poorQuality: "ছবি�� মান ভালো নয়",
+        poorQuality: "ছবির মান ভালো নয়",
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
       },
       fields: {
@@ -189,6 +189,41 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       streamRef.current = null;
     }
     setIsStreaming(false);
+  };
+
+  // Handle file upload
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setError(language === 'bn' ? 'ছবির আকার ৫MB এর কম হতে হবে' : 'Image size must be less than 5MB');
+      return;
+    }
+
+    setError('');
+
+    // Convert file to base64
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (e.target?.result) {
+        setCapturedImage(e.target.result as string);
+        setIsCaptured(true);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Trigger file input
+  const triggerFileUpload = () => {
+    fileInputRef.current?.click();
   };
 
   // Capture photo from video stream
@@ -466,7 +501,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                   <div>
                     <p className="text-sm font-medium">{language === 'bn' ? 'এনআইডি ছবি' : 'NID Image'}</p>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'সফলভাবে ক্যাপচার হয়���ছে' : 'Successfully captured'}
+                      {language === 'bn' ? 'সফলভাবে ক্যাপচার হয়েছে' : 'Successfully captured'}
                     </p>
                   </div>
                 </div>
