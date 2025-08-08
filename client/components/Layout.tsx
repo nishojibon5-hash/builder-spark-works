@@ -292,9 +292,9 @@ export default function Layout({ children }: LayoutProps) {
                 <Button
                   className="w-full bg-green-600 hover:bg-green-700 text-white"
                   onClick={() => {
-                    // Create a dummy APK download
+                    // Download the APK file
                     const link = document.createElement('a');
-                    link.href = '/api/download-apk'; // This would be the actual APK file endpoint
+                    link.href = '/LoanBondhu.apk';
                     link.download = 'LoanBondhu.apk';
                     document.body.appendChild(link);
                     link.click();
