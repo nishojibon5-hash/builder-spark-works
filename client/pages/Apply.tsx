@@ -54,6 +54,9 @@ export default function Apply() {
     totalInterest: 0
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const text = {
     bn: {
       title: "ঋণের আবেদন",
