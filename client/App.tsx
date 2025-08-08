@@ -13,6 +13,10 @@ import Loans from "./pages/Loans";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AdminLogin from "./pages/admin/Login";
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminMembers from "./pages/admin/Members";
+import AdminLoans from "./pages/admin/Loans";
 
 const queryClient = new QueryClient();
 
