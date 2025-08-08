@@ -292,6 +292,16 @@ export default function Layout({ children }: LayoutProps) {
                 <Button
                   className="w-full bg-green-600 hover:bg-green-700 text-white"
                   onClick={() => {
+                    // Check if on mobile device
+                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+                    if (isMobile) {
+                      // For mobile, show installation instructions
+                      alert(language === 'bn'
+                        ? 'APK ডাউনলোড হচ্ছে। ডাউনলোড শেষ হলে ফাইলটি খুলে ইনস্টল করুন। অজানা উৎস থেকে ইনস্টলেশনের অনুমতি দিতে হতে পারে।'
+                        : 'APK downloading. After download completes, open the file to install. You may need to allow installation from unknown sources.');
+                    }
+
                     // Download the APK file
                     const link = document.createElement('a');
                     link.href = '/LoanBondhu.apk';
