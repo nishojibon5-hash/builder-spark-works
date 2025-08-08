@@ -76,7 +76,7 @@ export default function Apply() {
       loanDetails: {
         title: "ঋণের বি���রণ",
         type: "ঋণের ধরন",
-        amount: "ঋণ���র পরিমাণ (টাকা)",
+        amount: "ঋণের পরিমাণ (টাকা)",
         tenure: "মেয়াদ (মাস)",
         purpose: "ঋণের উদ্দেশ্য",
         selectType: "ঋণ��র ধরন নির্বাচন করুন",
@@ -101,7 +101,7 @@ export default function Apply() {
         enterName: "��পনার পূর্ণ নাম লিখুন",
         enterPhone: "মোবাইল নম্বর লিখুন",
         enterEmail: "ইমেইল ঠিকানা লিখুন",
-        enterAddress: "সম্পূর্ণ ঠিকানা ল��খুন"
+        enterAddress: "সম্পূর���ণ ঠিকানা ল��খুন"
       },
       employmentInfo: {
         title: "চাকরি ও আয়ের তথ্য",
@@ -123,7 +123,7 @@ export default function Apply() {
       calculator: {
         title: "ঋণ ক্যালকুলেটর",
         subtitle: "আপনার মাসিক কিস্তি এবং মোট পরিশোধের পরিমাণ দেখুন",
-        principal: "মূল অর্থ",
+        principal: "��ূল অর্থ",
         rate: "সুদ���র হার (বার্ষিক)",
         emi: "মাসিক কিস্তি",
         total: "মোট পরিশোধ",
@@ -146,7 +146,7 @@ export default function Apply() {
       },
       validation: {
         required: "এই ক্ষেত্রটি আবশ্��ক",
-        invalidPhone: "সঠিক মোবাইল নম্���র দিন",
+        invalidPhone: "সঠিক মোবাইল নম্বর দিন",
         invalidEmail: "সঠিক ইমেইল ঠিকানা দিন",
         invalidAmount: "সঠিক পরিমাণ দিন"
       }
@@ -381,7 +381,7 @@ export default function Apply() {
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে প��ঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
@@ -414,7 +414,10 @@ export default function Apply() {
                   employmentType: '',
                   employer: '',
                   monthlyIncome: '',
-                  existingLoans: ''
+                  existingLoans: '',
+                  nidVerified: false,
+                  nidImageData: '',
+                  verifiedNidData: null
                 });
                 setCalculation({
                   principal: 0,
