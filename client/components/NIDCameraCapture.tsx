@@ -4,19 +4,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
-import { 
-  Camera, 
-  CameraOff, 
-  CheckCircle, 
-  AlertTriangle, 
-  RotateCcw, 
-  Zap, 
-  Shield, 
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Camera,
+  CameraOff,
+  CheckCircle,
+  AlertTriangle,
+  RotateCcw,
+  Zap,
+  Shield,
   Scan,
   X,
   Eye,
   Download,
-  Upload
+  Upload,
+  FileImage,
+  Settings,
+  HelpCircle
 } from "lucide-react";
 
 interface NIDData {
@@ -72,7 +77,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       },
       errors: {
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
-        cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
+        cameraNotFound: "ক্যামেরা পাওয়া যায়���ি",
         nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
         poorQuality: "ছবির মান ভালো নয়",
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
