@@ -1,11 +1,11 @@
 // This creates a minimal but valid APK structure using JavaScript
-const fs = require('fs');
+const fs = require("fs");
 
 // Create a proper APK manifest and structure
 const createMinimalAPK = () => {
   // APK is essentially a ZIP file with specific structure
   // This creates the minimal required files for Android to recognize it as valid
-  
+
   const manifest = `<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.loanbondhu.app"
@@ -101,7 +101,7 @@ financial market with Bengali language support.
   // Create APK info file
   const apkInfo = {
     name: "LoanBondhu",
-    package: "com.loanbondhu.app", 
+    package: "com.loanbondhu.app",
     version: "1.0.0",
     versionCode: 1,
     minSdk: 21,
@@ -110,31 +110,31 @@ financial market with Bengali language support.
     features: [
       "Loan Application Form",
       "Admin Panel (Phone: 01650074073)",
-      "EMI Calculator", 
+      "EMI Calculator",
       "Document Upload",
       "Bengali/English Support",
       "Offline Mode",
-      "Real-time Sync"
+      "Real-time Sync",
     ],
     adminAccess: {
       phone: "01650074073",
-      password: "admin123", 
-      twoFA: "123456"
+      password: "admin123",
+      twoFA: "123456",
     },
     permissions: [
       "INTERNET",
-      "ACCESS_NETWORK_STATE", 
+      "ACCESS_NETWORK_STATE",
       "CAMERA",
       "READ_EXTERNAL_STORAGE",
-      "WRITE_EXTERNAL_STORAGE"
-    ]
+      "WRITE_EXTERNAL_STORAGE",
+    ],
   };
 
   return { manifest, appInfo, apkInfo };
 };
 
 // Export for use
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
   module.exports = createMinimalAPK;
 } else {
   console.log("APK template created");

@@ -5,13 +5,16 @@
 ### Prerequisites
 
 1. **Java Development Kit (JDK) 8 or higher**
+
    ```bash
    java -version
    ```
 
 2. **Android SDK** (if building locally)
+
    - Download Android Studio or just the command line tools
    - Set `ANDROID_HOME` environment variable
+
    ```bash
    export ANDROID_HOME=$HOME/Android/Sdk
    export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
@@ -28,12 +31,14 @@
 #### Option 1: Using Build Script (Recommended)
 
 **For Linux/Mac:**
+
 ```bash
 chmod +x build-android.sh
 ./build-android.sh
 ```
 
 **For Windows:**
+
 ```cmd
 build-android.bat
 ```
@@ -41,11 +46,13 @@ build-android.bat
 #### Option 2: Manual Build
 
 1. Build web application:
+
    ```bash
    npm run build
    ```
 
 2. Build Android APK:
+
    ```bash
    cd android
    ./gradlew assembleDebug
@@ -76,6 +83,7 @@ build-android.bat
 ### Step 3: Grant Permissions
 
 When you first open the app, it may request permissions for:
+
 - **Internet Access**: Required for loan application submission
 - **Camera**: For document capture (optional)
 - **Storage**: For document uploads (optional)
@@ -84,6 +92,7 @@ When you first open the app, it may request permissions for:
 ## 🔧 App Features
 
 ### User Features
+
 - ✅ Complete loan application form
 - ✅ EMI calculator
 - ✅ Application status tracking
@@ -92,6 +101,7 @@ When you first open the app, it may request permissions for:
 - ✅ Offline form filling (syncs when online)
 
 ### Admin Features
+
 - ✅ Secure admin login (Phone: 01650074073)
 - ✅ Application management
 - ✅ User management
@@ -118,6 +128,7 @@ This error typically occurs due to:
 4. **Architecture Mismatch**: Use the universal APK provided
 
 **Solutions:**
+
 ```bash
 # Check APK integrity
 adb install LoanBondhu.apk
@@ -158,6 +169,7 @@ The app automatically checks for web updates when connected to internet. For APK
 ## 📞 Support
 
 For technical issues:
+
 - **App Issues**: Check this guide first
 - **Server Issues**: Contact development team
 - **Installation Problems**: Follow troubleshooting steps above
@@ -165,6 +177,7 @@ For technical issues:
 ## 🏗️ Development Notes
 
 The Android app is a WebView wrapper around the React web application with:
+
 - Native Android UI integration
 - Offline capability
 - Enhanced mobile experience

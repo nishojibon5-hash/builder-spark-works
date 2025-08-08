@@ -3,6 +3,7 @@
 ## ✅ Pre-Installation Testing
 
 ### APK File Verification
+
 - [ ] APK file size > 1MB (realistic size)
 - [ ] No corruption during download
 - [ ] File extension is .apk
@@ -10,6 +11,7 @@
 - [ ] Version information is correct (1.0.0)
 
 ### Device Compatibility
+
 - [ ] Android 5.0+ (API 21+) devices
 - [ ] ARM, ARM64, x86, x86_64 architectures
 - [ ] Phone and tablet form factors
@@ -19,6 +21,7 @@
 ## 📱 Installation Testing
 
 ### Installation Process
+
 - [ ] APK downloads successfully from website
 - [ ] No "parsing package" errors during installation
 - [ ] Installation completes without errors
@@ -27,6 +30,7 @@
 - [ ] Uninstall and reinstall works correctly
 
 ### Permissions
+
 - [ ] Internet permission granted automatically
 - [ ] Camera permission requested when needed
 - [ ] Storage permission requested when needed
@@ -37,6 +41,7 @@
 ## 🚀 App Launch Testing
 
 ### Splash Screen
+
 - [ ] Splash screen appears for 2 seconds
 - [ ] LoanBondhu logo displays correctly
 - [ ] Smooth transition to main screen
@@ -44,6 +49,7 @@
 - [ ] Proper branding and colors
 
 ### Main Application
+
 - [ ] WebView loads homepage successfully
 - [ ] Internet connectivity check works
 - [ ] Offline message appears when no internet
@@ -53,6 +59,7 @@
 ## 📋 Loan Application Testing
 
 ### Form Functionality
+
 - [ ] All form fields are accessible
 - [ ] Input validation works correctly
 - [ ] Dropdown menus function properly
@@ -61,6 +68,7 @@
 - [ ] Form can be filled completely
 
 ### EMI Calculator
+
 - [ ] Calculator loads and displays properly
 - [ ] Real-time calculations work
 - [ ] All loan types calculate correctly
@@ -69,6 +77,7 @@
 - [ ] Currency formatting is correct
 
 ### Form Submission
+
 - [ ] Submit button activates when form complete
 - [ ] Loading indicator appears during submission
 - [ ] Success message displays after submission
@@ -77,6 +86,7 @@
 - [ ] Network errors are handled gracefully
 
 ### Document Upload
+
 - [ ] Camera access works for document capture
 - [ ] Gallery access works for file selection
 - [ ] File upload progress indicator works
@@ -87,6 +97,7 @@
 ## 🔐 Admin Panel Testing
 
 ### Admin Access
+
 - [ ] Admin login button visible in menu
 - [ ] Clicking opens admin login screen
 - [ ] Phone number field accepts input
@@ -95,6 +106,7 @@
 - [ ] Invalid credentials show error message
 
 ### Admin Authentication
+
 - [ ] Correct credentials (01650074073/admin123) work
 - [ ] 2FA screen appears after login
 - [ ] 2FA code 123456 works
@@ -103,6 +115,7 @@
 - [ ] Session management works
 
 ### Admin Dashboard
+
 - [ ] Dashboard loads with statistics
 - [ ] Real application data appears
 - [ ] Navigation menu works
@@ -111,6 +124,7 @@
 - [ ] Charts and graphs display correctly
 
 ### Application Management
+
 - [ ] Submitted applications appear in admin panel
 - [ ] Application details display correctly
 - [ ] Approve/reject buttons work
@@ -121,6 +135,7 @@
 ## 📲 Mobile Experience Testing
 
 ### Touch and Gestures
+
 - [ ] All buttons respond to touch
 - [ ] Scrolling works smoothly
 - [ ] Pinch-to-zoom disabled where appropriate
@@ -129,6 +144,7 @@
 - [ ] Double-tap zoom works in WebView
 
 ### Orientation and Layout
+
 - [ ] Portrait mode displays correctly
 - [ ] Landscape mode works (if enabled)
 - [ ] Layout adapts to screen size
@@ -137,6 +153,7 @@
 - [ ] No horizontal scrolling required
 
 ### Keyboard Input
+
 - [ ] Soft keyboard appears for text fields
 - [ ] Number keyboard for numeric fields
 - [ ] Email keyboard for email fields
@@ -147,6 +164,7 @@
 ## 🌐 Network and Connectivity
 
 ### Online Functionality
+
 - [ ] App works with WiFi connection
 - [ ] App works with mobile data
 - [ ] API calls complete successfully
@@ -155,6 +173,7 @@
 - [ ] Admin panel syncs properly
 
 ### Offline Functionality
+
 - [ ] Offline message displays when no internet
 - [ ] Forms can be filled offline
 - [ ] Data saves locally when offline
@@ -163,6 +182,7 @@
 - [ ] No crashes when going offline
 
 ### Network Switching
+
 - [ ] Switching from WiFi to mobile data works
 - [ ] Connection recovery after network loss
 - [ ] Proper error messages for network issues
@@ -173,6 +193,7 @@
 ## 🔒 Security Testing
 
 ### Data Protection
+
 - [ ] No sensitive data in logs
 - [ ] Local storage is encrypted
 - [ ] Session tokens are secure
@@ -181,6 +202,7 @@
 - [ ] Biometric authentication works (if available)
 
 ### Admin Security
+
 - [ ] Only authorized phone number can access admin
 - [ ] Session timeout works correctly
 - [ ] Admin functions require authentication
@@ -191,6 +213,7 @@
 ## 🎯 Performance Testing
 
 ### App Performance
+
 - [ ] App starts within 3 seconds
 - [ ] WebView loads within 5 seconds
 - [ ] Smooth scrolling and navigation
@@ -199,6 +222,7 @@
 - [ ] CPU usage stays within normal limits
 
 ### Memory Management
+
 - [ ] App uses reasonable amount of RAM
 - [ ] No crashes due to memory issues
 - [ ] WebView memory management works
@@ -209,6 +233,7 @@
 ## 🌍 Localization Testing
 
 ### Language Support
+
 - [ ] Bengali language displays correctly
 - [ ] English language works properly
 - [ ] Language switching works
@@ -217,6 +242,7 @@
 - [ ] Currency formatting matches locale
 
 ### Font and Text
+
 - [ ] Bengali fonts render correctly
 - [ ] Text doesn't overlap or get cut off
 - [ ] RTL text support if needed
@@ -227,6 +253,7 @@
 ## 🔄 Update and Maintenance
 
 ### App Updates
+
 - [ ] Version checking works
 - [ ] Update notifications appear
 - [ ] APK update process works
@@ -235,6 +262,7 @@
 - [ ] No loss of functionality after update
 
 ### Error Handling
+
 - [ ] Crash reporting works (if implemented)
 - [ ] Error messages are user-friendly
 - [ ] Recovery from errors is possible
@@ -245,6 +273,7 @@
 ## 📊 User Experience Testing
 
 ### Usability
+
 - [ ] Navigation is intuitive
 - [ ] User flow is logical
 - [ ] Help text is available where needed
@@ -253,6 +282,7 @@
 - [ ] Loading states are informative
 
 ### Accessibility
+
 - [ ] Screen reader compatibility
 - [ ] High contrast mode support
 - [ ] Large text support
@@ -263,6 +293,7 @@
 ## 🎨 Visual and UI Testing
 
 ### Design Consistency
+
 - [ ] Colors match brand guidelines
 - [ ] Fonts are consistent throughout
 - [ ] Button styles are uniform
@@ -271,6 +302,7 @@
 - [ ] Visual hierarchy is clear
 
 ### Responsive Design
+
 - [ ] Layout works on small screens (< 5")
 - [ ] Layout works on large screens (> 6")
 - [ ] Tablet layout is optimized
@@ -281,6 +313,7 @@
 ## 🧪 Edge Case Testing
 
 ### Unusual Scenarios
+
 - [ ] Very long text input handled properly
 - [ ] Special characters in input fields
 - [ ] Maximum file size uploads
@@ -289,6 +322,7 @@
 - [ ] Rapid button tapping doesn't cause issues
 
 ### System Integration
+
 - [ ] Works with other apps installed
 - [ ] Doesn't conflict with system features
 - [ ] Background app refresh works
@@ -314,6 +348,7 @@ Before declaring the app ready for production:
 ## 📋 Testing Report Template
 
 For each test session, document:
+
 - Device model and Android version
 - Test date and duration
 - Features tested
@@ -326,6 +361,7 @@ For each test session, document:
 ## 🚨 Critical Issues That Must Be Fixed
 
 Any of these issues require immediate attention:
+
 - App crashes on startup
 - Cannot install APK (parsing errors)
 - Loan application submission fails
@@ -337,6 +373,7 @@ Any of these issues require immediate attention:
 ## ✅ Ready for Release Criteria
 
 The app is ready for release when:
+
 - All critical functionality works
 - Installation success rate > 95%
 - Crash rate < 1%
