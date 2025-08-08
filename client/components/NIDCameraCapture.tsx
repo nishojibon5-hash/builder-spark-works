@@ -1,6 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
@@ -21,7 +27,7 @@ import {
   Upload,
   FileImage,
   Settings,
-  HelpCircle
+  HelpCircle,
 } from "lucide-react";
 
 interface NIDData {
@@ -39,21 +45,28 @@ interface NIDData {
 interface NIDCameraCaptureProps {
   onCapture: (nidData: NIDData, imageData: string) => void;
   onError: (error: string) => void;
-  language: 'bn' | 'en';
+  language: "bn" | "en";
   disabled?: boolean;
 }
 
-export default function NIDCameraCapture({ onCapture, onError, language, disabled }: NIDCameraCaptureProps) {
+export default function NIDCameraCapture({
+  onCapture,
+  onError,
+  language,
+  disabled,
+}: NIDCameraCaptureProps) {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isCaptured, setIsCaptured] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationProgress, setVerificationProgress] = useState(0);
   const [nidData, setNidData] = useState<NIDData | null>(null);
-  const [capturedImage, setCapturedImage] = useState<string>('');
-  const [error, setError] = useState<string>('');
-  const [cameraError, setCameraError] = useState<string>('');
+  const [capturedImage, setCapturedImage] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [cameraError, setCameraError] = useState<string>("");
   const [showUploadOption, setShowUploadOption] = useState(false);
-  const [uploadMethod, setUploadMethod] = useState<'camera' | 'upload'>('camera');
+  const [uploadMethod, setUploadMethod] = useState<"camera" | "upload">(
+    "camera",
+  );
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -80,14 +93,14 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         position: "আপনার এনআইডি কার্ডটি ক্যামেরার সামনে রাখুন",
         lighting: "ভালো আলোতে রাখুন",
         steady: "স্থির রাখুন",
-        visible: "পুরো কার্ড দেখা যাচ্ছে কিনা নিশ্চিত করুন"
+        visible: "পুরো কার্ড দেখা যাচ্ছে কিনা নিশ্চিত করুন",
       },
       errors: {
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
         cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
         nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
         poorQuality: "ছবির মান ভালো নয়",
-        verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
+        verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে",
       },
       fields: {
         nidNumber: "এনআইডি নম্বর",
@@ -96,11 +109,11 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         fatherName: "পিতার নাম",
         motherName: "মাতার নাম",
         address: "ঠিকানা",
-        bloodGroup: "রক্তের গ্রুপ"
+        bloodGroup: "রক্তের গ্রুপ",
       },
       confidence: "নির্ভুলতা",
       preview: "প্রিভিউ দেখুন",
-      accept: "গ্রহণ করুন"
+      accept: "গ্রহণ করুন",
     },
     en: {
       title: "National ID Verification",
@@ -121,14 +134,14 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         position: "Position your NID card in front of the camera",
         lighting: "Ensure good lighting",
         steady: "Keep it steady",
-        visible: "Make sure the entire card is visible"
+        visible: "Make sure the entire card is visible",
       },
       errors: {
         cameraPermission: "Camera permission required",
         cameraNotFound: "Camera not found",
         nidNotDetected: "NID card not detected",
         poorQuality: "Poor image quality",
-        verificationFailed: "Verification failed"
+        verificationFailed: "Verification failed",
       },
       fields: {
         nidNumber: "NID Number",
@@ -137,12 +150,12 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         fatherName: "Father's Name",
         motherName: "Mother's Name",
         address: "Address",
-        bloodGroup: "Blood Group"
+        bloodGroup: "Blood Group",
       },
       confidence: "Confidence",
       preview: "Preview",
-      accept: "Accept"
-    }
+      accept: "Accept",
+    },
   };
 
   const currentText = text[language];
@@ -150,12 +163,12 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
   // Start camera stream
   const startCamera = async () => {
     try {
-      setError('');
-      setCameraError('');
+      setError("");
+      setCameraError("");
 
       // Check if getUserMedia is supported
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error('Camera not supported');
+        throw new Error("Camera not supported");
       }
 
       // Request camera permission
@@ -163,8 +176,8 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         video: {
           width: { ideal: 1280 },
           height: { ideal: 720 },
-          facingMode: 'environment' // Prefer back camera for better quality
-        }
+          facingMode: "environment", // Prefer back camera for better quality
+        },
       });
 
       streamRef.current = stream;
@@ -173,15 +186,21 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         setIsStreaming(true);
       }
     } catch (err: any) {
-      console.error('Camera error:', err);
+      console.error("Camera error:", err);
       let errorMessage = currentText.errors.cameraPermission;
 
-      if (err.name === 'NotFoundError' || err.message === 'Camera not supported') {
+      if (
+        err.name === "NotFoundError" ||
+        err.message === "Camera not supported"
+      ) {
         errorMessage = currentText.errors.cameraNotFound;
-      } else if (err.name === 'NotAllowedError') {
+      } else if (err.name === "NotAllowedError") {
         errorMessage = currentText.errors.cameraPermission;
-      } else if (err.name === 'NotReadableError') {
-        errorMessage = language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে' : 'Camera is being used by another app';
+      } else if (err.name === "NotReadableError") {
+        errorMessage =
+          language === "bn"
+            ? "ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে"
+            : "Camera is being used by another app";
       }
 
       setCameraError(errorMessage);
@@ -189,7 +208,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
       // Automatically suggest upload option after camera error
       setTimeout(() => {
-        setUploadMethod('upload');
+        setUploadMethod("upload");
         setShowUploadOption(true);
       }, 2000);
     }
@@ -198,7 +217,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
   // Stop camera stream
   const stopCamera = () => {
     if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     }
     setIsStreaming(false);
@@ -210,18 +229,26 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
     if (!file) return;
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
+    if (!file.type.startsWith("image/")) {
+      setError(
+        language === "bn"
+          ? "শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য"
+          : "Only image files are allowed",
+      );
       return;
     }
 
     // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
-      setError(language === 'bn' ? 'ছবির আকার ৫MB এর কম হতে হবে' : 'Image size must be less than 5MB');
+      setError(
+        language === "bn"
+          ? "ছবির আকার ৫MB এর কম হতে হবে"
+          : "Image size must be less than 5MB",
+      );
       return;
     }
 
-    setError('');
+    setError("");
 
     // Convert file to base64
     const reader = new FileReader();
@@ -245,7 +272,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
 
     if (!context) return;
 
@@ -257,10 +284,10 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     // Convert canvas to base64 image
-    const imageData = canvas.toDataURL('image/jpeg', 0.9);
+    const imageData = canvas.toDataURL("image/jpeg", 0.9);
     setCapturedImage(imageData);
     setIsCaptured(true);
-    
+
     // Stop camera after capture
     stopCamera();
   };
@@ -271,12 +298,12 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
     setIsVerifying(true);
     setVerificationProgress(0);
-    setError('');
+    setError("");
 
     try {
       // Simulate verification progress
       const progressInterval = setInterval(() => {
-        setVerificationProgress(prev => {
+        setVerificationProgress((prev) => {
           if (prev >= 90) {
             clearInterval(progressInterval);
             return 90;
@@ -286,22 +313,26 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       }, 200);
 
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+
       clearInterval(progressInterval);
       setVerificationProgress(100);
 
       // Simulate NID verification result (in real app, this would be from OCR/AI service)
       const mockNIDData: NIDData = {
         nidNumber: generateMockNID(),
-        name: language === 'bn' ? 'মোহাম্মদ রহিম উদ্দিন' : 'Mohammad Rahim Uddin',
-        dateOfBirth: '1990-05-15',
-        fatherName: language === 'bn' ? 'আব্দুল করিম' : 'Abdul Karim',
-        motherName: language === 'bn' ? 'ফাতেমা খাতুন' : 'Fatema Khatun',
-        address: language === 'bn' ? 'গ্রাম: কমলাপুর, উপজেলা: ঢাকা, জেলা: ঢাকা' : 'Village: Komolapur, Upazila: Dhaka, District: Dhaka',
-        bloodGroup: 'B+',
+        name:
+          language === "bn" ? "মোহাম্মদ রহিম উদ্দিন" : "Mohammad Rahim Uddin",
+        dateOfBirth: "1990-05-15",
+        fatherName: language === "bn" ? "আব্দুল করিম" : "Abdul Karim",
+        motherName: language === "bn" ? "ফাতেমা খাতুন" : "Fatema Khatun",
+        address:
+          language === "bn"
+            ? "গ্রাম: কমলাপুর, উপজেলা: ঢাকা, জেলা: ঢাকা"
+            : "Village: Komolapur, Upazila: Dhaka, District: Dhaka",
+        bloodGroup: "B+",
         verified: true,
-        confidence: Math.floor(Math.random() * 15) + 85 // 85-99% confidence
+        confidence: Math.floor(Math.random() * 15) + 85, // 85-99% confidence
       };
 
       // Simulate occasional verification failure
@@ -310,12 +341,11 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       }
 
       setNidData(mockNIDData);
-      
+
       // Call parent callback with verified data
       onCapture(mockNIDData, capturedImage);
-
     } catch (err: any) {
-      console.error('Verification error:', err);
+      console.error("Verification error:", err);
       setError(err.message || currentText.errors.verificationFailed);
       onError(err.message || currentText.errors.verificationFailed);
     } finally {
@@ -326,7 +356,9 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
   // Generate mock NID number
   const generateMockNID = () => {
     const year = Math.floor(Math.random() * 30) + 1970;
-    const serial = Math.floor(Math.random() * 999999).toString().padStart(6, '0');
+    const serial = Math.floor(Math.random() * 999999)
+      .toString()
+      .padStart(6, "0");
     return `${year}${serial}123`;
   };
 
@@ -336,16 +368,16 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
     setIsVerifying(false);
     setVerificationProgress(0);
     setNidData(null);
-    setCapturedImage('');
-    setError('');
-    setCameraError('');
+    setCapturedImage("");
+    setError("");
+    setCameraError("");
     setShowUploadOption(false);
-    setUploadMethod('camera');
+    setUploadMethod("camera");
     stopCamera();
 
     // Reset file input
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -363,18 +395,14 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
           <Shield className="w-5 h-5 mr-2" />
           {currentText.title}
         </CardTitle>
-        <CardDescription>
-          {currentText.subtitle}
-        </CardDescription>
+        <CardDescription>{currentText.subtitle}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Error Display */}
         {(error || cameraError) && (
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />
-            <AlertDescription>
-              {error || cameraError}
-            </AlertDescription>
+            <AlertDescription>{error || cameraError}</AlertDescription>
           </Alert>
         )}
 
@@ -384,42 +412,42 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             {/* Method Selection */}
             <div className="flex space-x-2 mb-4">
               <Button
-                variant={uploadMethod === 'camera' ? 'default' : 'outline'}
+                variant={uploadMethod === "camera" ? "default" : "outline"}
                 size="sm"
                 onClick={() => {
-                  setUploadMethod('camera');
+                  setUploadMethod("camera");
                   setShowUploadOption(false);
-                  setError('');
-                  setCameraError('');
+                  setError("");
+                  setCameraError("");
                 }}
                 className="flex-1"
               >
                 <Camera className="w-4 h-4 mr-2" />
-                {language === 'bn' ? 'ক্যামেরা' : 'Camera'}
+                {language === "bn" ? "ক্যামেরা" : "Camera"}
               </Button>
               <Button
-                variant={uploadMethod === 'upload' ? 'default' : 'outline'}
+                variant={uploadMethod === "upload" ? "default" : "outline"}
                 size="sm"
                 onClick={() => {
-                  setUploadMethod('upload');
+                  setUploadMethod("upload");
                   setShowUploadOption(true);
                   stopCamera();
-                  setError('');
-                  setCameraError('');
+                  setError("");
+                  setCameraError("");
                 }}
                 className="flex-1"
               >
                 <Upload className="w-4 h-4 mr-2" />
-                {language === 'bn' ? 'আপলোড' : 'Upload'}
+                {language === "bn" ? "আপলোড" : "Upload"}
               </Button>
             </div>
 
             {/* Camera Instructions */}
-            {uploadMethod === 'camera' && (
+            {uploadMethod === "camera" && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-medium text-blue-900 mb-2 flex items-center">
                   <Camera className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'নির্দেশাবলী:' : 'Instructions:'}
+                  {language === "bn" ? "নির্দেশাবলী:" : "Instructions:"}
                 </h4>
                 <ul className="text-sm text-blue-800 space-y-1">
                   <li>• {currentText.instructions.position}</li>
@@ -431,42 +459,84 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             )}
 
             {/* Upload Instructions */}
-            {uploadMethod === 'upload' && (
+            {uploadMethod === "upload" && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                 <h4 className="font-medium text-green-900 mb-2 flex items-center">
                   <FileImage className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'ছবি আপলোড নির্দেশাবলী:' : 'Photo Upload Instructions:'}
+                  {language === "bn"
+                    ? "ছবি আপলোড নির্দেশাবলী:"
+                    : "Photo Upload Instructions:"}
                 </h4>
                 <ul className="text-sm text-green-800 space-y-1">
-                  <li>• {language === 'bn' ? 'স্পষ্ট এবং পড়ার যোগ্য ছবি নির্বাচন করুন' : 'Select a clear and readable photo'}</li>
-                  <li>• {language === 'bn' ? 'ভা��ো আলোতে তোলা ছবি ব্যবহার করুন' : 'Use a photo taken in good lighting'}</li>
-                  <li>• {language === 'bn' ? 'পুরো এনআইডি কার্ড দেখা যায় এমন ছবি' : 'Ensure the entire NID card is visible'}</li>
-                  <li>• {language === 'bn' ? 'JPG, PNG বা JPEG ফরম্যাট (সর্বোচ্চ ৫MB)' : 'JPG, PNG or JPEG format (max 5MB)'}</li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "স্পষ্ট এবং পড়ার যোগ্য ছবি নির্বাচন করুন"
+                      : "Select a clear and readable photo"}
+                  </li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "ভা��ো আলোতে তোলা ছবি ব্যবহার করুন"
+                      : "Use a photo taken in good lighting"}
+                  </li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "পুরো এনআইডি কার্ড দেখা যায় এমন ছবি"
+                      : "Ensure the entire NID card is visible"}
+                  </li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "JPG, PNG বা JPEG ফরম্যাট (সর্বোচ্চ ৫MB)"
+                      : "JPG, PNG or JPEG format (max 5MB)"}
+                  </li>
                 </ul>
               </div>
             )}
 
             {/* Camera Troubleshooting */}
-            {(cameraError || error) && uploadMethod === 'camera' && (
+            {(cameraError || error) && uploadMethod === "camera" && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                 <h4 className="font-medium text-yellow-900 mb-2 flex items-center">
                   <HelpCircle className="w-4 h-4 mr-2" />
                   {currentText.troubleshoot}
                 </h4>
                 <ul className="text-sm text-yellow-800 space-y-1 mb-3">
-                  <li>• {language === 'bn' ? 'ব্রাউজারে ক্যামেরা অনুমতি দিন' : 'Allow camera permission in browser'}</li>
-                  <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দ��খুন' : 'Try using a different browser'}</li>
-                  <li>• {language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে কিনা চেক করুন' : 'Check if camera is being used by another app'}</li>
-                  <li>• {language === 'bn' ? 'পেজ রিফ্রেশ করে আবার চেষ্টা করুন' : 'Refresh the page and try again'}</li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "ব্রাউজারে ক্যামেরা অনুমতি দিন"
+                      : "Allow camera permission in browser"}
+                  </li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "অন্য ব্রাউজার ব্যবহার করে দ��খুন"
+                      : "Try using a different browser"}
+                  </li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে কিনা চেক করুন"
+                      : "Check if camera is being used by another app"}
+                  </li>
+                  <li>
+                    •{" "}
+                    {language === "bn"
+                      ? "পেজ রিফ্রেশ করে আবার চেষ্টা করুন"
+                      : "Refresh the page and try again"}
+                  </li>
                 </ul>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    setUploadMethod('upload');
+                    setUploadMethod("upload");
                     setShowUploadOption(true);
-                    setError('');
-                    setCameraError('');
+                    setError("");
+                    setCameraError("");
                   }}
                 >
                   <Upload className="w-4 h-4 mr-2" />
@@ -478,7 +548,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         )}
 
         {/* Camera View */}
-        {isStreaming && !isCaptured && uploadMethod === 'camera' && (
+        {isStreaming && !isCaptured && uploadMethod === "camera" && (
           <div className="relative">
             <video
               ref={videoRef}
@@ -486,7 +556,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               playsInline
               muted
               className="w-full rounded-lg border shadow-lg"
-              style={{ maxHeight: '400px' }}
+              style={{ maxHeight: "400px" }}
             />
 
             {/* Camera overlay frame */}
@@ -498,7 +568,9 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm">
-                  {language === 'bn' ? 'এনআইডি কার্ড এখানে রাখুন' : 'Place NID card here'}
+                  {language === "bn"
+                    ? "এনআইডি কার্ড এখানে রাখুন"
+                    : "Place NID card here"}
                 </div>
               </div>
             </div>
@@ -506,7 +578,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         )}
 
         {/* File Upload Area */}
-        {uploadMethod === 'upload' && !isCaptured && !nidData && (
+        {uploadMethod === "upload" && !isCaptured && !nidData && (
           <div className="space-y-4">
             <div
               className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer"
@@ -517,13 +589,13 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                 {currentText.selectFile}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">
-                {language === 'bn'
-                  ? 'ক্লিক করুন বা এনআইডি কার্ডের ছবি ড্র্যাগ করুন'
-                  : 'Click or drag your NID card photo here'}
+                {language === "bn"
+                  ? "ক্লিক করুন বা এনআইডি কার্ডের ছবি ড্র্যাগ করুন"
+                  : "Click or drag your NID card photo here"}
               </p>
               <Button variant="outline">
                 <Upload className="w-4 h-4 mr-2" />
-                {language === 'bn' ? 'ফাইল নির্বাচন করুন' : 'Select File'}
+                {language === "bn" ? "ফাইল নির্বাচন করুন" : "Select File"}
               </Button>
             </div>
 
@@ -545,15 +617,15 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         {isCaptured && capturedImage && !nidData && (
           <div className="space-y-4">
             <div className="relative">
-              <img 
-                src={capturedImage} 
-                alt="Captured NID" 
+              <img
+                src={capturedImage}
+                alt="Captured NID"
                 className="w-full rounded-lg border shadow-lg"
-                style={{ maxHeight: '300px', objectFit: 'contain' }}
+                style={{ maxHeight: "300px", objectFit: "contain" }}
               />
               <Badge className="absolute top-2 right-2 bg-green-500">
                 <CheckCircle className="w-3 h-3 mr-1" />
-                {language === 'bn' ? 'ক্যাপচার সম্পন্ন' : 'Captured'}
+                {language === "bn" ? "ক্যাপচার সম্পন্ন" : "Captured"}
               </Badge>
             </div>
           </div>
@@ -569,7 +641,9 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               </div>
               <h3 className="font-medium mb-2">{currentText.verifying}</h3>
               <Progress value={verificationProgress} className="mb-2" />
-              <p className="text-sm text-muted-foreground">{verificationProgress}%</p>
+              <p className="text-sm text-muted-foreground">
+                {verificationProgress}%
+              </p>
             </div>
           </div>
         )}
@@ -580,38 +654,52 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             <div className="bg-green-50 border border-green-200 rounded-lg p-4">
               <div className="flex items-center mb-3">
                 <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                <h3 className="font-medium text-green-900">{currentText.verified}</h3>
+                <h3 className="font-medium text-green-900">
+                  {currentText.verified}
+                </h3>
                 <Badge variant="secondary" className="ml-auto">
                   {currentText.confidence}: {nidData.confidence}%
                 </Badge>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-muted-foreground">{currentText.fields.nidNumber}:</span>
+                  <span className="text-muted-foreground">
+                    {currentText.fields.nidNumber}:
+                  </span>
                   <p className="font-medium font-mono">{nidData.nidNumber}</p>
                 </div>
                 <div>
-                  <span className="text-muted-foreground">{currentText.fields.name}:</span>
+                  <span className="text-muted-foreground">
+                    {currentText.fields.name}:
+                  </span>
                   <p className="font-medium">{nidData.name}</p>
                 </div>
                 <div>
-                  <span className="text-muted-foreground">{currentText.fields.dateOfBirth}:</span>
+                  <span className="text-muted-foreground">
+                    {currentText.fields.dateOfBirth}:
+                  </span>
                   <p className="font-medium">{nidData.dateOfBirth}</p>
                 </div>
                 <div>
-                  <span className="text-muted-foreground">{currentText.fields.bloodGroup}:</span>
+                  <span className="text-muted-foreground">
+                    {currentText.fields.bloodGroup}:
+                  </span>
                   <p className="font-medium">{nidData.bloodGroup}</p>
                 </div>
                 {nidData.fatherName && (
                   <div>
-                    <span className="text-muted-foreground">{currentText.fields.fatherName}:</span>
+                    <span className="text-muted-foreground">
+                      {currentText.fields.fatherName}:
+                    </span>
                     <p className="font-medium">{nidData.fatherName}</p>
                   </div>
                 )}
                 {nidData.motherName && (
                   <div>
-                    <span className="text-muted-foreground">{currentText.fields.motherName}:</span>
+                    <span className="text-muted-foreground">
+                      {currentText.fields.motherName}:
+                    </span>
                     <p className="font-medium">{nidData.motherName}</p>
                   </div>
                 )}
@@ -619,25 +707,31 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
               {nidData.address && (
                 <div className="mt-4">
-                  <span className="text-sm text-muted-foreground">{currentText.fields.address}:</span>
+                  <span className="text-sm text-muted-foreground">
+                    {currentText.fields.address}:
+                  </span>
                   <p className="font-medium">{nidData.address}</p>
                 </div>
               )}
             </div>
-            
+
             {/* Captured Image Thumbnail */}
             {capturedImage && (
               <div className="flex items-center justify-between bg-muted rounded-lg p-3">
                 <div className="flex items-center space-x-3">
-                  <img 
-                    src={capturedImage} 
-                    alt="NID Thumbnail" 
+                  <img
+                    src={capturedImage}
+                    alt="NID Thumbnail"
                     className="w-16 h-10 object-cover rounded border"
                   />
                   <div>
-                    <p className="text-sm font-medium">{language === 'bn' ? 'এনআইডি ছবি' : 'NID Image'}</p>
+                    <p className="text-sm font-medium">
+                      {language === "bn" ? "এনআইডি ছবি" : "NID Image"}
+                    </p>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'সফলভাবে ক্যাপচার হয়েছে' : 'Successfully captured'}
+                      {language === "bn"
+                        ? "সফলভাবে ক্যাপচার হয়েছে"
+                        : "Successfully captured"}
                     </p>
                   </div>
                 </div>
@@ -653,30 +747,27 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-3">
           {/* Camera method buttons */}
-          {uploadMethod === 'camera' && !isStreaming && !isCaptured && !nidData && (
-            <Button
-              onClick={startCamera}
-              disabled={disabled}
-              className="flex-1"
-            >
-              <Camera className="w-4 h-4 mr-2" />
-              {currentText.startCamera}
-            </Button>
-          )}
-
-          {uploadMethod === 'camera' && isStreaming && !isCaptured && (
-            <>
+          {uploadMethod === "camera" &&
+            !isStreaming &&
+            !isCaptured &&
+            !nidData && (
               <Button
-                onClick={capturePhoto}
+                onClick={startCamera}
+                disabled={disabled}
                 className="flex-1"
               >
                 <Camera className="w-4 h-4 mr-2" />
+                {currentText.startCamera}
+              </Button>
+            )}
+
+          {uploadMethod === "camera" && isStreaming && !isCaptured && (
+            <>
+              <Button onClick={capturePhoto} className="flex-1">
+                <Camera className="w-4 h-4 mr-2" />
                 {currentText.capture}
               </Button>
-              <Button
-                variant="outline"
-                onClick={stopCamera}
-              >
+              <Button variant="outline" onClick={stopCamera}>
                 <CameraOff className="w-4 h-4 mr-2" />
                 {currentText.stopCamera}
               </Button>
@@ -684,7 +775,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
           )}
 
           {/* Upload method buttons */}
-          {uploadMethod === 'upload' && !isCaptured && !nidData && (
+          {uploadMethod === "upload" && !isCaptured && !nidData && (
             <Button
               onClick={triggerFileUpload}
               disabled={disabled}
@@ -698,17 +789,11 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
           {/* Verification buttons (common for both methods) */}
           {isCaptured && !isVerifying && !nidData && (
             <>
-              <Button
-                onClick={verifyNID}
-                className="flex-1"
-              >
+              <Button onClick={verifyNID} className="flex-1">
                 <Zap className="w-4 h-4 mr-2" />
                 {currentText.verify}
               </Button>
-              <Button
-                variant="outline"
-                onClick={reset}
-              >
+              <Button variant="outline" onClick={reset}>
                 <RotateCcw className="w-4 h-4 mr-2" />
                 {currentText.retake}
               </Button>
@@ -717,13 +802,11 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
           {/* Reset button after successful verification */}
           {nidData && (
-            <Button
-              variant="outline"
-              onClick={reset}
-              className="flex-1"
-            >
+            <Button variant="outline" onClick={reset} className="flex-1">
               <RotateCcw className="w-4 h-4 mr-2" />
-              {language === 'bn' ? 'আবার স্ক্যান/আপলোড করুন' : 'Scan/Upload Again'}
+              {language === "bn"
+                ? "আবার স্ক্যান/আপলোড করুন"
+                : "Scan/Upload Again"}
             </Button>
           )}
         </div>
@@ -734,12 +817,12 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
             <Shield className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
             <div className="text-xs text-muted-foreground">
               <p className="font-medium mb-1">
-                {language === 'bn' ? 'নিরাপত্তা নোটিস:' : 'Security Notice:'}
+                {language === "bn" ? "নিরাপত্তা নোটিস:" : "Security Notice:"}
               </p>
               <p>
-                {language === 'bn' 
-                  ? 'আপনার এনআইডি তথ্য এনক্রিপ্ট করা হয় এবং নিরাপদে সংরক্ষণ করা হয়। আমরা আপনার গোপনীয়তা রক্ষা করি।'
-                  : 'Your NID information is encrypted and stored securely. We protect your privacy.'}
+                {language === "bn"
+                  ? "আপনার এনআইডি তথ্য এনক্রিপ্ট করা হয় এবং নিরাপদে সংরক্ষণ করা হয়। আমরা আপনার গোপনীয়তা রক্ষা করি।"
+                  : "Your NID information is encrypted and stored securely. We protect your privacy."}
               </p>
             </div>
           </div>
