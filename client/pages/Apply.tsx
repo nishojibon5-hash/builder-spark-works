@@ -96,7 +96,7 @@ export default function Apply() {
         phone: "মোবাইল নম্বর",
         email: "ইমেইল (ঐচ্ছিক)",
         dob: "জন্ম তারিখ",
-        nid: "জাতীয় পরিচয়পত্র নম্বর",
+        nid: "জাতীয় পরিচয়পত্র যাচাইকরণ",
         address: "ঠিকানা",
         enterName: "আপনার পূর্ণ নাম লিখুন",
         enterPhone: "মোবাইল নম্বর লিখুন",
@@ -109,7 +109,7 @@ export default function Apply() {
         employer: "প্রতিষ্ঠানের নাম",
         income: "মাসিক আয় (টাকা)",
         existingLoans: "বর্তমান ঋণ (টাকা)",
-        selectEmployment: "চাকরির ধরন নির্বাচন করুন",
+        selectEmployment: "চাকর���র ধরন নির্বাচন করুন",
         enterEmployer: "প্রতিষ্ঠানের নাম লিখুন",
         enterIncome: "মাসিক আয় লিখুন",
         enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখুন (যদি থাকে)"
@@ -359,7 +359,7 @@ export default function Apply() {
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনার ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনার ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
