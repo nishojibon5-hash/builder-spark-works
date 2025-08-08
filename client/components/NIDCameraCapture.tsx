@@ -63,7 +63,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
   const text = {
     bn: {
       title: "জাতীয় পরিচয়পত্র যাচাইকরণ",
-      subtitle: "ক্���ামেরা দিয়ে আপনার এনআইডি কার্ড স্ক্যান করুন",
+      subtitle: "ক্যামেরা দিয়ে আপনার এনআইডি কার্ড স্ক্যান করুন",
       startCamera: "ক্যামেরা ��ালু করুন",
       stopCamera: "ক্যামেরা বন্ধ করুন",
       capture: "ছবি তুলুন",
@@ -81,7 +81,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       errors: {
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
         cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
-        nidNotDetected: "এনআইডি কার্ড ��নাক্ত করা যায়নি",
+        nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
         poorQuality: "ছবির মান ভালো নয়",
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
       },
@@ -109,6 +109,10 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       verifying: "Verifying...",
       verified: "Successfully Verified",
       failed: "Verification Failed",
+      uploadOption: "Upload Photo Instead",
+      useCamera: "Use Camera Instead",
+      selectFile: "Select NID Photo",
+      troubleshoot: "Camera Not Working?",
       instructions: {
         position: "Position your NID card in front of the camera",
         lighting: "Ensure good lighting",
