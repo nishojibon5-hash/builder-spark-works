@@ -127,6 +127,15 @@ export function createServer() {
   app.get("/api/savings/all", authenticateToken, requireAdmin, getAllSavings);
   app.get("/api/savings/summary", authenticateToken, requireAdmin, getSavingsSummary);
 
+  // User Profile Management Routes
+  app.get("/api/users", authenticateToken, requireAdmin, getUsers);
+  app.get("/api/users/stats", authenticateToken, requireAdmin, getUserStats);
+  app.get("/api/users/search/advanced", authenticateToken, requireAdmin, advancedUserSearch);
+  app.get("/api/users/:id", authenticateToken, requireAdmin, getUserById);
+  app.put("/api/users/:id", authenticateToken, requireAdmin, updateUser);
+  app.post("/api/users", authenticateToken, requireAdmin, createUser);
+  app.delete("/api/users/:id", authenticateToken, requireAdmin, deleteUserProfile);
+
   // Admin Panel Management Routes
   app.post("/api/admin/users/add", authenticateToken, requireAdmin, addUser);
   app.get("/api/admin/users", authenticateToken, requireAdmin, getAllUsers);
