@@ -140,11 +140,25 @@ export default function Layout({ children }: LayoutProps) {
               </Button>
 
               {/* Admin Login Button */}
-              <Button variant="outline" size="sm" className="hidden sm:inline-flex border-orange-500 text-orange-600 hover:bg-orange-50" asChild>
-                <Link to="/admin/login">
-                  <Shield className="w-4 h-4 mr-2" />
-                  {currentText.menu.adminLogin}
-                </Link>
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden sm:inline-flex border-orange-500 text-orange-600 hover:bg-orange-50"
+                onClick={() => {
+                  // Check if running in Android app
+                  const isAndroidApp = navigator.userAgent.includes('LoanBondhuApp');
+
+                  if (isAndroidApp && (window as any).Android) {
+                    // Use native Android interface for admin access
+                    (window as any).Android.openAdmin('01650074073');
+                  } else {
+                    // Web browser - navigate normally
+                    window.location.href = '/admin/login';
+                  }
+                }}
+              >
+                <Shield className="w-4 h-4 mr-2" />
+                {currentText.menu.adminLogin}
               </Button>
 
               {/* Apply Button */}
@@ -339,7 +353,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'APK ড��উনলোড' : 'Download APK'}
+                  {language === 'bn' ? 'APK ডাউনলোড' : 'Download APK'}
                 </Button>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <Smartphone className="w-4 h-4 mr-1" />
@@ -382,7 +396,7 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="border-t border-border mt-8 pt-6">
             <p className="text-center text-sm text-muted-foreground">
-              © 2024 {currentText.companyName}. {language === 'bn' ? 'সকল অধিকার সংরক্ষিত���' : 'All rights reserved.'}
+              © 2024 {currentText.companyName}. {language === 'bn' ? 'সকল অধিকার সংরক্ষিত।' : 'All rights reserved.'}
             </p>
           </div>
         </div>
