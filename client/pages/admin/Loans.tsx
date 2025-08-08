@@ -234,7 +234,7 @@ export default function AdminLoans() {
   }, []);
 
   useEffect(() => {
-    let filtered = mockLoans;
+    let filtered = allLoans;
 
     // Apply search filter
     if (searchTerm) {
