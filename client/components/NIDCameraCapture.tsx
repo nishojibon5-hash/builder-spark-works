@@ -69,7 +69,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       capture: "ছবি তুলুন",
       retake: "আবার তুলুন",
       verify: "যাচাই করুন",
-      verifying: "যাচাই কর�� হচ্ছে...",
+      verifying: "যাচাই করা হচ্ছে...",
       verified: "সফলভাবে যাচাই হয়েছে",
       failed: "যাচাই ব্যর্থ হয়েছে",
       uploadOption: "ছবি আপলোড করুন",
@@ -84,7 +84,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       },
       errors: {
         cameraPermission: "ক্যামেরা অনুমতি প্রয়োজন",
-        cameraNotFound: "ক্যামেরা পাওয়া যায়নি",
+        cameraNotFound: "ক্যামেরা প��ওয়া যায়নি",
         nidNotDetected: "এনআইডি কার্ড সনাক্ত করা যায়নি",
         poorQuality: "ছবির মান ভালো নয়",
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
@@ -198,7 +198,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
+      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ��য' : 'Only image files are allowed');
       return;
     }
 
@@ -326,7 +326,14 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
     setCapturedImage('');
     setError('');
     setCameraError('');
+    setShowUploadOption(false);
+    setUploadMethod('camera');
     stopCamera();
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   // Cleanup on unmount
@@ -435,7 +442,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                 </h4>
                 <ul className="text-sm text-yellow-800 space-y-1 mb-3">
                   <li>• {language === 'bn' ? 'ব্রাউজারে ক্যামেরা অনুমতি দিন' : 'Allow camera permission in browser'}</li>
-                  <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দেখুন' : 'Try using a different browser'}</li>
+                  <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দেখু���' : 'Try using a different browser'}</li>
                   <li>• {language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে কিনা চেক করুন' : 'Check if camera is being used by another app'}</li>
                   <li>• {language === 'bn' ? 'পেজ রিফ্রেশ করে আবার চেষ্টা করুন' : 'Refresh the page and try again'}</li>
                 </ul>
@@ -703,7 +710,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               className="flex-1"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              {language === 'bn' ? 'আবার ��্ক্যান/আপলোড করুন' : 'Scan/Upload Again'}
+              {language === 'bn' ? 'আবার স্ক্যান/আপলোড করুন' : 'Scan/Upload Again'}
             </Button>
           )}
         </div>
