@@ -91,6 +91,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       badge: "1,234"
     },
     {
+      title: "User Profiles",
+      href: "/admin/user-profiles",
+      icon: UserCircle,
+      badge: null
+    },
+    {
       title: "Loans",
       href: "/admin/loans",
       icon: CreditCard,
