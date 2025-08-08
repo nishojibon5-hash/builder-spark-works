@@ -128,6 +128,23 @@ export default function AdminDashboard() {
   const [timeRange, setTimeRange] = useState("7d");
   const [refreshing, setRefreshing] = useState(false);
   const [selectedTab, setSelectedTab] = useState("overview");
+  const [realApplications, setRealApplications] = useState([]);
+
+  // Load real applications from localStorage
+  useEffect(() => {
+    const loadApplications = () => {
+      const stored = localStorage.getItem('loanApplications');
+      if (stored) {
+        const apps = JSON.parse(stored);
+        setRealApplications(apps);
+      }
+    };
+
+    loadApplications();
+    // Set up interval to check for new applications
+    const interval = setInterval(loadApplications, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-BD', {
