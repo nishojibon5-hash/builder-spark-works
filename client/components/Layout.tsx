@@ -292,27 +292,54 @@ export default function Layout({ children }: LayoutProps) {
                 <Button
                   className="w-full bg-green-600 hover:bg-green-700 text-white"
                   onClick={() => {
+                    // Check if already running in Android app
+                    const isAndroidApp = navigator.userAgent.includes('LoanBondhuApp');
+
+                    if (isAndroidApp) {
+                      // Already in the app, show message
+                      alert(language === 'bn'
+                        ? 'আপনি ইতিমধ্যে LoanBondhu অ্যাপে আছেন!'
+                        : 'You are already using the LoanBondhu app!');
+                      return;
+                    }
+
                     // Check if on mobile device
                     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
                     if (isMobile) {
                       // For mobile, show installation instructions
-                      alert(language === 'bn'
-                        ? 'APK ডাউনলোড হচ্ছে। ডাউনলোড শেষ হলে ফাইলটি খুলে ইনস্টল করুন। অজানা উৎস থেকে ইনস্টলেশনের অনুমতি দিতে হতে পারে।'
-                        : 'APK downloading. After download completes, open the file to install. You may need to allow installation from unknown sources.');
-                    }
+                      if (confirm(language === 'bn'
+                        ? 'LoanBondhu অ্যাপ ডাউনলোড করতে চান? ডাউনলোড শেষ হলে ফাইলটি খুলে ইনস্টল করুন।'
+                        : 'Download LoanBondhu app? After download completes, open the file to install the app.')) {
 
-                    // Download the APK file
-                    const link = document.createElement('a');
-                    link.href = '/LoanBondhu.apk';
-                    link.download = 'LoanBondhu.apk';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                        // Download the APK file
+                        const link = document.createElement('a');
+                        link.href = '/LoanBondhu.apk';
+                        link.download = 'LoanBondhu.apk';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                        // Show follow-up instructions
+                        setTimeout(() => {
+                          alert(language === 'bn'
+                            ? 'ডাউনলোড সম্পূর্ণ হলে ফাইল ম্যানেজারে গিয়ে APK ফাইলটি খুলুন। "অজানা উৎস" থেকে ইনস্টলের অনুমতি দিন।'
+                            : 'Once download completes, go to file manager and open the APK file. Allow installation from unknown sources when prompted.');
+                        }, 1000);
+                      }
+                    } else {
+                      // For desktop, direct download
+                      const link = document.createElement('a');
+                      link.href = '/LoanBondhu.apk';
+                      link.download = 'LoanBondhu.apk';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }
                   }}
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'APK ডাউনলোড' : 'Download APK'}
+                  {language === 'bn' ? 'APK ড��উনলোড' : 'Download APK'}
                 </Button>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <Smartphone className="w-4 h-4 mr-1" />
@@ -355,7 +382,7 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="border-t border-border mt-8 pt-6">
             <p className="text-center text-sm text-muted-foreground">
-              © 2024 {currentText.companyName}. {language === 'bn' ? 'সকল অধিকার সংরক্ষিত।' : 'All rights reserved.'}
+              © 2024 {currentText.companyName}. {language === 'bn' ? 'সকল অধিকার সংরক্ষিত���' : 'All rights reserved.'}
             </p>
           </div>
         </div>
