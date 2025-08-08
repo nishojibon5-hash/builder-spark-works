@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { 
+import {
   LayoutDashboard,
   Users,
   CreditCard,
@@ -32,7 +32,8 @@ import {
   Home,
   Banknote,
   Calendar,
-  Wallet
+  Wallet,
+  UserCircle
 } from "lucide-react";
 
 interface AdminLayoutProps {
