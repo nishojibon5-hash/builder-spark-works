@@ -322,10 +322,10 @@ export default function AdminLoans() {
   };
 
   // Filter loans by status for tabs
-  const pendingLoans = mockLoans.filter(loan => loan.status === 'pending_approval');
-  const approvedLoans = mockLoans.filter(loan => loan.status === 'approved');
-  const disbursedLoans = mockLoans.filter(loan => loan.status === 'disbursed');
-  const activeLoans = mockLoans.filter(loan => ['disbursed'].includes(loan.status));
+  const pendingLoans = allLoans.filter(loan => loan.status === 'pending_approval');
+  const approvedLoans = allLoans.filter(loan => loan.status === 'approved');
+  const disbursedLoans = allLoans.filter(loan => loan.status === 'disbursed');
+  const activeLoans = allLoans.filter(loan => ['disbursed'].includes(loan.status));
 
   return (
     <AdminLayout>
