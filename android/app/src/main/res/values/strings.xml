@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoanBondhu</string>
+    <string name="app_tagline">Your Trusted Loan Partner</string>
+    <string name="app_version">Version 1.0.0</string>
+    <string name="app_logo">LoanBondhu Logo</string>
+    
+    <!-- Activity Titles -->
+    <string name="title_main">Loan Application</string>
+    <string name="title_admin">Admin Panel</string>
+    <string name="title_splash">LoanBondhu</string>
+    
+    <!-- Menu Items -->
+    <string name="menu_home">Home</string>
+    <string name="menu_loans">Loans</string>
+    <string name="menu_calculator">Calculator</string>
+    <string name="menu_about">About</string>
+    <string name="menu_contact">Contact</string>
+    <string name="menu_admin">Admin</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_logout">Logout</string>
+    
+    <!-- Messages -->
+    <string name="loading">Loading…</string>
+    <string name="error_network">Network connection error. Please check your internet and try again.</string>
+    <string name="error_server">Server error. Please try again later.</string>
+    <string name="error_unknown">An unexpected error occurred.</string>
+    <string name="retry">Retry</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Admin Panel -->
+    <string name="admin_login_title">Admin Login</string>
+    <string name="admin_phone_hint">Enter admin phone number</string>
+    <string name="admin_password_hint">Enter password</string>
+    <string name="admin_login_button">Login</string>
+    <string name="admin_access_denied">Access denied. Invalid credentials.</string>
+    <string name="admin_authorized_only">Only authorized admin phone number allowed</string>
+    
+    <!-- Loan Application -->
+    <string name="loan_apply_title">Apply for Loan</string>
+    <string name="loan_type">Loan Type</string>
+    <string name="loan_amount">Loan Amount</string>
+    <string name="loan_tenure">Loan Tenure</string>
+    <string name="loan_purpose">Loan Purpose</string>
+    <string name="personal_info">Personal Information</string>
+    <string name="employment_info">Employment Information</string>
+    <string name="submit_application">Submit Application</string>
+    <string name="application_submitted">Application submitted successfully!</string>
+    
+    <!-- Download -->
+    <string name="download_apk">Download APK</string>
+    <string name="download_started">Download started</string>
+    <string name="download_complete">Download completed</string>
+    <string name="install_instructions">After download completes, open the file to install the app</string>
+    
+    <!-- Permissions -->
+    <string name="permission_camera">Camera permission needed for document capture</string>
+    <string name="permission_storage">Storage permission needed for document uploads</string>
+    <string name="permission_phone">Phone permission needed for auto-fill</string>
+    
+    <!-- Validation -->
+    <string name="field_required">This field is required</string>
+    <string name="invalid_phone">Please enter a valid phone number</string>
+    <string name="invalid_email">Please enter a valid email address</string>
+    <string name="invalid_amount">Please enter a valid amount</string>
+    
+    <!-- Bengali Translations -->
+    <string name="app_name_bn">ঋণবন্ধু</string>
+    <string name="app_tagline_bn">আপনার বিশ্বস্ত ঋণের সাথী</string>
+    <string name="loading_bn">লোড হচ্ছে…</string>
+    <string name="retry_bn">আবার চেষ্টা করুন</string>
+    
+</resources>
