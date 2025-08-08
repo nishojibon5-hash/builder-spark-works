@@ -327,7 +327,7 @@ export default function Layout({ children }: LayoutProps) {
             {/* Legal */}
             <div>
               <h4 className="font-semibold text-foreground mb-4">
-                {language === 'bn' ? 'আ��নি' : 'Legal'}
+                {language === 'bn' ? 'আইনি' : 'Legal'}
               </h4>
               <ul className="space-y-2">
                 <li><Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
