@@ -45,15 +45,24 @@ import {
   getAllSavings,
   getSavingsSummary
 } from "./routes/savings";
-import { 
-  addUser, 
-  getAllUsers, 
-  updateUserRole, 
-  deleteUser, 
+import {
+  addUser,
+  getAllUsers,
+  updateUserRole,
+  deleteUser,
   getDashboardStats,
   getAuditLogs,
   getSystemHealth
 } from "./routes/admin";
+import {
+  getUsers,
+  getUserById,
+  updateUser,
+  createUser,
+  deleteUser as deleteUserProfile,
+  advancedUserSearch,
+  getUserStats
+} from "./routes/users";
 import { 
   getLoanReport, 
   getRepaymentReport, 
