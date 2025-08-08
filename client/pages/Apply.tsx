@@ -11,6 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import Layout from "@/components/Layout";
 import NIDCameraCapture from "@/components/NIDCameraCapture";
+import SecurityFeatures from "@/components/SecurityFeatures";
 import {
   Calculator,
   CreditCard,
@@ -82,7 +83,7 @@ export default function Apply() {
         selectType: "ঋণ��র ধরন নির্বাচন করুন",
         selectTenure: "মেয়াদ নির্বাচন করুন",
         enterAmount: "পরিমাণ লি���ুন",
-        describePurpose: "ঋণের উদ্দেশ্য বর্ণনা করুন"
+        describePurpose: "ঋণের উদ্��েশ্য বর্ণনা করুন"
       },
       loanTypes: {
         instant: "তাৎক্ষণিক মাইক্রোলোন",
@@ -97,7 +98,7 @@ export default function Apply() {
         email: "ইমেইল (ঐচ্ছিক)",
         dob: "জন্ম তারিখ",
         nid: "জাতীয় পরিচয়পত্র যাচাইকরণ",
-        address: "ঠ��কানা",
+        address: "ঠিকানা",
         enterName: "��পনার পূর্ণ নাম লিখুন",
         enterPhone: "মোবাইল নম্বর লিখুন",
         enterEmail: "ইমেইল ঠিকানা লিখুন",
