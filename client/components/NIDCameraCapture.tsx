@@ -71,7 +71,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
       verify: "যাচাই করুন",
       verifying: "যাচাই করা হচ্ছে...",
       verified: "সফলভাবে যাচাই হয়েছে",
-      failed: "যাচাই ব্যর্থ হয়েছে",
+      failed: "যাচাই ব��যর্থ হয়েছে",
       uploadOption: "ছবি আপলোড করুন",
       useCamera: "ক্যামেরা ব্যবহার করুন",
       selectFile: "এনআইডি ছবি নির্বাচন করুন",
@@ -90,7 +90,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         verificationFailed: "যাচাইকর��� ব্যর্থ হয়েছে"
       },
       fields: {
-        nidNumber: "এনআইডি নম্বর",
+        nidNumber: "এনআই���ি নম্বর",
         name: "নাম",
         dateOfBirth: "জন্ম তারিখ",
         fatherName: "পিতার নাম",
@@ -198,7 +198,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
 
     // Validate file type
     if (!file.type.startsWith('image/')) {
-      setError(language === 'bn' ? 'শু���ুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
+      setError(language === 'bn' ? 'শুধুমাত্র ছবি ফাইল গ্রহণযোগ্য' : 'Only image files are allowed');
       return;
     }
 
@@ -285,7 +285,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         dateOfBirth: '1990-05-15',
         fatherName: language === 'bn' ? 'আব্দুল করিম' : 'Abdul Karim',
         motherName: language === 'bn' ? 'ফাতেমা খাতুন' : 'Fatema Khatun',
-        address: language === 'bn' ? 'গ্রাম: কমলাপুর, উপজেলা: ঢাকা, জেলা: ঢা���া' : 'Village: Komolapur, Upazila: Dhaka, District: Dhaka',
+        address: language === 'bn' ? 'গ্রাম: কমলাপুর, উপজেলা: ঢাকা, জেলা: ঢাকা' : 'Village: Komolapur, Upazila: Dhaka, District: Dhaka',
         bloodGroup: 'B+',
         verified: true,
         confidence: Math.floor(Math.random() * 15) + 85 // 85-99% confidence
@@ -437,7 +437,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
                   <li>• {language === 'bn' ? 'ব্রাউজারে ক্যামেরা অনুমতি দিন' : 'Allow camera permission in browser'}</li>
                   <li>• {language === 'bn' ? 'অন্য ব্রাউজার ব্যবহার করে দেখুন' : 'Try using a different browser'}</li>
                   <li>• {language === 'bn' ? 'ক্যামেরা অন্য অ্যাপে ব্যবহার হচ্ছে কিনা চেক করুন' : 'Check if camera is being used by another app'}</li>
-                  <li>�� {language === 'bn' ? 'পেজ রিফ্রেশ করে আবার চেষ্টা করুন' : 'Refresh the page and try again'}</li>
+                  <li>• {language === 'bn' ? 'পেজ রিফ্রেশ করে আবার চেষ্টা করুন' : 'Refresh the page and try again'}</li>
                 </ul>
                 <Button
                   variant="outline"
@@ -458,7 +458,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
         )}
 
         {/* Camera View */}
-        {isStreaming && !isCaptured && (
+        {isStreaming && !isCaptured && uploadMethod === 'camera' && (
           <div className="relative">
             <video
               ref={videoRef}
@@ -468,20 +468,53 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               className="w-full rounded-lg border shadow-lg"
               style={{ maxHeight: '400px' }}
             />
-            
+
             {/* Camera overlay frame */}
             <div className="absolute inset-4 border-2 border-white rounded-lg shadow-lg">
               <div className="absolute top-0 left-0 w-8 h-8 border-l-4 border-t-4 border-primary rounded-tl-lg"></div>
               <div className="absolute top-0 right-0 w-8 h-8 border-r-4 border-t-4 border-primary rounded-tr-lg"></div>
               <div className="absolute bottom-0 left-0 w-8 h-8 border-l-4 border-b-4 border-primary rounded-bl-lg"></div>
               <div className="absolute bottom-0 right-0 w-8 h-8 border-r-4 border-b-4 border-primary rounded-br-lg"></div>
-              
+
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm">
                   {language === 'bn' ? 'এনআইডি কার্ড এখানে রাখুন' : 'Place NID card here'}
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* File Upload Area */}
+        {uploadMethod === 'upload' && !isCaptured && !nidData && (
+          <div className="space-y-4">
+            <div
+              className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary transition-colors cursor-pointer"
+              onClick={triggerFileUpload}
+            >
+              <FileImage className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+              <h3 className="text-lg font-medium mb-2">
+                {currentText.selectFile}
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                {language === 'bn'
+                  ? 'ক্লিক করুন বা এনআইডি কার্ডের ছবি ড্��্যাগ করুন'
+                  : 'Click or drag your NID card photo here'}
+              </p>
+              <Button variant="outline">
+                <Upload className="w-4 h-4 mr-2" />
+                {language === 'bn' ? 'ফাইল নির্বাচন করুন' : 'Select File'}
+              </Button>
+            </div>
+
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
           </div>
         )}
 
@@ -670,7 +703,7 @@ export default function NIDCameraCapture({ onCapture, onError, language, disable
               </p>
               <p>
                 {language === 'bn' 
-                  ? 'আপনার এনআইডি তথ্য এনক্রিপ্ট করা হয় এবং নিরাপদে সংরক্ষণ করা হয়। আমরা আপনার গোপনীয়তা রক্ষা করি।'
+                  ? 'আপনার এনআইডি তথ্য এনক্রিপ্ট করা হয় এবং নিরাপদে সংরক্ষণ করা ���য়। আমরা আপনার গোপনীয়তা রক্ষা করি।'
                   : 'Your NID information is encrypted and stored securely. We protect your privacy.'}
               </p>
             </div>
