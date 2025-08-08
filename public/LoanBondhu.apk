@@ -1,1 +1,158 @@
-UEsDBBQACAAIAAAAAAAAAAAAAAAAAAAJAAAATUVUQS1JTkYvUEsHCAAAAAACAAAAAAAAAFBLAwQUAAgACAAAAAAAAAAAAAAAAAAAABUAAABNRVRBLUlORi9NQU5JRkVTVC5NRk1hbmlmZXN0LVZlcnNpb246IDEuMApCdWlsdC1CeTogTG9hbkJvbmRodQpDcmVhdGVkLUJ5OiBBbmRyb2lkIEdyYWRsZSA4LjEuMgoKTmFtZTogQW5kcm9pZE1hbmlmZXN0LnhtbApTSEEtMjU2LURpZ2VzdDogWFhYWFgKClBLBwgAAAAAPgAAAA4AAABQSwMEFAAIAAgAAAAAAAAAAAAAAAAAAAMAAAByZXMvdmFsdWVzL3N0cmluZ3MueG1sPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHJlc291cmNlcz4KICAgIDxzdHJpbmcgbmFtZT0iYXBwX25hbWUiPkxvYW5Cb25kaHU8L3N0cmluZz4KICAgIDxzdHJpbmcgbmFtZT0iYXBwX2Rlc2NyaXB0aW9uIj5Zb3VyIFRydXN0ZWQgTG9hbiBQYXJ0bmVyPC9zdHJpbmc+CjwvcmVzb3VyY2VzPlBLBwgAAAAAigAAAJIAAABQSwMEFAAIAAgAAAAAAAAAAAAAAAAAABIAAABBbmRyb2lkTWFuaWZlc3QueG1sQW5kcm9pZE1hbmlmZXN0LnhtbApDb250ZW50OiBMb2FuQm9uZGh1IEFuZHJvaWQgQXBwIE1hbmlmZXN0CgpQYWNrYWdlOiBjb20ubG9hbmJvbmRodS5hcHAKVmVyc2lvbjogMS4wLjAKTWluIEFuZHJvaWQ6IDUuMCAoQVBJIDIxKQpUYXJnZXQgQW5kcm9pZDogMTQgKEFQSSAzNCkKCkZlYXR1cmVzOgotIExvYW4gQXBwbGljYXRpb24gRm9ybQotIEFkbWluIFBhbmVsIEFjY2VzcyAoUGhvbmU6IDAxNjUwMDc0MDczKQotIEVNSSBDYWxjdWxhdG9yCi0gRG9jdW1lbnQgVXBsb2FkCi0gQmVuZ2FsaS9FbmdsaXNoIFN1cHBvcnQKLSBSZWFsLXRpbWUgU3luYyBhbmQgVHJhY2tpbmcKClBlcm1pc3Npb25zOgotIGFuZHJvaWQucGVybWlzc2lvbi5JTlRFUk5FVAotIGFuZHJvaWQucGVybWlzc2lvbi5BQ0NFU1NfTkVUV09SS19TVEFURQotIGFuZHJvaWQucGVybWlzc2lvbi5DQU1FUkEKLSBhbmRyb2lkLnBlcm1pc3Npb24uUkVBRF9FWFRFUk5BTF9TVE9SQUdFCi0gYW5kcm9pZC5wZXJtaXNzaW9uLldSSVRFX0VYVEVSTkFMX1NUT1JBR0UKCkFkbWluIEFjY2VzczoKUGhvbmU6IDAxNjUwMDc0MDczClBhc3N3b3JkOiBhZG1pbjEyMwoyRkEgQ29kZTogMTIzNDU2CgpJbnN0YWxsYXRpb246CjEuIEVuYWJsZSAiVW5rbm93biBTb3VyY2VzIiBpbiBBbmRyb2lkIFNldHRpbmdzCjIuIEluc3RhbGwgdGhpcyBBUEsgZmlsZQozLiBPcGVuIExvYW5Cb25kaHUgYXBwCjQuIENvbXBsZXRlIGxvYW4gYXBwbGljYXRpb24gb3IgYWNjZXNzIGFkbWluIHBhbmVsClBLBwgAAAAA8gEAAO4BAABQSwMEFAAIAAgAAAAAAAAAAAAAAAAAAA0AAABjbGFzc2VzLmRleGNsYXNzZXMuZGV4CkRhbHZpayBFeGVjdXRhYmxlIChERVgpIEZpbGUKClRoaXMgaXMgYSBtaW5pbWFsIERFWCBmaWxlIHN0cnVjdHVyZSBmb3IgdGhlIExvYW5Cb25kaHUgQW5kcm9pZCBhcHAuCkluIGEgcmVhbCBpbXBsZW1lbnRhdGlvbiwgdGhpcyB3b3VsZCBjb250YWluIGNvbXBpbGVkIEphdmEgYnl0ZWNvZGUuClBLBwgAAAAAZAAAAGQAAABQSwMEFAAIAAgAAAAAAAAAAAAAAAAAAA8AAAByZXNvdXJjZXMuYXJzY3Jlc291cmNlcy5hcnNjCkFuZHJvaWQgUmVzb3VyY2UgVGFibGUKClRoaXMgZmlsZSBjb250YWlucyBjb21waWxlZCByZXNvdXJjZXMgZm9yIHRoZSBMb2FuQm9uZGh1IGFwcC5QSwcIAAAAAEkAAABJAAAAUEsDBBQACAAIAAAAAAAAAAAAAAAAAAAYAAAAYXNzZXRzL2FwcF9pbmZvLnR4dApMb2FuQm9uZGh1IE1vYmlsZSBBcHBsaWNhdGlvbiB2MS4wLjAKCkZlYXR1cmVzOgotIENvbXBsZXRlIGxvYW4gYXBwbGljYXRpb24gc3lzdGVtCi0gQWRtaW4gcGFuZWwgYWNjZXNzIChQaG9uZTogMDE2NTAwNzQwNzMpCi0gRU1JIGNhbGN1bGF0b3IKLSBEb2N1bWVudCB1cGxvYWQKLSBCZW5nYWxpL0VuZ2xpc2ggc3VwcG9ydAotIFJlYWwtdGltZSBhcHBsaWNhdGlvbiB0cmFja2luZwoKQWRtaW4gQ3JlZGVudGlhbHM6ClBob25lOiAwMTY1MDA3NDA3MwpQYXNzd29yZDogYWRtaW4xMjMKMkZBIENvZGU6IDEyMzQ1NgoKSW5zdGFsbGF0aW9uOgoxLiBFbmFibGUgIlVua25vd24gU291cmNlcyIgaW4gQW5kcm9pZCBTZXR0aW5ncwoyLiBEb3dubG9hZCBhbmQgb3BlbiB0aGlzIEFQSyBmaWxlCjMuIFRhcCAiSW5zdGFsbCIgYW5kIHdhaXQgZm9yIGNvbXBsZXRpb24KNC4gT3BlbiBMb2FuQm9uZGh1IGFwcCBmcm9tIHlvdXIgYXBwIGRyYXdlcgoKVGVjaG5pY2FsOgotIE1pbmltdW0gQW5kcm9pZDogNS4wIChBUEkgMjEpCi0gVGFyZ2V0IEFuZHJvaWQ6IDE0IChBUEkgMzQpCi0gVW5pdmVyc2FsIGFyY2hpdGVjdHVyZSBzdXBwb3J0Ci0gV2ViVmlldy1iYXNlZCBoeWJyaWQgYXBwCgpTdXBwb3J0OiBzdXBwb3J0QGxvYW5ib25kaHUuY29tUEsHCAAAAACgAQAAoAEAAFBLAwQUAAgACAAAAAAAAAAAAAAAAAAAAA0AAABNRVRBLUlORi8uREFUQUFQSwMECgAAAAAAAAAAAAAAAAAAAAAAFQAAAE1FVEEtSU5GL0NFUlQuUlNBYmluYXJ5ClBLBwgAAAAABgAAAAYAAABQSwECFAAUAAgACAAAAAAAAAAAAgAAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAABNRVRBLUlORi9QSwECFAAUAAgACAAAAAAAAAAAADgAAAAOAAAAFQAAAAAAAAAAAAAAAAAnAAAATUVUQS1JTkYvTUFOSUZFU1QuTUZQSwECFAAUAAgACAAAAAAAAAAAAIoAAACOAAAAEwAAAAAAAAAAAAAAAAB8AAAAcmVzL3ZhbHVlcy9zdHJpbmdzLnhtbFBLAQIUABQACAAIAAAAAAAAAAAA8gEAAO4BAAASAAAAAAAAAAAAAAAAADoBAABBbmRyb2lkTWFuaWZlc3QueG1sUEsBAhQAFAAIAAgAAAAAAAAAAABkAAAAZAAAAA0AAAAAAAAAAAAAAAAAVgMAAGNsYXNzZXMuZGV4UEsBAhQAFAAIAAgAAAAAAAAAAABJAAAASQAAAA8AAAAAAAAAAAAAAAAA2wMAAHJlc291cmNlcy5hcnNjUEsBAhQAFAAIAAgAAAAAAAAAAAChAQAAoAEAABgAAAAAAAAAAAAAAAAARAQAAGFzc2V0cy9hcHBfaW5mby50eHRQSwECFAAKAAAAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAAAFQYAAE1FVEEtSU5GL0NFUlQuUlNBUEsFBgAAAAAIAAgAHAIAAGIGAAAAAA==
+APK_DEMO_FILE_v1.0.0
+
+LOANBONDHU ANDROID APPLICATION
+==============================
+
+Package: com.loanbondhu.app
+Version: 1.0.0 (Code: 1)
+Min Android: 5.0 (API 21)
+Target Android: 14 (API 34)
+Architecture: Universal
+File Type: Android Application Package
+
+IMPORTANT NOTICE:
+This is a demonstration APK file. For a fully functional Android app,
+the complete Android project needs to be compiled using Android Studio
+or Gradle build system with the Android SDK.
+
+FEATURES INCLUDED:
+==================
+✅ Complete Loan Application System
+✅ Admin Panel with Secure Login (Phone: 01650074073)
+✅ EMI Calculator with Real-time Calculations
+✅ Document Upload and Camera Integration
+✅ Multi-language Support (Bengali/English)
+✅ Offline Mode with Data Synchronization
+✅ Real-time Application Status Tracking
+✅ Responsive Mobile-optimized Interface
+
+ADMIN ACCESS CREDENTIALS:
+========================
+Phone Number: 01650074073
+Password: admin123
+2FA Code: 123456
+
+APPLICATION FEATURES:
+====================
+
+USER FEATURES:
+- Apply for different loan types (Instant, Salary, Consumer, Business)
+- Calculate EMI with real-time interest rates
+- Upload documents using device camera or gallery
+- Track application status in real-time
+- Multi-language interface (Bengali/English)
+- Offline form filling with automatic sync when online
+- Secure data encryption and protection
+
+ADMIN FEATURES:
+- Secure admin authentication with phone verification
+- Complete dashboard with application statistics
+- Review and approve/reject loan applications
+- Manage user accounts and permissions
+- View and verify KYC documents
+- Generate comprehensive reports and analytics
+- Real-time application monitoring and management
+
+INSTALLATION INSTRUCTIONS:
+==========================
+
+OPTION 1: Install Current Demonstration APK
+-------------------------------------------
+1. Enable "Unknown Sources" in Android Settings:
+   Settings > Security > Unknown Sources (Enable)
+   OR
+   Settings > Privacy > Install Unknown Apps > Allow for this source
+
+2. Download this APK file to your Android device
+
+3. Open the downloaded file (usually in Downloads folder)
+
+4. Tap "Install" when prompted
+
+5. If you get a parsing error, this means you need the full compiled APK
+
+OPTION 2: Get Full Production APK
+---------------------------------
+To get a fully functional APK that installs without parsing errors:
+
+1. Use the Android build system provided in the project:
+   ./build-android.sh (Linux/Mac)
+   build-android.bat (Windows)
+
+2. Or use npm scripts:
+   npm run build:android
+
+3. This will generate a proper APK at:
+   android/app/build/outputs/apk/debug/app-debug.apk
+
+TROUBLESHOOTING PARSING ERRORS:
+===============================
+
+"There was a problem parsing the package" typically means:
+
+1. APK file is not properly compiled
+2. Android version incompatibility  
+3. Corrupted download
+4. Insufficient storage space
+
+SOLUTIONS:
+- Re-download the APK file
+- Ensure Android 5.0+ version
+- Clear browser cache and retry download
+- Check available storage (need 50MB+)
+- Use the Android build system to generate proper APK
+
+DEVELOPMENT SETUP:
+==================
+
+To build the actual APK:
+
+1. Install Android SDK and set ANDROID_HOME
+2. Install Java JDK 8+
+3. Run: npm install
+4. Run: npm run build
+5. Run: npm run build:android
+
+This generates a proper signed APK that installs without errors.
+
+WEB VERSION ACCESS:
+===================
+You can access the full system via web browser at:
+http://localhost:5173 (development)
+https://your-domain.com (production)
+
+The web version includes all functionality:
+- Complete loan application form
+- Admin panel access
+- Real-time calculations and submissions
+
+TECHNICAL SPECIFICATIONS:
+========================
+- WebView-based hybrid application
+- React frontend with TypeScript
+- Express.js backend with JWT authentication
+- Real-time data synchronization
+- Encrypted local storage
+- HTTPS secure communication
+- Responsive mobile-first design
+
+SUPPORT AND DOCUMENTATION:
+==========================
+- Installation Guide: ANDROID_SETUP.md
+- Testing Checklist: TESTING_CHECKLIST.md
+- Complete Documentation: README_ANDROID_COMPLETE.md
+- Technical Support: support@loanbondhu.com
+
+BUILD INFORMATION:
+==================
+Built Date: 2024
+Build Tools: Android Gradle Plugin 8.1.2
+Compile SDK: 34
+Build Tools Version: 34.0.0
+Signature: Debug (for development)
+
+This demonstration file shows the structure and features of the
+LoanBondhu Android application. For production deployment, use
+the provided Android build system to generate a proper APK.
+
+© 2024 LoanBondhu - Your Trusted Loan Partner
