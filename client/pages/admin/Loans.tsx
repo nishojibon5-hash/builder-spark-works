@@ -70,6 +70,45 @@ import {
   MapPin
 } from "lucide-react";
 
+// Load applications from localStorage
+const loadApplicationsFromStorage = () => {
+  const stored = localStorage.getItem('loanApplications');
+  if (stored) {
+    return JSON.parse(stored).map((app: any, index: number) => ({
+      id: app.applicationId || `LB${Date.now() + index}`,
+      applicantId: `M${Date.now() + index}`,
+      applicantName: app.name,
+      applicantEmail: app.email || 'N/A',
+      applicantPhone: app.phone,
+      loanType: app.loanType,
+      requestedAmount: parseInt(app.amount),
+      approvedAmount: parseInt(app.amount),
+      tenure: parseInt(app.tenure),
+      interestRate: app.calculation?.interestRate || 18,
+      emi: app.calculation?.emi || 0,
+      purpose: app.purpose,
+      status: "pending_approval",
+      riskLevel: "medium",
+      creditScore: 650,
+      monthlyIncome: parseInt(app.monthlyIncome) || 0,
+      existingLoans: parseInt(app.existingLoans) || 0,
+      submittedAt: app.submittedAt || new Date().toISOString(),
+      lastUpdated: app.submittedAt || new Date().toISOString(),
+      documents: [
+        { type: "NID", status: "pending", uploadedAt: app.submittedAt },
+        { type: "Application Form", status: "verified", uploadedAt: app.submittedAt }
+      ],
+      notes: [],
+      address: app.address,
+      dob: app.dob,
+      nid: app.nid,
+      employmentType: app.employmentType,
+      employer: app.employer
+    }));
+  }
+  return [];
+};
+
 // Mock loan data
 const mockLoans = [
   {
