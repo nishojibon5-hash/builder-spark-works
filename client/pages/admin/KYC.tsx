@@ -974,7 +974,7 @@ function DocumentViewer({ document }: { document: any }) {
         
         <div className="flex space-x-2">
           <Button variant="outline" size="sm">
-            <Zoom className="w-4 h-4 mr-2" />
+            <ZoomIn className="w-4 h-4 mr-2" />
             Zoom
           </Button>
           <Button variant="outline" size="sm">
