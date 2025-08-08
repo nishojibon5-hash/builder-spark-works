@@ -75,7 +75,7 @@ export default function Apply() {
         purpose: "ঋণের উদ্দেশ্য",
         selectType: "ঋণ��র ধরন নির্বাচন করুন",
         selectTenure: "মেয়াদ নির্বাচন করুন",
-        enterAmount: "পরিমাণ লিখুন",
+        enterAmount: "পরিমাণ লি���ুন",
         describePurpose: "ঋণের উদ্দেশ্য বর্ণনা করুন"
       },
       loanTypes: {
@@ -121,7 +121,7 @@ export default function Apply() {
         rate: "সুদের হার (বার্ষিক)",
         emi: "মাসিক কিস্তি",
         total: "মোট পরিশোধ",
-        interest: "মোট সুদ",
+        interest: "মো�� সুদ",
         calculate: "গণনা করুন"
       },
       review: {
@@ -139,7 +139,7 @@ export default function Apply() {
         calculate: "গণনা করুন"
       },
       validation: {
-        required: "এই ক্ষেত্রটি আব��্যক",
+        required: "এই ক্ষেত্রটি আবশ্যক",
         invalidPhone: "সঠিক মোবাইল নম্বর দিন",
         invalidEmail: "সঠিক ইমেইল ঠিকানা দিন",
         invalidAmount: "সঠিক পরিমাণ দিন"
@@ -338,6 +338,74 @@ export default function Apply() {
       setIsSubmitting(false);
     }
   };
+
+  // Success page component
+  if (submitSuccess) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-10 h-10 text-green-600" />
+            </div>
+            <h1 className="text-3xl font-bold text-foreground mb-4">
+              {language === 'bn' ? 'আবেদন সফলভাবে জমা হয়েছে!' : 'Application Submitted Successfully!'}
+            </h1>
+            <p className="text-lg text-muted-foreground mb-8">
+              {language === 'bn'
+                ? 'আপনার ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                : 'Your loan application has been received. We will contact you shortly.'}
+            </p>
+            <div className="bg-muted rounded-lg p-6 mb-8">
+              <h3 className="font-semibold mb-2">
+                {language === 'bn' ? 'আবেদন নম্বর:' : 'Application ID:'}
+              </h3>
+              <p className="text-2xl font-mono">{`LB${Date.now()}`.slice(0, 12)}</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild>
+                <Link to="/">
+                  <Home className="w-4 h-4 mr-2" />
+                  {language === 'bn' ? 'হোমে ফিরুন' : 'Back to Home'}
+                </Link>
+              </Button>
+              <Button variant="outline" onClick={() => {
+                setSubmitSuccess(false);
+                setStep(1);
+                setFormData({
+                  loanType: '',
+                  amount: '',
+                  tenure: '',
+                  purpose: '',
+                  name: '',
+                  phone: '',
+                  email: '',
+                  dob: '',
+                  nid: '',
+                  address: '',
+                  employmentType: '',
+                  employer: '',
+                  monthlyIncome: '',
+                  existingLoans: ''
+                });
+                setCalculation({
+                  principal: 0,
+                  interestRate: 0,
+                  months: 0,
+                  emi: 0,
+                  totalPayable: 0,
+                  totalInterest: 0
+                });
+              }}>
+                <CreditCard className="w-4 h-4 mr-2" />
+                {language === 'bn' ? 'নতুন আবেদন' : 'New Application'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
