@@ -76,7 +76,7 @@ export default function Apply() {
       loanDetails: {
         title: "ঋণের বি���রণ",
         type: "ঋণের ধরন",
-        amount: "ঋণের পরিমাণ (টাকা)",
+        amount: "ঋণ���র পরিমাণ (টাকা)",
         tenure: "মেয়াদ (মাস)",
         purpose: "ঋণের উদ্দেশ্য",
         selectType: "ঋণ��র ধরন নির্বাচন করুন",
@@ -146,7 +146,7 @@ export default function Apply() {
       },
       validation: {
         required: "এই ক্ষেত্রটি আবশ্��ক",
-        invalidPhone: "সঠিক মোবাইল নম্বর দিন",
+        invalidPhone: "সঠিক মোবাইল নম্���র দিন",
         invalidEmail: "সঠিক ইমেইল ঠিকানা দিন",
         invalidAmount: "সঠিক পরিমাণ দিন"
       }
@@ -381,7 +381,7 @@ export default function Apply() {
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে প��ঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
@@ -605,13 +605,59 @@ export default function Apply() {
                       </div>
 
                       <div>
-                        <Label htmlFor="nid">{currentText.personalInfo.nid}</Label>
-                        <Input
-                          id="nid"
-                          placeholder="1234567890123"
-                          value={formData.nid}
-                          onChange={(e) => handleInputChange('nid', e.target.value)}
-                        />
+                        <Label className="mb-3 block">{currentText.personalInfo.nid}</Label>
+                        {!formData.nidVerified ? (
+                          <NIDCameraCapture
+                            onCapture={handleNIDCapture}
+                            onError={handleNIDError}
+                            language={language}
+                          />
+                        ) : (
+                          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center">
+                                <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                                <span className="text-green-900 font-medium">
+                                  {currentText.personalInfo.nidVerified}
+                                </span>
+                              </div>
+                              <Badge variant="secondary" className="bg-green-100 text-green-800">
+                                <Shield className="w-3 h-3 mr-1" />
+                                {language === 'bn' ? 'যাচাইকৃত' : 'Verified'}
+                              </Badge>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4 text-sm">
+                              <div>
+                                <span className="text-muted-foreground">
+                                  {language === 'bn' ? 'এনআইডি নম্বর:' : 'NID Number:'}
+                                </span>
+                                <p className="font-medium font-mono">{formData.nid}</p>
+                              </div>
+                              <div>
+                                <span className="text-muted-foreground">
+                                  {language === 'bn' ? 'নাম:' : 'Name:'}
+                                </span>
+                                <p className="font-medium">{formData.verifiedNidData?.name}</p>
+                              </div>
+                            </div>
+
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="mt-3"
+                              onClick={() => setFormData(prev => ({
+                                ...prev,
+                                nidVerified: false,
+                                nidImageData: '',
+                                verifiedNidData: null
+                              }))}
+                            >
+                              <Camera className="w-4 h-4 mr-2" />
+                              {language === 'bn' ? 'আবার স্ক্যান করুন' : 'Scan Again'}
+                            </Button>
+                          </div>
+                        )}
                       </div>
 
                       <div>
