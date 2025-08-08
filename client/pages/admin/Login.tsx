@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
-  Shield, 
-  Eye, 
-  EyeOff, 
-  Lock, 
-  User, 
+import {
+  Shield,
+  Eye,
+  EyeOff,
+  Lock,
+  Phone,
   AlertTriangle,
   ArrowRight,
   CreditCard
@@ -22,7 +22,7 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
+    phone: '',
     password: '',
     rememberMe: false,
     twoFactorCode: ''
@@ -44,8 +44,8 @@ export default function AdminLogin() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Mock validation
-      if (formData.email === 'admin@loanbondhu.com' && formData.password === 'admin123') {
+      // Mock validation - only allow phone number 01650074073
+      if (formData.phone === '01650074073' && formData.password === 'admin123') {
         if (step === 1) {
           setStep(2); // Move to 2FA
         } else {
@@ -55,7 +55,7 @@ export default function AdminLogin() {
             localStorage.setItem('adminUser', JSON.stringify({
               id: 1,
               name: 'Admin User',
-              email: 'admin@loanbondhu.com',
+              phone: '01650074073',
               role: 'super_admin',
               permissions: ['all']
             }));
@@ -65,7 +65,7 @@ export default function AdminLogin() {
           }
         }
       } else {
-        setError('Invalid email or password. Please try again.');
+        setError('Invalid phone number or password. Please try again.');
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -110,8 +110,8 @@ export default function AdminLogin() {
               )}
             </CardTitle>
             <CardDescription className="text-center">
-              {step === 1 
-                ? "Enter your admin credentials to access the system"
+              {step === 1
+                ? "Enter your authorized phone number and password"
                 : "Enter the 6-digit code from your authenticator app"
               }
             </CardDescription>
@@ -120,21 +120,24 @@ export default function AdminLogin() {
             <form onSubmit={handleLogin} className="space-y-4">
               {step === 1 ? (
                 <>
-                  {/* Email */}
+                  {/* Phone */}
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="phone">Phone Number</Label>
                     <div className="relative">
-                      <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
-                        id="email"
-                        type="email"
-                        placeholder="admin@loanbondhu.com"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        id="phone"
+                        type="tel"
+                        placeholder="01650074073"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
                         className="pl-10"
                         required
                       />
                     </div>
+                    <p className="text-xs text-muted-foreground">
+                      Only authorized admin phone number allowed
+                    </p>
                   </div>
 
                   {/* Password */}
@@ -243,7 +246,7 @@ export default function AdminLogin() {
             <div className="text-center space-y-2">
               <h3 className="font-medium text-sm">Demo Credentials</h3>
               <div className="text-xs space-y-1 text-muted-foreground">
-                <p>Email: admin@loanbondhu.com</p>
+                <p>Phone: 01650074073</p>
                 <p>Password: admin123</p>
                 <p>2FA Code: 123456</p>
               </div>
