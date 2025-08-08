@@ -381,7 +381,7 @@ export default function Apply() {
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               {language === 'bn'
-                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে পৌঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
+                ? 'আপনা��� ঋণের আবেদন আমাদের কাছে প��ঁছে���ে। ���মরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'
                 : 'Your loan application has been received. We will contact you shortly.'}
             </p>
             <div className="bg-muted rounded-lg p-6 mb-8">
@@ -626,7 +626,7 @@ export default function Apply() {
                               </div>
                               <Badge variant="secondary" className="bg-green-100 text-green-800">
                                 <Shield className="w-3 h-3 mr-1" />
-                                {language === 'bn' ? 'যাচাইকৃত' : 'Verified'}
+                                {language === 'bn' ? '��াচাইকৃত' : 'Verified'}
                               </Badge>
                             </div>
 
@@ -770,9 +770,17 @@ export default function Apply() {
                             <span className="text-muted-foreground">{currentText.personalInfo.dob}:</span>
                             <p className="font-medium">{formData.dob}</p>
                           </div>
-                          <div>
+                          <div className="col-span-2">
                             <span className="text-muted-foreground">{currentText.personalInfo.nid}:</span>
-                            <p className="font-medium">{formData.nid}</p>
+                            <div className="flex items-center space-x-2 mt-1">
+                              <p className="font-medium font-mono">{formData.nid}</p>
+                              {formData.nidVerified && (
+                                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                                  <CheckCircle className="w-3 h-3 mr-1" />
+                                  {language === 'bn' ? 'যাচাইকৃত' : 'Verified'}
+                                </Badge>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
