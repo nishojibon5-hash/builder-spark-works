@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe, Phone, CreditCard, Calculator, User } from "lucide-react";
+import { Menu, X, Globe, Phone, CreditCard, Calculator, User, Shield } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,6 +23,7 @@ export default function Layout({ children }: LayoutProps) {
         about: "আমাদের সম্পর্কে",
         contact: "যোগাযোগ",
         login: "লগইন",
+        adminLogin: "অ্যাডমিন লগইন",
         apply: "আবেদন করুন"
       },
       contact: {
@@ -36,10 +37,11 @@ export default function Layout({ children }: LayoutProps) {
       menu: {
         home: "Home",
         loans: "Loans",
-        calculator: "Calculator", 
+        calculator: "Calculator",
         about: "About",
         contact: "Contact",
         login: "Login",
+        adminLogin: "Admin Login",
         apply: "Apply Now"
       },
       contact: {
@@ -137,6 +139,14 @@ export default function Layout({ children }: LayoutProps) {
                 {currentText.menu.login}
               </Button>
 
+              {/* Admin Login Button */}
+              <Button variant="outline" size="sm" className="hidden sm:inline-flex border-orange-500 text-orange-600 hover:bg-orange-50" asChild>
+                <Link to="/admin/login">
+                  <Shield className="w-4 h-4 mr-2" />
+                  {currentText.menu.adminLogin}
+                </Link>
+              </Button>
+
               {/* Apply Button */}
               <Button size="sm" asChild>
                 <Link to="/apply">
@@ -231,6 +241,13 @@ export default function Layout({ children }: LayoutProps) {
                 <Button variant="outline" size="sm" className="w-full justify-start mb-2">
                   <User className="w-4 h-4 mr-2" />
                   {currentText.menu.login}
+                </Button>
+
+                <Button variant="outline" size="sm" className="w-full justify-start mb-2 border-orange-500 text-orange-600 hover:bg-orange-50" asChild>
+                  <Link to="/admin/login" onClick={() => setIsMenuOpen(false)}>
+                    <Shield className="w-4 h-4 mr-2" />
+                    {currentText.menu.adminLogin}
+                  </Link>
                 </Button>
               </div>
             </div>
