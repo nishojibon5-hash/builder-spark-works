@@ -63,7 +63,7 @@ export default function Apply() {
       subtitle: "সহজ পদ্ধতিতে আপনার ঋণের আবেদন সম্পন্ন করুন",
       steps: {
         loan: "ঋণের তথ্য",
-        personal: "ব্যক্তিগত তথ্য",
+        personal: "ব্যক���তিগত তথ্য",
         employment: "চাকরির তথ্য",
         review: "পর্যালোচনা"
       },
@@ -109,7 +109,7 @@ export default function Apply() {
         enterExistingLoans: "বর্তমান ঋণের পরিমাণ লিখুন (যদি থাকে)"
       },
       employmentTypes: {
-        salaried: "বেতনভোগী কর্মচারী",
+        salaried: "বেতনভোগী কর্মচ���রী",
         business: "ব্যবসায়ী",
         freelancer: "ফ্রিল্যান্সার",
         other: "অন্যান্য"
@@ -307,6 +307,36 @@ export default function Apply() {
       currency: 'BDT',
       minimumFractionDigits: 0
     }).format(amount).replace('BDT', '৳');
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+
+    try {
+      // Prepare submission data
+      const applicationData = {
+        ...formData,
+        calculation,
+        applicationId: `LB${Date.now()}`,
+        status: 'pending',
+        submittedAt: new Date().toISOString(),
+        language
+      };
+
+      // Store in localStorage for demo purposes (in real app, this would be an API call)
+      const existingApplications = JSON.parse(localStorage.getItem('loanApplications') || '[]');
+      existingApplications.push(applicationData);
+      localStorage.setItem('loanApplications', JSON.stringify(existingApplications));
+
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      setSubmitSuccess(true);
+    } catch (error) {
+      console.error('Submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
