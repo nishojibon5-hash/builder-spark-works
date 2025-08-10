@@ -17,6 +17,7 @@ import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminMembers from "./pages/admin/Members";
 import UserProfileDashboard from "./pages/admin/UserProfile";
+import ApplicationReview from "./pages/admin/ApplicationReview";
 import AdminLoans from "./pages/admin/Loans";
 import AdminRepayments from "./pages/admin/Repayments";
 import AdminKYC from "./pages/admin/KYC";
