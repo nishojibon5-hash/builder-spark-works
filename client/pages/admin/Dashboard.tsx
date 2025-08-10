@@ -363,14 +363,14 @@ export default function AdminDashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-3">
-                    <Link to="/admin/loans/applications">
-                      <Button variant="outline" className="w-full justify-start h-auto p-4">
+                    <Link to="/admin/application-review">
+                      <Button variant="outline" className="w-full justify-start h-auto p-4 border-orange-200 hover:border-orange-300">
                         <div className="text-left">
                           <div className="flex items-center mb-2">
-                            <FileText className="w-4 h-4 mr-2" />
-                            <span className="font-medium">Review Applications</span>
+                            <FileText className="w-4 h-4 mr-2 text-orange-600" />
+                            <span className="font-medium text-orange-900">Review Applications</span>
                           </div>
-                          <p className="text-xs text-muted-foreground">23 pending</p>
+                          <p className="text-xs text-orange-700">{realApplications.length} total</p>
                         </div>
                       </Button>
                     </Link>
