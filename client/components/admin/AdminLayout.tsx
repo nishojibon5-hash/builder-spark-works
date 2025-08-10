@@ -59,7 +59,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     // Check if user is authenticated
     const token = localStorage.getItem('adminToken');
     const userData = localStorage.getItem('adminUser');
-    
+
     if (!token || !userData) {
       navigate('/admin/login');
       return;
@@ -70,6 +70,25 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     } catch (error) {
       navigate('/admin/login');
     }
+
+    // Load pending applications count
+    const loadPendingApplications = () => {
+      const stored = localStorage.getItem('loanApplications');
+      if (stored) {
+        try {
+          const apps = JSON.parse(stored);
+          const pending = apps.filter((app: any) => app.status === 'pending' || !app.status).length;
+          setPendingApplications(pending);
+        } catch (error) {
+          console.error('Error loading applications:', error);
+        }
+      }
+    };
+
+    loadPendingApplications();
+    // Set up interval to check for new applications
+    const interval = setInterval(loadPendingApplications, 5000);
+    return () => clearInterval(interval);
   }, [navigate]);
 
   const handleLogout = () => {
