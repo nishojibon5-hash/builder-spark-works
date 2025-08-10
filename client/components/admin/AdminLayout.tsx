@@ -305,11 +305,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         {/* Quick Actions */}
         <div className="p-4 border-t">
           <div className="space-y-2">
-            <Link to="/admin/loans/applications">
+            <Link to="/admin/application-review">
               <Button variant="outline" size="sm" className="w-full justify-start">
                 <CreditCard className="w-4 h-4 mr-2" />
                 New Applications
-                <Badge variant="destructive" className="ml-auto">23</Badge>
+                {pendingApplications > 0 && (
+                  <Badge variant="destructive" className="ml-auto">{pendingApplications}</Badge>
+                )}
               </Button>
             </Link>
             <Link to="/admin/repayments/overdue">
