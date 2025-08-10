@@ -120,7 +120,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       title: "Application Review",
       href: "/admin/application-review",
       icon: FileCheck,
-      badge: "New"
+      badge: pendingApplications > 0 ? pendingApplications.toString() : null
     },
     {
       title: "Loans",
