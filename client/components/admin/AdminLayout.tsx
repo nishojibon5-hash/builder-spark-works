@@ -51,6 +51,7 @@ interface AdminUser {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
+  const [pendingApplications, setPendingApplications] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
 
