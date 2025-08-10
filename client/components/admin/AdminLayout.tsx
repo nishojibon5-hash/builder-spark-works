@@ -97,6 +97,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       badge: null
     },
     {
+      title: "Application Review",
+      href: "/admin/application-review",
+      icon: FileCheck,
+      badge: "New"
+    },
+    {
       title: "Loans",
       href: "/admin/loans",
       icon: CreditCard,
