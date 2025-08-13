@@ -230,6 +230,25 @@ export default function SocietyManager() {
     savings: number;
   }>>({});
 
+  // Income/Expense form state
+  const [newIncomeExpense, setNewIncomeExpense] = useState({
+    type: 'income' as 'income' | 'expense',
+    category: '',
+    amount: 0,
+    description: '',
+    date: new Date().toISOString().split('T')[0]
+  });
+
+  // Worker Salary form state
+  const [newWorkerSalary, setNewWorkerSalary] = useState({
+    workerId: '',
+    workerName: '',
+    month: new Date().toISOString().split('T')[0].substring(0, 7),
+    baseSalary: 0,
+    bonus: 0,
+    deductions: 0
+  });
+
   // Load data from localStorage on component mount
   useEffect(() => {
     const savedWorkers = localStorage.getItem('society_workers');
@@ -280,7 +299,7 @@ export default function SocietyManager() {
       workers: "কর্মী ব্যবস্থাপনা",
       members: "সদস্যগণ",
       collection: "কালেকশন",
-      reports: "প্রতিব���দন",
+      reports: "প্রতিবেদন",
       settings: "সেটিংস",
       societyName: "আমাদের সমিতি",
       totalMembers: "মোট সদস্য",
@@ -322,11 +341,11 @@ export default function SocietyManager() {
       login: "লগইন",
       logout: "লগআউট",
       dataBackup: "ডেটা ব্যাকআপ",
-      downloadPDF: "পিডিএফ ডাউনলোড",
+      downloadPDF: "��িডিএফ ডাউনলোড",
       uploadBackup: "ব্যাকআপ আপলোড",
       deleteData: "ডেটা মুছুন",
       confirmDelete: "মুছে ফেলার নিশ্চিতকরণ",
-      cannotDelete: "শু��ুমাত্র অ্যাডমিন ডেটা মুছতে পারবেন",
+      cannotDelete: "শুধুমাত্র অ্যাডমিন ডেটা মুছতে পারবেন",
       dataProtected: "ডেটা সুরক্ষিত",
       memberProfilePDF: "সদস্যের প্রোফাইল পিডিএফ",
       collectionCalendarPDF: "কালেকশন ক্যালেন্ডার পিডিএফ",
@@ -695,7 +714,7 @@ export default function SocietyManager() {
           </div>
         </div>
 
-        <h3>সাম্প���রতিক কালেকশন ইতিহাস</h3>
+        <h3>সাম্প্রতিক কালেকশন ইতিহাস</h3>
         <table>
           <thead>
             <tr>
@@ -881,7 +900,7 @@ export default function SocietyManager() {
         </div>
 
         <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #666;">
-          <p>আমাদের সমিতি - কালেকশন ক্যালেন্ডার র���পোর্ট</p>
+          <p>আমাদের সমিতি - কালেকশন ক্যালেন্ডার রিপোর্ট</p>
           <p>রিপোর্ট তৈরির তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
         </div>
 
@@ -939,7 +958,7 @@ export default function SocietyManager() {
         <div class="stats">
           <div class="stat-box">
             <div class="stat-value">${workers.length}</div>
-            <div class="stat-label">মোট কর্ম���</div>
+            <div class="stat-label">মোট কর্মী</div>
           </div>
           <div class="stat-box">
             <div class="stat-value">${members.length}</div>
@@ -963,7 +982,7 @@ export default function SocietyManager() {
                 <th>কর্মী আইডি</th>
                 <th>নাম</th>
                 <th>এলাকা</th>
-                <th>মোবাইল</th>
+                <th>���োবাইল</th>
                 <th>মোট সদস্য</th>
                 <th>দৈনিক কালেকশন</th>
                 <th>অবস্থা</th>
@@ -996,7 +1015,7 @@ export default function SocietyManager() {
                 <th>নাম</th>
                 <th>এনআইডি</th>
                 <th>মোবাইল</th>
-                <th>কর্মী</th>
+                <th>��র্মী</th>
                 <th>এলাকা</th>
                 <th>কিস্তি</th>
                 <th>সঞ্চয়</th>
@@ -1030,7 +1049,7 @@ export default function SocietyManager() {
           <table>
             <thead>
               <tr>
-                <th>তারিখ</th>
+                <th>তা���িখ</th>
                 <th>সদস্য কোড</th>
                 <th>সদস্যের নাম</th>
                 <th>কর্মী</th>
@@ -1320,7 +1339,7 @@ export default function SocietyManager() {
               {/* Recent Collections with improved display */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{language === 'bn' ? 'সাম্প��রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
+                  <CardTitle>{language === 'bn' ? 'সাম্প্রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
                   <CardDescription>
                     {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন - বিস্তারিত দেখতে ক্লিক করুন' : 'Latest financial transactions - click for details'}
                   </CardDescription>
@@ -1771,12 +1790,12 @@ export default function SocietyManager() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <HardDrive className="w-5 h-5 mr-2" />
-                      {language === 'bn' ? 'ডেট�� ব্যাকআপ' : 'Data Backup'}
+                      {language === 'bn' ? 'ডেটা ব্যাকআপ' : 'Data Backup'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {language === 'bn' ? 'সমিতির ডেটা JSON ফরম্যাটে ব্যাকআপ ডাউনলোড করুন' : 'Download society data backup in JSON format'}
+                      {language === 'bn' ? 'সমিতির ডেটা JSON ফরম��যাটে ব্যাকআপ ডাউনলোড করুন' : 'Download society data backup in JSON format'}
                     </p>
                     <Button className="w-full" variant="outline" onClick={downloadBackup}>
                       <Download className="w-4 h-4 mr-2" />
@@ -1795,7 +1814,7 @@ export default function SocietyManager() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground mb-4">
-                        {language === 'bn' ? 'পূর্ব���র ব্যাকআপ ফাইল ইমপোর্ট করুন (শুধুমাত্র অ্যাডমিন)' : 'Import previous backup file (admin only)'}
+                        {language === 'bn' ? 'পূর্বের ব্যাকআপ ফাইল ইমপোর্ট করুন (শুধুমাত্র অ্যাডমিন)' : 'Import previous backup file (admin only)'}
                       </p>
                       <Input
                         type="file"
@@ -2014,7 +2033,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.addMember}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'নতুন সদস্���ের সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new member information'}
+              {language === 'bn' ? 'নতুন সদস্যের সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new member information'}
             </DialogDescription>
           </DialogHeader>
           
@@ -2142,7 +2161,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.collectionSheet}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'দৈনিক কালেকশন রেকর্ড করুন - যেকোনো পরিমাণ বা খালি রেখেও সেভ করতে পারবেন' : 'Record daily collection - can save any amount or leave empty'}
+              {language === 'bn' ? 'দৈনিক কালেকশন রেকর্ড করুন - যেকোনো পরিমাণ বা খাল�� রেখেও সেভ করতে পারবেন' : 'Record daily collection - can save any amount or leave empty'}
             </DialogDescription>
           </DialogHeader>
           
@@ -2291,7 +2310,7 @@ export default function SocietyManager() {
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => selectedMember && generateMemberCollectionCalendarPDF(selectedMember)}>
                   <CalendarIcon className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'ক্যালেন্ডার পিডিএফ' : 'Calendar PDF'}
+                  {language === 'bn' ? 'ক্যাল��ন্ডার পিডিএফ' : 'Calendar PDF'}
                 </Button>
               </div>
             </DialogTitle>
@@ -2384,7 +2403,7 @@ export default function SocietyManager() {
                         if (memberCollection) {
                           alert(`${language === 'bn' ? 'এই তারিখের কালেকশন:' : 'Collection for this date:'}\n${language === 'bn' ? 'কিস্তি:' : 'Installment:'} ${formatCurrency(memberCollection.installmentCollected)}\n${language === 'bn' ? 'সঞ্চয়:' : 'Savings:'} ${formatCurrency(memberCollection.savingsCollected)}\n${language === 'bn' ? 'মোট:' : 'Total:'} ${formatCurrency(memberCollection.installmentCollected + memberCollection.savingsCollected)}`);
                         } else {
-                          alert(language === 'bn' ? 'এই তারিখে কোন কালেকশন পাওয়া যায়নি' : 'No collection found for this date');
+                          alert(language === 'bn' ? 'এই তারিখে কোন কা��েকশন পাওয়া যায়নি' : 'No collection found for this date');
                         }
                       }
                     }}>
