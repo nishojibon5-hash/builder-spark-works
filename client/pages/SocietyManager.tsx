@@ -298,6 +298,18 @@ export default function SocietyManager() {
   }, [collections]);
 
   useEffect(() => {
+    if (incomeExpenses.length > 0) {
+      localStorage.setItem('society_income_expenses', JSON.stringify(incomeExpenses));
+    }
+  }, [incomeExpenses]);
+
+  useEffect(() => {
+    if (workerSalaries.length > 0) {
+      localStorage.setItem('society_worker_salaries', JSON.stringify(workerSalaries));
+    }
+  }, [workerSalaries]);
+
+  useEffect(() => {
     localStorage.setItem('society_admin_status', JSON.stringify(isAdmin));
   }, [isAdmin]);
 
@@ -312,7 +324,7 @@ export default function SocietyManager() {
       societyName: "আমাদের সমিতি",
       totalMembers: "মোট সদস্য",
       totalWorkers: "মোট কর্মী",
-      todayCollection: "আজকের কালেকশন",
+      todayCollection: "আজকের কালে���শন",
       monthlyTarget: "মাসিক লক্ষ্য",
       addMember: "নতুন সদস্য যোগ করুন",
       addWorker: "নতুন কর্মী যোগ করুন",
@@ -699,7 +711,7 @@ export default function SocietyManager() {
             <p><strong>দৈনিক কিস্তি:</strong> ${formatCurrency(member.installmentAmount)}</p>
             <p><strong>দৈনিক সঞ্চয়:</strong> ${formatCurrency(member.savingsAmount)}</p>
             <p><strong>গৃহীত ঋণ:</strong> ${formatCurrency(member.loanAmount)}</p>
-            <p><strong>সদস্যপদ:</strong> ${member.membershipType === 'regular' ? 'নিয়মিত' : member.membershipType === 'premium' ? 'প্রিমিয়াম' : 'আজীবন'}</p>
+            <p><strong>সদস্যপদ:</strong> ${member.membershipType === 'regular' ? 'নিয়মিত' : member.membershipType === 'premium' ? 'প��রিমিয়াম' : 'আজীবন'}</p>
           </div>
         </div>
 
@@ -747,7 +759,7 @@ export default function SocietyManager() {
         </table>
 
         <div class="footer">
-          <p>আমাদের সমিত��� - সদস্য প্রোফাইল রিপোর্ট</p>
+          <p>আমাদের সমিতি - সদস্য প্রোফাইল রিপোর্ট</p>
           <p>এই রিপোর্টটি ${new Date().toLocaleString('bn-BD')} এ তৈরি করা হয়েছে</p>
         </div>
 
@@ -844,7 +856,7 @@ export default function SocietyManager() {
       </head>
       <body>
         <div class="header">
-          <h1>কালেকশন ক্যাল���ন্ডার</h1>
+          <h1>কালেকশন ক্যালেন্ডার</h1>
           <h2>${member.name} (${member.memberCode})</h2>
           <h3>${monthName}</h3>
         </div>
@@ -884,7 +896,7 @@ export default function SocietyManager() {
               <div style="font-size: 20px; font-weight: bold; color: #059669;">
                 ${formatCurrency(getMemberProfileData(member).monthlyStats.totalInstallment)}
               </div>
-              <div style="font-size: 12px; color: #666;">মোট কিস্তি</div>
+              <div style="font-size: 12px; color: #666;">ম���ট কিস্তি</div>
             </div>
             <div style="text-align: center;">
               <div style="font-size: 20px; font-weight: bold; color: #0284c7;">
@@ -1093,7 +1105,7 @@ export default function SocietyManager() {
               <tr>
                 <th>এলাকা</th>
                 <th>কর্মী</th>
-                <th>মোট সদস্য</th>
+                <th>���োট সদস্য</th>
                 <th>সক্রিয় সদস্য</th>
                 <th>মোট কালেকশন</th>
                 <th>দৈনিক গড় কালেকশন</th>
@@ -1349,7 +1361,7 @@ export default function SocietyManager() {
                 <CardHeader>
                   <CardTitle>{language === 'bn' ? 'সাম্প্রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
                   <CardDescription>
-                    {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন - বিস্তারিত দেখতে ক্লিক করুন' : 'Latest financial transactions - click for details'}
+                    {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন - বিস্তারিত দেখতে ক���লিক করুন' : 'Latest financial transactions - click for details'}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -1427,7 +1439,7 @@ export default function SocietyManager() {
                       {language === 'bn' ? 'কোনো কর্মী নেই' : 'No Workers Added'}
                     </h3>
                     <p className="text-muted-foreground text-center mb-4">
-                      {language === 'bn' ? 'প্রথমে কর্মী যোগ করুন যা��া বিভিন্ন এলাকায় দৈনিক কালেকশন করবেন।' : 'Start by adding workers who will collect daily from different areas.'}
+                      {language === 'bn' ? 'প্রথমে কর্মী যোগ করুন যারা বিভিন্ন এলাকায় দৈনিক কালেকশন করবেন।' : 'Start by adding workers who will collect daily from different areas.'}
                     </p>
                     <Button onClick={() => setAddWorkerOpen(true)}>
                       <UserPlus className="w-4 h-4 mr-2" />
@@ -1491,7 +1503,7 @@ export default function SocietyManager() {
                             <p className="font-bold text-xl">{worker.totalMembers}</p>
                           </div>
                           <div>
-                            <p className="text-sm text-muted-foreground">{language === 'bn' ? 'দৈনিক কা���েকশন' : 'Daily Collection'}</p>
+                            <p className="text-sm text-muted-foreground">{language === 'bn' ? 'দৈনিক কালেকশন' : 'Daily Collection'}</p>
                             <p className="font-bold text-xl text-green-600">{formatCurrency(worker.dailyCollection)}</p>
                           </div>
                         </div>
@@ -1879,7 +1891,7 @@ export default function SocietyManager() {
                       </div>
                       <p className="text-sm text-green-700 mt-2">
                         {language === 'bn' 
-                          ? '��কল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
+                          ? 'সকল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
                           : 'All data is stored locally and never automatically deleted.'
                         }
                       </p>
@@ -2018,7 +2030,7 @@ export default function SocietyManager() {
                 }}
               />
               <p className="text-sm text-muted-foreground mt-1">
-                {language === 'bn' ? 'কর্মীর ছবি আপলোড ��রুন (ঐচ্ছিক)' : 'Upload worker photo (optional)'}
+                {language === 'bn' ? 'কর্মীর ছবি আপলোড করুন (ঐচ্ছিক)' : 'Upload worker photo (optional)'}
               </p>
             </div>
           </div>
