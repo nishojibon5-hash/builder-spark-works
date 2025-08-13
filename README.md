@@ -23,7 +23,7 @@
 
 ### 💼 Society Manager Features
 - **📈 Dashboard** - ড্যাশবোর্ড
-- **👨‍💼 Worker Management** - কর্মী ব্যবস্থাপনা
+- **👨‍💼 Worker Management** - কর্মী ব্যবস���থাপনা
 - **👥 Member Registration** - সদস্য নিবন্ধন
 - **💵 Collection Tracking** - কালেকশন ট্র্যাকিং
 - **📋 Income/Expense Management** - আয়-ব্যয় ব্যবস্থাপনা
@@ -217,8 +217,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Issues:** [GitHub Issues](https://github.com/nishojibon5-hash/builder-spark-works/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/nishojibon5-hash/builder-spark-works/discussions)
+- **Issues:** [GitHub Issues](https://github.com/nishojibon5-hash/loanbondhu/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/nishojibon5-hash/loanbondhu/discussions)
 - **Email:** support@loanbondhu.com
 
 ## 📞 Contact
