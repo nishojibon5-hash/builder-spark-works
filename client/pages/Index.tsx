@@ -100,7 +100,7 @@ export default function Index() {
         },
         transparent: {
           title: "স্বচ্ছ ফি",
-          description: "কোনো লুকানো চার্জ নেই, সব খরচ আগেই জানান হয়",
+          description: "কোনো লু���ানো চার্জ নেই, সব খরচ আগেই জানান হয়",
         },
         support: {
           title: "২৪/৭ সহায়তা",
@@ -361,6 +361,17 @@ export default function Index() {
                     <Link to="/calculator">
                       <Calculator className="w-5 h-5 mr-2" />
                       {currentText.hero.calculate}
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="h-12 px-8 text-base bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
+                    asChild
+                  >
+                    <Link to="/society-manager">
+                      <Users className="w-5 h-5 mr-2" />
+                      {language === "bn" ? "সমিতি ম্যানেজার" : "Society Manager"}
                     </Link>
                   </Button>
                 </div>
@@ -877,7 +888,7 @@ export default function Index() {
                   language === "bn"
                     ? `📱 LoanBondhu অ্যাপ ইনস্টল গাইড:
 
-⚠️ গুরুত্বপূর্ণ: "প্যাকেজ পার���স" এরর এড়াতে:
+⚠️ গুরুত্বপূর্ণ: "প্যাকেজ পার���স" এ���র এড়াতে:
 
 1. সেটিংস > নিরাপত্তা > "অজানা উৎস" সক্রিয় করুন
 2. Android 5.0+ ভার্সন নিশ্চিত করুন
