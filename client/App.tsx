@@ -38,6 +38,7 @@ const App = () => (
           <Route path="/loans" element={<Loans />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/society-manager" element={<SocietyManager />} />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
