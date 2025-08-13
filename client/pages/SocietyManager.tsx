@@ -254,6 +254,8 @@ export default function SocietyManager() {
     const savedWorkers = localStorage.getItem('society_workers');
     const savedMembers = localStorage.getItem('society_members');
     const savedCollections = localStorage.getItem('society_collections');
+    const savedIncomeExpenses = localStorage.getItem('society_income_expenses');
+    const savedWorkerSalaries = localStorage.getItem('society_worker_salaries');
     const savedAdminStatus = localStorage.getItem('society_admin_status');
 
     if (savedWorkers) {
@@ -264,6 +266,12 @@ export default function SocietyManager() {
     }
     if (savedCollections) {
       setCollections(JSON.parse(savedCollections));
+    }
+    if (savedIncomeExpenses) {
+      setIncomeExpenses(JSON.parse(savedIncomeExpenses));
+    }
+    if (savedWorkerSalaries) {
+      setWorkerSalaries(JSON.parse(savedWorkerSalaries));
     }
     if (savedAdminStatus) {
       setIsAdmin(JSON.parse(savedAdminStatus));
@@ -341,7 +349,7 @@ export default function SocietyManager() {
       login: "লগইন",
       logout: "লগআউট",
       dataBackup: "ডেটা ব্যাকআপ",
-      downloadPDF: "��িডিএফ ডাউনলোড",
+      downloadPDF: "পিডিএফ ডাউনলোড",
       uploadBackup: "ব্যাকআপ আপলোড",
       deleteData: "ডেটা মুছুন",
       confirmDelete: "মুছে ফেলার নিশ্চিতকরণ",
@@ -739,7 +747,7 @@ export default function SocietyManager() {
         </table>
 
         <div class="footer">
-          <p>আমাদের সমিতি - সদস্য প্রোফাইল রিপোর্ট</p>
+          <p>আমাদের সমিত��� - সদস্য প্রোফাইল রিপোর্ট</p>
           <p>এই রিপোর্টটি ${new Date().toLocaleString('bn-BD')} এ তৈরি করা হয়েছে</p>
         </div>
 
@@ -836,7 +844,7 @@ export default function SocietyManager() {
       </head>
       <body>
         <div class="header">
-          <h1>কালেকশন ক্যালেন্ডার</h1>
+          <h1>কালেকশন ক্যাল���ন্ডার</h1>
           <h2>${member.name} (${member.memberCode})</h2>
           <h3>${monthName}</h3>
         </div>
@@ -982,7 +990,7 @@ export default function SocietyManager() {
                 <th>কর্মী আইডি</th>
                 <th>নাম</th>
                 <th>এলাকা</th>
-                <th>���োবাইল</th>
+                <th>মোবাইল</th>
                 <th>মোট সদস্য</th>
                 <th>দৈনিক কালেকশন</th>
                 <th>অবস্থা</th>
@@ -1015,7 +1023,7 @@ export default function SocietyManager() {
                 <th>নাম</th>
                 <th>এনআইডি</th>
                 <th>মোবাইল</th>
-                <th>��র্মী</th>
+                <th>কর্মী</th>
                 <th>এলাকা</th>
                 <th>কিস্তি</th>
                 <th>সঞ্চয়</th>
@@ -1049,7 +1057,7 @@ export default function SocietyManager() {
           <table>
             <thead>
               <tr>
-                <th>তা���িখ</th>
+                <th>তারিখ</th>
                 <th>সদস্য কোড</th>
                 <th>সদস্যের নাম</th>
                 <th>কর্মী</th>
@@ -1419,7 +1427,7 @@ export default function SocietyManager() {
                       {language === 'bn' ? 'কোনো কর্মী নেই' : 'No Workers Added'}
                     </h3>
                     <p className="text-muted-foreground text-center mb-4">
-                      {language === 'bn' ? 'প্রথমে কর্মী যোগ করুন যারা বিভিন্ন এলাকায় দৈনিক কালেকশন করবেন।' : 'Start by adding workers who will collect daily from different areas.'}
+                      {language === 'bn' ? 'প্রথমে কর্মী যোগ করুন যা��া বিভিন্ন এলাকায় দৈনিক কালেকশন করবেন।' : 'Start by adding workers who will collect daily from different areas.'}
                     </p>
                     <Button onClick={() => setAddWorkerOpen(true)}>
                       <UserPlus className="w-4 h-4 mr-2" />
@@ -1483,7 +1491,7 @@ export default function SocietyManager() {
                             <p className="font-bold text-xl">{worker.totalMembers}</p>
                           </div>
                           <div>
-                            <p className="text-sm text-muted-foreground">{language === 'bn' ? 'দৈনিক কালেকশন' : 'Daily Collection'}</p>
+                            <p className="text-sm text-muted-foreground">{language === 'bn' ? 'দৈনিক কা���েকশন' : 'Daily Collection'}</p>
                             <p className="font-bold text-xl text-green-600">{formatCurrency(worker.dailyCollection)}</p>
                           </div>
                         </div>
@@ -1795,7 +1803,7 @@ export default function SocietyManager() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {language === 'bn' ? 'সমিতির ডেটা JSON ফরম��যাটে ব্যাকআপ ডাউনলোড করুন' : 'Download society data backup in JSON format'}
+                      {language === 'bn' ? 'সমিতির ডেটা JSON ফরম্যাটে ব্যাকআপ ডাউনলোড করুন' : 'Download society data backup in JSON format'}
                     </p>
                     <Button className="w-full" variant="outline" onClick={downloadBackup}>
                       <Download className="w-4 h-4 mr-2" />
@@ -1871,7 +1879,7 @@ export default function SocietyManager() {
                       </div>
                       <p className="text-sm text-green-700 mt-2">
                         {language === 'bn' 
-                          ? 'সকল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
+                          ? '��কল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
                           : 'All data is stored locally and never automatically deleted.'
                         }
                       </p>
@@ -2010,7 +2018,7 @@ export default function SocietyManager() {
                 }}
               />
               <p className="text-sm text-muted-foreground mt-1">
-                {language === 'bn' ? 'কর্মীর ছবি আপলোড করুন (ঐচ্ছিক)' : 'Upload worker photo (optional)'}
+                {language === 'bn' ? 'কর্মীর ছবি আপলোড ��রুন (ঐচ্ছিক)' : 'Upload worker photo (optional)'}
               </p>
             </div>
           </div>
@@ -2161,7 +2169,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.collectionSheet}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'দৈনিক কালেকশন রেকর্ড করুন - যেকোনো পরিমাণ বা খাল�� রেখেও সেভ করতে পারবেন' : 'Record daily collection - can save any amount or leave empty'}
+              {language === 'bn' ? 'দৈনিক কালেকশন রেকর্ড করুন - যেকোনো পরিমাণ বা খালি রেখেও সেভ করতে পারবেন' : 'Record daily collection - can save any amount or leave empty'}
             </DialogDescription>
           </DialogHeader>
           
@@ -2310,7 +2318,7 @@ export default function SocietyManager() {
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => selectedMember && generateMemberCollectionCalendarPDF(selectedMember)}>
                   <CalendarIcon className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'ক্যাল��ন্ডার পিডিএফ' : 'Calendar PDF'}
+                  {language === 'bn' ? 'ক্যালেন্ডার পিডিএফ' : 'Calendar PDF'}
                 </Button>
               </div>
             </DialogTitle>
@@ -2403,7 +2411,7 @@ export default function SocietyManager() {
                         if (memberCollection) {
                           alert(`${language === 'bn' ? 'এই তারিখের কালেকশন:' : 'Collection for this date:'}\n${language === 'bn' ? 'কিস্তি:' : 'Installment:'} ${formatCurrency(memberCollection.installmentCollected)}\n${language === 'bn' ? 'সঞ্চয়:' : 'Savings:'} ${formatCurrency(memberCollection.savingsCollected)}\n${language === 'bn' ? 'মোট:' : 'Total:'} ${formatCurrency(memberCollection.installmentCollected + memberCollection.savingsCollected)}`);
                         } else {
-                          alert(language === 'bn' ? 'এই তারিখে কোন কা��েকশন পাওয়া যায়নি' : 'No collection found for this date');
+                          alert(language === 'bn' ? 'এই তারিখে কোন কালেকশন পাওয়া যায়নি' : 'No collection found for this date');
                         }
                       }
                     }}>
