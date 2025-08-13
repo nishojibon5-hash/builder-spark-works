@@ -1,6 +1,6 @@
 {
-  "name": "fusion-starter",
-  "private": true,
+  "name": "loanbondhu",
+  "private": false,
   "type": "module",
   "pkg": {
     "assets": [
