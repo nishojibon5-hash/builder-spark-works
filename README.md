@@ -48,12 +48,12 @@
 ## 🚀 Quick Start
 
 ### 🌐 Web Application
-Visit: [https://nishojibon5-hash.github.io/builder-spark-works/](https://nishojibon5-hash.github.io/builder-spark-works/)
+Visit: [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash.github.io/loanbondhu/)
 
 ### 📱 Android Installation
 
 1. **Download APK:**
-   - Go to [Releases](https://github.com/nishojibon5-hash/builder-spark-works/releases/latest)
+   - Go to [Releases](https://github.com/nishojibon5-hash/loanbondhu/releases/latest)
    - Download `LoanBondhu-release.apk`
 
 2. **Install:**
