@@ -344,7 +344,7 @@ export default function SocietyManager() {
       cancel: "বাতিল",
       dailyCollection: "দৈনিক কালেকশন",
       selectWorker: "কর্মী নির্বাচন করুন",
-      selectDate: "তারিখ নির্বাচন করুন",
+      selectDate: "তা��িখ নির্বাচন করুন",
       monthlyCalendar: "মাসিক ক্যালেন্ডার",
       searchByDate: "তারিখ দিয়ে খুঁজুন",
       collected: "সংগ্রহীত",
@@ -366,9 +366,9 @@ export default function SocietyManager() {
       deleteData: "ডেটা মুছুন",
       confirmDelete: "মুছে ফেলার নিশ্চিতকরণ",
       cannotDelete: "শুধুমাত্র অ্যাডমিন ডেটা মুছতে পারবেন",
-      dataProtected: "ডেটা সুরক্ষিত",
+      dataProtected: "ড��টা সুরক্ষিত",
       memberProfilePDF: "সদস্যের প্রোফাইল পিডিএফ",
-      collectionCalendarPDF: "কালেকশন ক্যালেন্ডার প��ডিএফ",
+      collectionCalendarPDF: "কালেকশন ক্যালেন্ডার পিডিএফ",
       completeDatabasePDF: "সম্পূর্ণ ডেটাবেস পিডিএফ",
       generating: "তৈরি করা হচ্ছে...",
       noDataFound: "কোনো ডেটা পাওয়া যায়নি",
@@ -394,7 +394,7 @@ export default function SocietyManager() {
       cancelled: "বাতিল",
       totalIncome: "মোট আয়",
       totalExpense: "মোট ব্যয়",
-      netIncome: "নিট আয��",
+      netIncome: "নিট আয়",
       salaryPaid: "বেতন প্রদত্ত",
       selectMonth: "মাস নির্বাচন করুন"
     },
@@ -541,7 +541,7 @@ export default function SocietyManager() {
     }
     
     // Extra confirmation for data protection
-    if (window.confirm(language === 'bn' ? 'আপনি কি সত্যিই এই সদস্যকে মুছে ফেলতে চান? এই কাজটি পূর্বাবস��থায় ফেরানো যাবে না।' : 'Are you sure you want to delete this member? This action cannot be undone.')) {
+    if (window.confirm(language === 'bn' ? 'আপনি কি সত্যিই এই সদস্যকে মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।' : 'Are you sure you want to delete this member? This action cannot be undone.')) {
       const member = members.find(m => m.id === memberId);
       if (member) {
         // Update worker's total members count
@@ -882,7 +882,7 @@ export default function SocietyManager() {
         </table>
 
         <div class="footer">
-          <p>আমাদে�� সমিতি - সদস্য প্রোফাইল রিপোর্ট</p>
+          <p>আমাদের সমিতি - সদস্য প্রোফাইল রিপোর্ট</p>
           <p>এই রিপোর্টটি ${new Date().toLocaleString('bn-BD')} এ তৈরি করা হয়েছে</p>
         </div>
 
@@ -1127,7 +1127,7 @@ export default function SocietyManager() {
                 <th>এলাকা</th>
                 <th>মোবাইল</th>
                 <th>মোট সদস্য</th>
-                <th>দৈনিক কা��েকশন</th>
+                <th>দৈনিক কালেকশন</th>
                 <th>অবস্থা</th>
                 <th>যোগদানের তারিখ</th>
               </tr>
@@ -1188,7 +1188,7 @@ export default function SocietyManager() {
         </div>
 
         <div class="section page-break">
-          <h2>কালেকশন ইতিহাস</h2>
+          <h2>কালেকশন ইত���হাস</h2>
           <table>
             <thead>
               <tr>
@@ -1222,7 +1222,7 @@ export default function SocietyManager() {
         </div>
 
         <div class="section page-break">
-          <h2>এলাক���ভিত্তিক পরিসংখ্যান</h2>
+          <h2>এলাকাভিত্তিক পরিসংখ্যান</h2>
           <table>
             <thead>
               <tr>
@@ -1315,7 +1315,7 @@ export default function SocietyManager() {
         const backup = JSON.parse(e.target?.result as string);
         if (backup.workers && backup.members && backup.collections) {
           // Extra confirmation before importing
-          if (window.confirm(language === 'bn' ? 'আপনি কি নিশ্চিত যে এই ব্যাকআপ ইমপোর্ট করতে চান? বর্তমান সব ডেটা প্রতিস্থাপিত হবে।' : 'Are you sure you want to import this backup? All current data will be replaced.')) {
+          if (window.confirm(language === 'bn' ? 'আপনি কি নিশ্চিত যে এই ব্যাকআপ ইমপোর্ট করতে চান? বর্তমা�� সব ডেটা প্রতিস্থাপিত হবে।' : 'Are you sure you want to import this backup? All current data will be replaced.')) {
             setWorkers(backup.workers);
             setMembers(backup.members);
             setCollections(backup.collections);
@@ -1593,7 +1593,7 @@ export default function SocietyManager() {
                       <div className="text-center py-8">
                         <FileSpreadsheet className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                         <p className="text-muted-foreground">
-                          {language === 'bn' ? 'এখনো কোনো কালেকশন নেই। প্রথমে কর্মী এবং সদস্য য���গ করুন।' : 'No collections yet. Add workers and members first.'}
+                          {language === 'bn' ? 'এখনো কোনো কালেকশন নেই। প্রথমে কর্মী এব�� সদস্য যোগ করুন।' : 'No collections yet. Add workers and members first.'}
                         </p>
                       </div>
                     ) : (
@@ -1700,7 +1700,7 @@ export default function SocietyManager() {
                                 <AlertDialogHeader>
                                   <AlertDialogTitle>{currentText.confirmDelete}</AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    {language === 'bn' ? 'আপনি কি নিশ্চিত যে এই কর্মীকে মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।' : 'Are you sure you want to delete this worker? This action cannot be undone.'}
+                                    {language === 'bn' ? 'আপনি কি নিশ্চিত যে এই কর্মীকে মুছে ফেলত�� চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।' : 'Are you sure you want to delete this worker? This action cannot be undone.'}
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
@@ -1747,7 +1747,7 @@ export default function SocietyManager() {
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight">{currentText.members}</h2>
                   <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির সদস্যদের তথ্য ব্যব���্থাপনা ও প্রোফাইল' : 'Manage member information and profiles'}
+                    {language === 'bn' ? 'সমিতির সদস্যদের তথ্য ব্যবস্থাপনা ও প্রোফাইল' : 'Manage member information and profiles'}
                   </p>
                 </div>
                 
@@ -1817,7 +1817,7 @@ export default function SocietyManager() {
                           <TableHead>{currentText.workerName}</TableHead>
                           <TableHead>{currentText.area}</TableHead>
                           <TableHead>{language === 'bn' ? 'কিস্তি' : 'Installment'}</TableHead>
-                          <TableHead>{language === 'bn' ? 'সঞ্চয়' : 'Savings'}</TableHead>
+                          <TableHead>{language === 'bn' ? 'স���্চয়' : 'Savings'}</TableHead>
                           <TableHead>{language === 'bn' ? 'কার্যক্রম' : 'Actions'}</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -2454,7 +2454,7 @@ export default function SocietyManager() {
                         </span>
                       </TableHead>
                       <TableHead>
-                        {language === 'bn' ? 'সঞ��চয় সংগ্রহ' : 'Savings Collection'}
+                        {language === 'bn' ? 'সঞ্চয় সংগ্রহ' : 'Savings Collection'}
                         <span className="text-xs text-green-600 block">
                           {language === 'bn' ? '(যেকোনো পরিমাণ বা খালি)' : '(any amount or empty)'}
                         </span>
@@ -2704,6 +2704,188 @@ export default function SocietyManager() {
               </Card>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Income/Expense Dialog */}
+      <Dialog open={incomeExpenseOpen} onOpenChange={setIncomeExpenseOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{currentText.addIncomeExpense}</DialogTitle>
+            <DialogDescription>
+              {language === 'bn' ? 'সমিতির আয় বা ব্যয়ের তথ্য যোগ করুন' : 'Add society income or expense information'}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <div>
+              <Label>{language === 'bn' ? 'ধরন' : 'Type'} *</Label>
+              <Select
+                value={newIncomeExpense.type}
+                onValueChange={(value) => setNewIncomeExpense({...newIncomeExpense, type: value as 'income' | 'expense'})}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="income">{currentText.income}</SelectItem>
+                  <SelectItem value="expense">{currentText.expense}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>{currentText.category} *</Label>
+              <Input
+                value={newIncomeExpense.category}
+                onChange={(e) => setNewIncomeExpense({...newIncomeExpense, category: e.target.value})}
+                placeholder={language === 'bn' ? 'যেমন: সুদ, বেতন, অফিস ভাড়া' : 'e.g.: Interest, Salary, Office Rent'}
+              />
+            </div>
+
+            <div>
+              <Label>{currentText.amount} *</Label>
+              <Input
+                type="number"
+                value={newIncomeExpense.amount || ''}
+                onChange={(e) => setNewIncomeExpense({...newIncomeExpense, amount: Number(e.target.value) || 0})}
+                placeholder="0"
+              />
+            </div>
+
+            <div>
+              <Label>{currentText.description}</Label>
+              <Textarea
+                value={newIncomeExpense.description}
+                onChange={(e) => setNewIncomeExpense({...newIncomeExpense, description: e.target.value})}
+                placeholder={language === 'bn' ? 'বিস্তারিত বিবরণ' : 'Detailed description'}
+                rows={3}
+              />
+            </div>
+
+            <div>
+              <Label>{currentText.date} *</Label>
+              <Input
+                type="date"
+                value={newIncomeExpense.date}
+                onChange={(e) => setNewIncomeExpense({...newIncomeExpense, date: e.target.value})}
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setIncomeExpenseOpen(false)}>
+              {currentText.cancel}
+            </Button>
+            <Button
+              onClick={handleAddIncomeExpense}
+              disabled={!newIncomeExpense.category || !newIncomeExpense.amount || !newIncomeExpense.date}
+            >
+              <Save className="w-4 h-4 mr-2" />
+              {currentText.save}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Worker Salary Dialog */}
+      <Dialog open={workerSalaryOpen} onOpenChange={setWorkerSalaryOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{currentText.addWorkerSalary}</DialogTitle>
+            <DialogDescription>
+              {language === 'bn' ? 'কর্মীর মাসিক বেতন প্রদান করুন' : 'Pay monthly salary to worker'}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <div>
+              <Label>{currentText.workerName} *</Label>
+              <Select
+                value={newWorkerSalary.workerId}
+                onValueChange={(value) => {
+                  const worker = workers.find(w => w.id === value);
+                  setNewWorkerSalary({
+                    ...newWorkerSalary,
+                    workerId: value,
+                    workerName: worker?.name || ''
+                  });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={language === 'bn' ? 'কর্মী নির্বাচন করুন' : 'Select worker'} />
+                </SelectTrigger>
+                <SelectContent>
+                  {workers.map((worker) => (
+                    <SelectItem key={worker.id} value={worker.id}>
+                      {worker.name} - {worker.area}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label>{currentText.month} *</Label>
+              <Input
+                type="month"
+                value={newWorkerSalary.month}
+                onChange={(e) => setNewWorkerSalary({...newWorkerSalary, month: e.target.value})}
+              />
+            </div>
+
+            <div>
+              <Label>{currentText.baseSalary} *</Label>
+              <Input
+                type="number"
+                value={newWorkerSalary.baseSalary || ''}
+                onChange={(e) => setNewWorkerSalary({...newWorkerSalary, baseSalary: Number(e.target.value) || 0})}
+                placeholder="15000"
+              />
+            </div>
+
+            <div>
+              <Label>{currentText.bonus}</Label>
+              <Input
+                type="number"
+                value={newWorkerSalary.bonus || ''}
+                onChange={(e) => setNewWorkerSalary({...newWorkerSalary, bonus: Number(e.target.value) || 0})}
+                placeholder="0"
+              />
+            </div>
+
+            <div>
+              <Label>{currentText.deductions}</Label>
+              <Input
+                type="number"
+                value={newWorkerSalary.deductions || ''}
+                onChange={(e) => setNewWorkerSalary({...newWorkerSalary, deductions: Number(e.target.value) || 0})}
+                placeholder="0"
+              />
+            </div>
+
+            <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">{currentText.totalSalary}:</span>
+                <span className="text-xl font-bold text-blue-600">
+                  {formatCurrency(newWorkerSalary.baseSalary + newWorkerSalary.bonus - newWorkerSalary.deductions)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setWorkerSalaryOpen(false)}>
+              {currentText.cancel}
+            </Button>
+            <Button
+              onClick={handleAddWorkerSalary}
+              disabled={!newWorkerSalary.workerId || !newWorkerSalary.month || !newWorkerSalary.baseSalary}
+            >
+              <Save className="w-4 h-4 mr-2" />
+              {language === 'bn' ? 'বেতন প্রদান করুন' : 'Pay Salary'}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </Layout>
