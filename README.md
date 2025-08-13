@@ -2,14 +2,14 @@
 
 **সমিতি ব্যবস্থাপনা সিস্টেম | Society Management System**
 
-[![Deploy to GitHub Pages](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/deploy.yml/badge.svg)](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/deploy.yml)
-[![Build Android APK](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/android-build.yml/badge.svg)](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/android-build.yml)
+[![Deploy to GitHub Pages](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/deploy.yml/badge.svg)](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/deploy.yml)
+[![Build Android APK](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/android-build.yml/badge.svg)](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/android-build.yml)
 
 ## 🌟 Live Demo
 
-🌐 **Website:** [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash.github.io/loanbondhu/)
+🌐 **Website:** [https://nishojibon5-hash.github.io/builder-spark-works/](https://nishojibon5-hash.github.io/builder-spark-works/)
 
-📱 **Android APK:** [Download Latest Release](https://github.com/nishojibon5-hash/loanbondhu/releases/latest)
+📱 **Android APK:** [Download Latest Release](https://github.com/nishojibon5-hash/builder-spark-works/releases/latest)
 
 ## 📱 Features | ফিচারসমূহ
 
@@ -28,7 +28,7 @@
 - **👨‍💼 Worker Management** - কর্মী ব্যবস���থাপনা
 - **👥 Member Registration** - সদস্য নিবন্ধন
 - **💵 Collection Tracking** - কালেকশন ট্র্যাকিং
-- **📋 Income/Expense Management** - আয়-ব্যয় ব্যবস্থাপনা
+- **📋 Income/Expense Management** - আয়-ব��যয় ব্যবস্থাপনা
 - **💰 Salary Management** - বেতন ব্যবস্থাপনা
 - **📄 PDF Reports** - পিডিএফ রিপোর্ট
 - **📅 Collection Calendar** - কালেকশন ক্যালেন্ডার
@@ -53,13 +53,13 @@
 
 ### 🌐 Web Application
 
-Visit: [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash.github.io/loanbondhu/)
+Visit: [https://nishojibon5-hash.github.io/builder-spark-works/](https://nishojibon5-hash.github.io/builder-spark-works/)
 
 ### 📱 Android Installation
 
 1. **Download APK:**
 
-   - Go to [Releases](https://github.com/nishojibon5-hash/loanbondhu/releases/latest)
+   - Go to [Releases](https://github.com/nishojibon5-hash/builder-spark-works/releases/latest)
    - Download `LoanBondhu-release.apk`
 
 2. **Install:**
@@ -85,8 +85,8 @@ Visit: [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash
 
 ```bash
 # Clone repository
-git clone https://github.com/nishojibon5-hash/loanbondhu.git
-cd loanbondhu
+git clone https://github.com/nishojibon5-hash/builder-spark-works.git
+cd builder-spark-works
 
 # Install dependencies
 npm install
@@ -114,7 +114,7 @@ npm run build:server
 ### Automatic Build (GitHub Actions)
 
 - Android APKs are automatically built on every push to main branch
-- Download from [GitHub Releases](https://github.com/nishojibon5-hash/loanbondhu/releases)
+- Download from [GitHub Releases](https://github.com/nishojibon5-hash/builder-spark-works/releases)
 - Both Debug and Release APKs are available
 
 ### Manual Build
@@ -237,8 +237,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Issues:** [GitHub Issues](https://github.com/nishojibon5-hash/loanbondhu/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/nishojibon5-hash/loanbondhu/discussions)
+- **Issues:** [GitHub Issues](https://github.com/nishojibon5-hash/builder-spark-works/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/nishojibon5-hash/builder-spark-works/discussions)
 - **Email:** support@loanbondhu.com
 
 ## 📞 Contact
