@@ -330,7 +330,7 @@ export default function SocietyManager() {
       addWorker: "নতুন কর্মী যোগ করুন",
       collectionSheet: "কালেকশন শীট",
       memberProfile: "সদস্যের প্রোফাইল",
-      searchMembers: "সদস্য খুঁজুন...",
+      searchMembers: "সদস্য খু���জুন...",
       memberCode: "সদস্য কোড",
       memberName: "সদস্যের নাম",
       nidNumber: "এনআইডি নম্বর",
@@ -341,7 +341,7 @@ export default function SocietyManager() {
       savingsAmount: "সঞ্চয়ের পরিমাণ",
       loanAmount: "ঋণের পরিমাণ",
       save: "সংরক্ষণ করুন",
-      cancel: "বাতি��",
+      cancel: "বাতিল",
       dailyCollection: "দৈনিক কালেকশন",
       selectWorker: "কর্মী নির্বাচন করুন",
       selectDate: "তারিখ নির্বাচন করুন",
@@ -1000,7 +1000,7 @@ export default function SocietyManager() {
             <tr>
               <th>রবিবার</th>
               <th>সোমবার</th>
-              <th>��ঙ্গলবার</th>
+              <th>মঙ্গলবার</th>
               <th>বুধবার</th>
               <th>বৃহস্পতিবার</th>
               <th>শুক্রবার</th>
@@ -1044,7 +1044,7 @@ export default function SocietyManager() {
 
         <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #666;">
           <p>আমাদের সমিতি - কালেকশন ক্যালেন্ডার রিপোর্ট</p>
-          <p>রিপোর্ট তৈরির তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
+          <p>রিপোর্��� তৈরির তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
         </div>
 
         <script>
@@ -1200,7 +1200,7 @@ export default function SocietyManager() {
                 <th>সঞ্চয়</th>
                 <th>মোট</th>
                 <th>অবস্থা</th>
-                <th>এন্ট্রির তারিখ</th>
+                <th>এন্ট্রির তা���িখ</th>
               </tr>
             </thead>
             <tbody>
@@ -1332,13 +1332,28 @@ export default function SocietyManager() {
   };
 
   // Calculate statistics
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
+  const monthlyCollections = collections.filter(c => {
+    const collectionDate = new Date(c.date);
+    return collectionDate.getMonth() === currentMonth && collectionDate.getFullYear() === currentYear;
+  });
+
   const stats = {
     totalMembers: members.length,
     totalWorkers: workers.length,
     todayCollection: collections
       .filter(c => c.date === new Date().toISOString().split('T')[0])
       .reduce((sum, c) => sum + c.installmentCollected + c.savingsCollected, 0),
-    monthlyTarget: members.reduce((sum, m) => sum + m.installmentAmount + m.savingsAmount, 0) * 30
+    monthlyTarget: members.reduce((sum, m) => sum + m.installmentAmount + m.savingsAmount, 0) * 30,
+    monthlyInstallment: monthlyCollections.reduce((sum, c) => sum + c.installmentCollected, 0),
+    monthlySavings: monthlyCollections.reduce((sum, c) => sum + c.savingsCollected, 0),
+    totalIncome: incomeExpenses.filter(ie => ie.type === 'income').reduce((sum, ie) => sum + ie.amount, 0),
+    totalExpense: incomeExpenses.filter(ie => ie.type === 'expense').reduce((sum, ie) => sum + ie.amount, 0),
+    netIncome: incomeExpenses.filter(ie => ie.type === 'income').reduce((sum, ie) => sum + ie.amount, 0) -
+               incomeExpenses.filter(ie => ie.type === 'expense').reduce((sum, ie) => sum + ie.amount, 0),
+    salaryPaid: workerSalaries.reduce((sum, ws) => sum + ws.totalSalary, 0)
   };
 
   return (
@@ -1441,7 +1456,7 @@ export default function SocietyManager() {
                   <CardContent>
                     <div className="text-2xl font-bold">{stats.totalWorkers}</div>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'দৈনিক কালেকশন���ারী' : 'Daily collectors'}
+                      {language === 'bn' ? 'দৈনিক কালেকশনকারী' : 'Daily collectors'}
                     </p>
                   </CardContent>
                 </Card>
@@ -1544,7 +1559,7 @@ export default function SocietyManager() {
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight">{currentText.workers}</h2>
                   <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির কর্মীদের তথ্য ও কর্মক্ষমতা ব্য��স্থাপনা' : 'Manage worker information and performance'}
+                    {language === 'bn' ? 'সমিতির কর্ম��দের তথ্য ও কর্মক্ষমতা ব্যবস্থাপনা' : 'Manage worker information and performance'}
                   </p>
                 </div>
                 
@@ -1705,7 +1720,7 @@ export default function SocietyManager() {
               ) : (
                 <Card>
                   <CardHeader>
-                    <CardTitle>{language === 'bn' ? 'সদস্য তা���িকা' : 'Members List'} ({members.length})</CardTitle>
+                    <CardTitle>{language === 'bn' ? 'সদস্য তালিকা' : 'Members List'} ({members.length})</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Table>
@@ -1871,7 +1886,7 @@ export default function SocietyManager() {
                     <div className="text-center py-8">
                       <FileSpreadsheet className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                       <p className="text-muted-foreground">
-                        {language === 'bn' ? 'এখনো কোনো কালেকশন রেকর্ড নেই।' : 'No collection records yet.'}
+                        {language === 'bn' ? 'এখনো ক��নো কালেকশন রেকর্ড নেই।' : 'No collection records yet.'}
                       </p>
                     </div>
                   ) : (
@@ -2014,7 +2029,7 @@ export default function SocietyManager() {
                       </div>
                       <p className="text-sm text-green-700 mt-2">
                         {language === 'bn' 
-                          ? 'সকল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখ��ো অটোমেটিক মুছে যায় না।'
+                          ? 'সকল ডেটা স্থ���নীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
                           : 'All data is stored locally and never automatically deleted.'
                         }
                       </p>
@@ -2038,7 +2053,7 @@ export default function SocietyManager() {
                           <span className="font-medium">{collections.length}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>{language === 'bn' ? 'মোট সংগ��রহ:' : 'Total Amount:'}</span>
+                          <span>{language === 'bn' ? 'মোট সংগ্রহ:' : 'Total Amount:'}</span>
                           <span className="font-medium">{formatCurrency(collections.reduce((sum, c) => sum + c.installmentCollected + c.savingsCollected, 0))}</span>
                         </div>
                       </div>
@@ -2100,7 +2115,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.addWorker}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'নতুন কর্মীর সম্পূর্��� তথ্য প্রবেশ করান' : 'Enter complete new worker information'}
+              {language === 'bn' ? 'নতুন কর্মীর সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new worker information'}
             </DialogDescription>
           </DialogHeader>
           
@@ -2356,7 +2371,7 @@ export default function SocietyManager() {
                       <TableHead>
                         {language === 'bn' ? 'সঞ্চয় সংগ্রহ' : 'Savings Collection'}
                         <span className="text-xs text-green-600 block">
-                          {language === 'bn' ? '(যেকোনো পরিমাণ বা খালি)' : '(any amount or empty)'}
+                          {language === 'bn' ? '(যেকোনো পরিমাণ ��া খালি)' : '(any amount or empty)'}
                         </span>
                       </TableHead>
                     </TableRow>
