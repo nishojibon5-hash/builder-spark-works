@@ -186,6 +186,8 @@ export default function SocietyManager() {
   const [workers, setWorkers] = useState<Worker[]>([]);
   const [members, setMembers] = useState<SocietyMember[]>([]);
   const [collections, setCollections] = useState<DailyCollection[]>([]);
+  const [incomeExpenses, setIncomeExpenses] = useState<IncomeExpense[]>([]);
+  const [workerSalaries, setWorkerSalaries] = useState<WorkerSalary[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMember, setSelectedMember] = useState<SocietyMember | null>(null);
   const [expandedCollection, setExpandedCollection] = useState<string | null>(null);
@@ -193,6 +195,8 @@ export default function SocietyManager() {
   const [addMemberOpen, setAddMemberOpen] = useState(false);
   const [addWorkerOpen, setAddWorkerOpen] = useState(false);
   const [collectionSheetOpen, setCollectionSheetOpen] = useState(false);
+  const [incomeExpenseOpen, setIncomeExpenseOpen] = useState(false);
+  const [workerSalaryOpen, setWorkerSalaryOpen] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [searchDate, setSearchDate] = useState<string>("");
@@ -276,7 +280,7 @@ export default function SocietyManager() {
       workers: "কর্মী ব্যবস্থাপনা",
       members: "সদস্যগণ",
       collection: "কালেকশন",
-      reports: "প্রতিবেদন",
+      reports: "প্রতিব���দন",
       settings: "সেটিংস",
       societyName: "আমাদের সমিতি",
       totalMembers: "মোট সদস্য",
@@ -290,7 +294,7 @@ export default function SocietyManager() {
       searchMembers: "সদস্য খুঁজুন...",
       memberCode: "সদস্য কোড",
       memberName: "সদস্যের নাম",
-      nidNumber: "এ���আইডি নম্বর",
+      nidNumber: "এনআইডি নম্বর",
       phoneNumber: "মোবাইল নম্বর",
       workerName: "কর্মীর নাম",
       area: "এলাকা",
@@ -313,7 +317,7 @@ export default function SocietyManager() {
       missedDays: "মিসড দিন",
       photo: "ছবি",
       uploadPhoto: "ছবি আপলোড করুন",
-      adminLogin: "অ্যাডমিন লগ���ন",
+      adminLogin: "অ্যাডমিন লগইন",
       adminPassword: "অ্যাডমিন পাসওয়ার্ড",
       login: "লগইন",
       logout: "লগআউট",
@@ -322,7 +326,7 @@ export default function SocietyManager() {
       uploadBackup: "ব্যাকআপ আপলোড",
       deleteData: "ডেটা মুছুন",
       confirmDelete: "মুছে ফেলার নিশ্চিতকরণ",
-      cannotDelete: "শুধুমাত্র অ্যাডমিন ডেটা মুছতে পারবেন",
+      cannotDelete: "শু��ুমাত্র অ্যাডমিন ডেটা মুছতে পারবেন",
       dataProtected: "ডেটা সুরক্ষিত",
       memberProfilePDF: "সদস্যের প্রোফাইল পিডিএফ",
       collectionCalendarPDF: "কালেকশন ক্যালেন্ডার পিডিএফ",
@@ -691,7 +695,7 @@ export default function SocietyManager() {
           </div>
         </div>
 
-        <h3>সাম্প্রতিক কালেকশন ইতিহাস</h3>
+        <h3>সাম্প���রতিক কালেকশন ইতিহাস</h3>
         <table>
           <thead>
             <tr>
@@ -877,7 +881,7 @@ export default function SocietyManager() {
         </div>
 
         <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #666;">
-          <p>আমাদের সমিতি - কালেকশন ক্যালেন্ডার রিপোর্ট</p>
+          <p>আমাদের সমিতি - কালেকশন ক্যালেন্ডার র���পোর্ট</p>
           <p>রিপোর্ট তৈরির তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
         </div>
 
@@ -935,7 +939,7 @@ export default function SocietyManager() {
         <div class="stats">
           <div class="stat-box">
             <div class="stat-value">${workers.length}</div>
-            <div class="stat-label">মোট কর্মী</div>
+            <div class="stat-label">মোট কর্ম���</div>
           </div>
           <div class="stat-box">
             <div class="stat-value">${members.length}</div>
@@ -1047,7 +1051,7 @@ export default function SocietyManager() {
                   <td>${formatCurrency(collection.installmentCollected)}</td>
                   <td>${formatCurrency(collection.savingsCollected)}</td>
                   <td>${formatCurrency(collection.installmentCollected + collection.savingsCollected)}</td>
-                  <td>${collection.status === 'collected' ? 'সংগৃহীত' : collection.status === 'pending' ? 'অপেক্ষ��ান' : 'মিসড'}</td>
+                  <td>${collection.status === 'collected' ? 'সংগৃহীত' : collection.status === 'pending' ? 'অপেক্ষমান' : 'মিসড'}</td>
                   <td>${new Date(collection.createdAt).toLocaleDateString('bn-BD')}</td>
                 </tr>
               `).join('')}
@@ -1149,7 +1153,7 @@ export default function SocietyManager() {
         const backup = JSON.parse(e.target?.result as string);
         if (backup.workers && backup.members && backup.collections) {
           // Extra confirmation before importing
-          if (window.confirm(language === 'bn' ? 'আপনি কি নিশ্চিত যে এই ব্��াকআপ ইমপোর্ট করতে চান? বর্তমান সব ডেটা প্রতিস্থাপিত হবে।' : 'Are you sure you want to import this backup? All current data will be replaced.')) {
+          if (window.confirm(language === 'bn' ? 'আপনি কি নিশ্চিত যে এই ব্যাকআপ ইমপোর্ট করতে চান? বর্তমান সব ডেটা প্রতিস্থাপিত হবে।' : 'Are you sure you want to import this backup? All current data will be replaced.')) {
             setWorkers(backup.workers);
             setMembers(backup.members);
             setCollections(backup.collections);
@@ -1316,7 +1320,7 @@ export default function SocietyManager() {
               {/* Recent Collections with improved display */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{language === 'bn' ? 'সাম্প্রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
+                  <CardTitle>{language === 'bn' ? 'সাম্প��রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
                   <CardDescription>
                     {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন - বিস্তারিত দেখতে ক্লিক করুন' : 'Latest financial transactions - click for details'}
                   </CardDescription>
@@ -1767,7 +1771,7 @@ export default function SocietyManager() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <HardDrive className="w-5 h-5 mr-2" />
-                      {language === 'bn' ? 'ডেটা ব্যাকআপ' : 'Data Backup'}
+                      {language === 'bn' ? 'ডেট�� ব্যাকআপ' : 'Data Backup'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -1791,7 +1795,7 @@ export default function SocietyManager() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground mb-4">
-                        {language === 'bn' ? 'পূর্বের ব্যাকআপ ফাইল ইমপোর্ট করুন (শুধুমাত্র অ্যাডমিন)' : 'Import previous backup file (admin only)'}
+                        {language === 'bn' ? 'পূর্ব���র ব্যাকআপ ফাইল ইমপোর্ট করুন (শুধুমাত্র অ্যাডমিন)' : 'Import previous backup file (admin only)'}
                       </p>
                       <Input
                         type="file"
@@ -2010,7 +2014,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.addMember}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'নতুন সদস্যের সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new member information'}
+              {language === 'bn' ? 'নতুন সদস্���ের সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new member information'}
             </DialogDescription>
           </DialogHeader>
           
@@ -2378,7 +2382,7 @@ export default function SocietyManager() {
                         const dateCollections = getCollectionsByDate(searchDate);
                         const memberCollection = dateCollections.find(c => c.memberId === selectedMember.id);
                         if (memberCollection) {
-                          alert(`${language === 'bn' ? 'এই তারিখের কালেকশন:' : 'Collection for this date:'}\n${language === 'bn' ? 'কিস��তি:' : 'Installment:'} ${formatCurrency(memberCollection.installmentCollected)}\n${language === 'bn' ? 'সঞ্চয়:' : 'Savings:'} ${formatCurrency(memberCollection.savingsCollected)}\n${language === 'bn' ? 'মোট:' : 'Total:'} ${formatCurrency(memberCollection.installmentCollected + memberCollection.savingsCollected)}`);
+                          alert(`${language === 'bn' ? 'এই তারিখের কালেকশন:' : 'Collection for this date:'}\n${language === 'bn' ? 'কিস্তি:' : 'Installment:'} ${formatCurrency(memberCollection.installmentCollected)}\n${language === 'bn' ? 'সঞ্চয়:' : 'Savings:'} ${formatCurrency(memberCollection.savingsCollected)}\n${language === 'bn' ? 'মোট:' : 'Total:'} ${formatCurrency(memberCollection.installmentCollected + memberCollection.savingsCollected)}`);
                         } else {
                           alert(language === 'bn' ? 'এই তারিখে কোন কালেকশন পাওয়া যায়নি' : 'No collection found for this date');
                         }
