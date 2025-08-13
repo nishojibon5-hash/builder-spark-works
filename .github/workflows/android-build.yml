@@ -158,8 +158,8 @@ jobs:
               📱 APK files are available in the workflow artifacts.
               
               ### Download Links:
-              - [Debug APK Artifact](https://github.com/nishojibon5-hash/loanbondhu/actions/runs/${context.runId})
-              - [Release APK Artifact](https://github.com/nishojibon5-hash/loanbondhu/actions/runs/${context.runId})
+              - [Debug APK Artifact](https://github.com/nishojibon5-hash/builder-spark-works/actions/runs/${context.runId})
+              - [Release APK Artifact](https://github.com/nishojibon5-hash/builder-spark-works/actions/runs/${context.runId})
 
               ### Installation Instructions:
               1. Download the APK from artifacts
