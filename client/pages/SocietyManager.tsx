@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
+import { Calendar } from "@/components/ui/calendar";
 import { 
   Select,
   SelectContent,
@@ -36,7 +37,7 @@ import Layout from "@/components/Layout";
 import { 
   Users,
   Banknote,
-  Calendar,
+  Calendar as CalendarIcon,
   TrendingUp,
   TrendingDown,
   PlusCircle,
@@ -72,247 +73,316 @@ import {
   CalendarDays,
   MessageSquare,
   AlertCircle,
-  RefreshCw
+  RefreshCw,
+  Save,
+  User,
+  FileSpreadsheet
 } from "lucide-react";
+
+interface Worker {
+  id: string;
+  name: string;
+  area: string;
+  phone: string;
+  totalMembers: number;
+  dailyCollection: number;
+  status: 'active' | 'inactive';
+}
 
 interface SocietyMember {
   id: string;
+  memberCode: string;
   name: string;
-  memberNumber: string;
+  nid: string;
   phone: string;
-  email?: string;
-  address: string;
+  workerName: string;
+  area: string;
+  installmentAmount: number;
+  savingsAmount: number;
+  loanAmount: number;
   joinDate: string;
+  status: 'active' | 'inactive';
   membershipType: 'regular' | 'premium' | 'life';
-  status: 'active' | 'inactive' | 'suspended';
-  totalDeposits: number;
-  totalLoans: number;
-  outstandingLoan: number;
-  shares: number;
-  lastActivity: string;
 }
 
-interface FinancialTransaction {
+interface DailyCollection {
   id: string;
   memberId: string;
+  memberCode: string;
   memberName: string;
-  type: 'deposit' | 'withdrawal' | 'loan' | 'repayment' | 'dividend';
-  amount: number;
+  workerName: string;
   date: string;
-  description: string;
-  status: 'completed' | 'pending' | 'cancelled';
+  installmentCollected: number;
+  savingsCollected: number;
+  status: 'collected' | 'pending' | 'missed';
 }
 
-interface Meeting {
-  id: string;
-  title: string;
-  date: string;
-  time: string;
-  venue: string;
-  agenda: string[];
-  attendees: number;
-  status: 'scheduled' | 'completed' | 'cancelled';
-  minutes?: string;
+interface MemberProfile {
+  member: SocietyMember;
+  collections: DailyCollection[];
+  monthlyStats: {
+    totalInstallment: number;
+    totalSavings: number;
+    collectedDays: number;
+    missedDays: number;
+  };
 }
 
 export default function SocietyManager() {
   const [language, setLanguage] = useState<'bn' | 'en'>('bn');
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [workers, setWorkers] = useState<Worker[]>([]);
   const [members, setMembers] = useState<SocietyMember[]>([]);
-  const [transactions, setTransactions] = useState<FinancialTransaction[]>([]);
-  const [meetings, setMeetings] = useState<Meeting[]>([]);
+  const [collections, setCollections] = useState<DailyCollection[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMember, setSelectedMember] = useState<SocietyMember | null>(null);
+  const [memberProfileOpen, setMemberProfileOpen] = useState(false);
+  const [addMemberOpen, setAddMemberOpen] = useState(false);
+  const [collectionSheetOpen, setCollectionSheetOpen] = useState(false);
+  const [selectedWorker, setSelectedWorker] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [searchDate, setSearchDate] = useState<string>("");
+
+  // New member form state
+  const [newMember, setNewMember] = useState({
+    memberCode: '',
+    name: '',
+    nid: '',
+    phone: '',
+    workerName: '',
+    installmentAmount: 0,
+    savingsAmount: 0,
+    loanAmount: 0
+  });
+
+  // Collection form state
+  const [dailyCollectionData, setDailyCollectionData] = useState<Record<string, {
+    installment: number;
+    savings: number;
+  }>>({});
 
   // Load mock data
   useEffect(() => {
+    // Mock workers data
+    const mockWorkers: Worker[] = [
+      {
+        id: 'W001',
+        name: 'করিম উদ্দিন',
+        area: 'এলাকা-১',
+        phone: '01711111111',
+        totalMembers: 100,
+        dailyCollection: 25000,
+        status: 'active'
+      },
+      {
+        id: 'W002',
+        name: 'রহিম আলী',
+        area: 'এলাকা-২',
+        phone: '01722222222',
+        totalMembers: 98,
+        dailyCollection: 23500,
+        status: 'active'
+      },
+      {
+        id: 'W003',
+        name: 'আব্দুল হক',
+        area: 'এলাকা-৩',
+        phone: '01733333333',
+        totalMembers: 102,
+        dailyCollection: 26000,
+        status: 'active'
+      },
+      {
+        id: 'W004',
+        name: 'মোঃ সালাম',
+        area: 'এলাকা-৪',
+        phone: '01744444444',
+        totalMembers: 95,
+        dailyCollection: 22800,
+        status: 'active'
+      },
+      {
+        id: 'W005',
+        name: 'নুরুল ইসলাম',
+        area: 'এলাকা-৫',
+        phone: '01755555555',
+        totalMembers: 105,
+        dailyCollection: 27200,
+        status: 'active'
+      }
+    ];
+
     // Mock members data
     const mockMembers: SocietyMember[] = [
       {
         id: 'M001',
+        memberCode: 'SM001',
         name: 'মোহাম্মদ আলী',
-        memberNumber: 'SM001',
+        nid: '1234567890123',
         phone: '01712345678',
-        email: 'ali@email.com',
-        address: 'ঢাকা, বাংলাদেশ',
+        workerName: 'করিম উদ্দিন',
+        area: 'এলাকা-১',
+        installmentAmount: 500,
+        savingsAmount: 200,
+        loanAmount: 25000,
         joinDate: '2023-01-15',
-        membershipType: 'premium',
         status: 'active',
-        totalDeposits: 150000,
-        totalLoans: 50000,
-        outstandingLoan: 25000,
-        shares: 10,
-        lastActivity: '2024-01-15T10:30:00'
+        membershipType: 'regular'
       },
       {
         id: 'M002',
+        memberCode: 'SM002',
         name: 'ফাতেমা খাতুন',
-        memberNumber: 'SM002',
+        nid: '9876543210987',
         phone: '01987654321',
-        email: 'fatema@email.com',
-        address: 'চট্টগ্রাম, বাংলাদেশ',
+        workerName: 'রহিম আলী',
+        area: 'এলাকা-২',
+        installmentAmount: 300,
+        savingsAmount: 150,
+        loanAmount: 15000,
         joinDate: '2023-03-20',
-        membershipType: 'regular',
         status: 'active',
-        totalDeposits: 75000,
-        totalLoans: 30000,
-        outstandingLoan: 15000,
-        shares: 5,
-        lastActivity: '2024-01-14T16:45:00'
+        membershipType: 'regular'
       },
       {
         id: 'M003',
+        memberCode: 'SM003',
         name: 'রহিম উদ্দিন',
-        memberNumber: 'SM003',
+        nid: '5555666777888',
         phone: '01555666777',
-        address: 'সিলেট, বাংলাদেশ',
+        workerName: 'আব্দুল হক',
+        area: 'এলাকা-৩',
+        installmentAmount: 600,
+        savingsAmount: 250,
+        loanAmount: 35000,
         joinDate: '2023-06-10',
-        membershipType: 'life',
         status: 'active',
-        totalDeposits: 200000,
-        totalLoans: 100000,
-        outstandingLoan: 60000,
-        shares: 20,
-        lastActivity: '2024-01-13T09:15:00'
+        membershipType: 'premium'
       }
     ];
 
-    // Mock transactions data
-    const mockTransactions: FinancialTransaction[] = [
+    // Mock collections data
+    const mockCollections: DailyCollection[] = [
       {
-        id: 'T001',
+        id: 'C001',
         memberId: 'M001',
+        memberCode: 'SM001',
         memberName: 'মোহাম্মদ আলী',
-        type: 'deposit',
-        amount: 10000,
+        workerName: 'কর���ম উদ্দিন',
         date: '2024-01-15',
-        description: 'মাসিক সঞ্চয় জমা',
-        status: 'completed'
+        installmentCollected: 500,
+        savingsCollected: 200,
+        status: 'collected'
       },
       {
-        id: 'T002',
+        id: 'C002',
         memberId: 'M002',
+        memberCode: 'SM002',
         memberName: 'ফাতেমা খাতুন',
-        type: 'loan',
-        amount: 25000,
+        workerName: 'রহিম আলী',
+        date: '2024-01-15',
+        installmentCollected: 300,
+        savingsCollected: 150,
+        status: 'collected'
+      },
+      {
+        id: 'C003',
+        memberId: 'M001',
+        memberCode: 'SM001',
+        memberName: 'মোহাম্মদ আলী',
+        workerName: 'করিম উদ্দিন',
         date: '2024-01-14',
-        description: 'জরুরি ঋণ',
-        status: 'completed'
-      },
-      {
-        id: 'T003',
-        memberId: 'M003',
-        memberName: 'রহিম উদ্দিন',
-        type: 'repayment',
-        amount: 5000,
-        date: '2024-01-13',
-        description: 'ঋণ পরিশোধ কিস্তি',
-        status: 'completed'
+        installmentCollected: 500,
+        savingsCollected: 200,
+        status: 'collected'
       }
     ];
 
-    // Mock meetings data
-    const mockMeetings: Meeting[] = [
-      {
-        id: 'MT001',
-        title: 'মাসিক সাধারণ সভা',
-        date: '2024-01-20',
-        time: '10:00 AM',
-        venue: 'সমিতি অফিস',
-        agenda: ['আর্থিক প্রতিবেদন', 'নতুন সদস্য গ্রহণ', 'ঋণ নীতি পর্যালোচনা'],
-        attendees: 25,
-        status: 'scheduled'
-      },
-      {
-        id: 'MT002',
-        title: 'বার্ষিক নির্বাচনী সভা',
-        date: '2024-01-05',
-        time: '2:00 PM',
-        venue: 'কমিউনিটি হল',
-        agenda: ['বার্ষিক প্রতিবেদন', 'নির্বাচনী প্রক্রিয়া', 'নতুন কমিটি গঠন'],
-        attendees: 45,
-        status: 'completed',
-        minutes: 'সভায় বার্ষিক প্রতিবেদন উপস্থাপন করা হয়। নতুন কমিটি নির্বাচিত হয়।'
-      }
-    ];
-
+    setWorkers(mockWorkers);
     setMembers(mockMembers);
-    setTransactions(mockTransactions);
-    setMeetings(mockMeetings);
+    setCollections(mockCollections);
   }, []);
 
   const text = {
     bn: {
       dashboard: "ড্যাশবোর্ড",
+      workers: "কর্মী ব্যবস্থাপনা",
       members: "সদস্যগণ",
-      finance: "আর্থিক ব্যবস্থাপনা",
-      meetings: "সভাসমূহ",
+      collection: "কালেকশন",
       reports: "প্রতিবেদন",
       settings: "সেটিংস",
       societyName: "আমাদের সমিতি",
       totalMembers: "মোট সদস্য",
-      totalDeposits: "মোট জমা",
-      totalLoans: "মোট ঋণ",
-      availableFunds: "উপলব্ধ তহবিল",
-      memberManagement: "সদস্য ব্যবস্থাপনা",
+      totalWorkers: "মোট কর্মী",
+      todayCollection: "আজকের কালেকশন",
+      monthlyTarget: "মাসিক লক্ষ্য",
       addMember: "নতুন সদস্য যোগ করুন",
+      collectionSheet: "কালেকশন শীট",
+      memberProfile: "সদস্যের প্রোফাইল",
       searchMembers: "সদস্য খুঁজুন...",
-      memberNumber: "সদস্য নম্বর",
+      memberCode: "সদস্য কোড",
       memberName: "সদস্যের নাম",
-      membershipType: "সদস্যপদের ধরন",
-      status: "অবস্থা",
-      recentTransactions: "সাম্প্রতিক লেনদেন",
-      upcomingMeetings: "আসন্ন সভা",
-      viewDetails: "বিস্তারিত দেখুন",
-      active: "সক্রিয়",
-      inactive: "নিষ্ক্রিয়",
-      deposit: "জমা",
-      withdrawal: "উত্তোলন",
-      loan: "ঋণ",
-      repayment: "পরিশোধ",
-      dividend: "লভ্যাংশ",
-      completed: "সম্পন্ন",
+      nidNumber: "এনআইডি নম্বর",
+      phoneNumber: "মোবাইল নম্বর",
+      workerName: "কর্মীর নাম",
+      area: "এলাকা",
+      installmentAmount: "কিস্তির পরিমাণ",
+      savingsAmount: "সঞ্চয়ের পরিমাণ",
+      loanAmount: "ঋণের পরিমাণ",
+      save: "সংরক্ষণ করুন",
+      cancel: "বাতিল",
+      dailyCollection: "দৈনিক কালেকশন",
+      selectWorker: "কর্মী নির্বাচন করুন",
+      selectDate: "তারিখ নির্বাচন করুন",
+      monthlyCalendar: "মাসিক ক্যালেন্ডার",
+      searchByDate: "তারিখ দিয়ে খুঁজুন",
+      collected: "সংগ্রহীত",
       pending: "অপেক্ষমান",
-      cancelled: "বাতিল",
-      regular: "নিয়মিত",
-      premium: "প্রিমিয়াম",
-      life: "আজীবন"
+      missed: "মিসড",
+      totalInstallment: "মোট কিস্তি",
+      totalSavings: "মোট সঞ্চয়",
+      collectedDays: "কালেকশন দিন",
+      missedDays: "মিসড দিন"
     },
     en: {
       dashboard: "Dashboard",
+      workers: "Worker Management",
       members: "Members",
-      finance: "Finance",
-      meetings: "Meetings",
+      collection: "Collection",
       reports: "Reports",
       settings: "Settings",
       societyName: "Our Society",
       totalMembers: "Total Members",
-      totalDeposits: "Total Deposits",
-      totalLoans: "Total Loans",
-      availableFunds: "Available Funds",
-      memberManagement: "Member Management",
+      totalWorkers: "Total Workers",
+      todayCollection: "Today's Collection",
+      monthlyTarget: "Monthly Target",
       addMember: "Add New Member",
+      collectionSheet: "Collection Sheet",
+      memberProfile: "Member Profile",
       searchMembers: "Search members...",
-      memberNumber: "Member Number",
+      memberCode: "Member Code",
       memberName: "Member Name",
-      membershipType: "Membership Type",
-      status: "Status",
-      recentTransactions: "Recent Transactions",
-      upcomingMeetings: "Upcoming Meetings",
-      viewDetails: "View Details",
-      active: "Active",
-      inactive: "Inactive",
-      deposit: "Deposit",
-      withdrawal: "Withdrawal",
-      loan: "Loan",
-      repayment: "Repayment",
-      dividend: "Dividend",
-      completed: "Completed",
+      nidNumber: "NID Number",
+      phoneNumber: "Phone Number",
+      workerName: "Worker Name",
+      area: "Area",
+      installmentAmount: "Installment Amount",
+      savingsAmount: "Savings Amount",
+      loanAmount: "Loan Amount",
+      save: "Save",
+      cancel: "Cancel",
+      dailyCollection: "Daily Collection",
+      selectWorker: "Select Worker",
+      selectDate: "Select Date",
+      monthlyCalendar: "Monthly Calendar",
+      searchByDate: "Search by Date",
+      collected: "Collected",
       pending: "Pending",
-      cancelled: "Cancelled",
-      regular: "Regular",
-      premium: "Premium",
-      life: "Life"
+      missed: "Missed",
+      totalInstallment: "Total Installment",
+      totalSavings: "Total Savings",
+      collectedDays: "Collected Days",
+      missedDays: "Missed Days"
     }
   };
 
@@ -326,44 +396,107 @@ export default function SocietyManager() {
     }).format(amount).replace('BDT', '৳');
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active': case 'completed': return 'bg-green-500';
-      case 'pending': case 'scheduled': return 'bg-yellow-500';
-      case 'inactive': case 'cancelled': return 'bg-red-500';
-      default: return 'bg-gray-500';
-    }
+  const handleAddMember = () => {
+    const member: SocietyMember = {
+      id: `M${String(members.length + 1).padStart(3, '0')}`,
+      memberCode: newMember.memberCode,
+      name: newMember.name,
+      nid: newMember.nid,
+      phone: newMember.phone,
+      workerName: newMember.workerName,
+      area: workers.find(w => w.name === newMember.workerName)?.area || '',
+      installmentAmount: newMember.installmentAmount,
+      savingsAmount: newMember.savingsAmount,
+      loanAmount: newMember.loanAmount,
+      joinDate: new Date().toISOString().split('T')[0],
+      status: 'active',
+      membershipType: 'regular'
+    };
+
+    setMembers([...members, member]);
+    setNewMember({
+      memberCode: '',
+      name: '',
+      nid: '',
+      phone: '',
+      workerName: '',
+      installmentAmount: 0,
+      savingsAmount: 0,
+      loanAmount: 0
+    });
+    setAddMemberOpen(false);
   };
 
-  const getMembershipColor = (type: string) => {
-    switch (type) {
-      case 'life': return 'bg-purple-500';
-      case 'premium': return 'bg-blue-500';
-      case 'regular': return 'bg-gray-500';
-      default: return 'bg-gray-500';
-    }
+  const handleSaveCollection = () => {
+    const newCollections: DailyCollection[] = [];
+    const selectedDateStr = selectedDate.toISOString().split('T')[0];
+    
+    Object.entries(dailyCollectionData).forEach(([memberId, data]) => {
+      const member = members.find(m => m.id === memberId);
+      if (member && (data.installment > 0 || data.savings > 0)) {
+        newCollections.push({
+          id: `C${String(collections.length + newCollections.length + 1).padStart(3, '0')}`,
+          memberId,
+          memberCode: member.memberCode,
+          memberName: member.name,
+          workerName: selectedWorker,
+          date: selectedDateStr,
+          installmentCollected: data.installment,
+          savingsCollected: data.savings,
+          status: 'collected'
+        });
+      }
+    });
+
+    setCollections([...collections, ...newCollections]);
+    setDailyCollectionData({});
+    setCollectionSheetOpen(false);
   };
 
-  const getTransactionIcon = (type: string) => {
-    switch (type) {
-      case 'deposit': return <TrendingUp className="w-4 h-4 text-green-600" />;
-      case 'withdrawal': return <TrendingDown className="w-4 h-4 text-red-600" />;
-      case 'loan': return <CreditCard className="w-4 h-4 text-blue-600" />;
-      case 'repayment': return <CheckCircle className="w-4 h-4 text-green-600" />;
-      case 'dividend': return <Award className="w-4 h-4 text-yellow-600" />;
-      default: return <Activity className="w-4 h-4" />;
-    }
+  const getWorkerMembers = (workerName: string) => {
+    return members.filter(m => m.workerName === workerName);
+  };
+
+  const getMemberCollections = (memberId: string) => {
+    return collections.filter(c => c.memberId === memberId);
+  };
+
+  const getMemberProfileData = (member: SocietyMember): MemberProfile => {
+    const memberCollections = getMemberCollections(member.id);
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    const monthlyCollections = memberCollections.filter(c => {
+      const collectionDate = new Date(c.date);
+      return collectionDate.getMonth() === currentMonth && collectionDate.getFullYear() === currentYear;
+    });
+
+    const monthlyStats = {
+      totalInstallment: monthlyCollections.reduce((sum, c) => sum + c.installmentCollected, 0),
+      totalSavings: monthlyCollections.reduce((sum, c) => sum + c.savingsCollected, 0),
+      collectedDays: monthlyCollections.filter(c => c.status === 'collected').length,
+      missedDays: Math.max(0, new Date().getDate() - monthlyCollections.length)
+    };
+
+    return {
+      member,
+      collections: memberCollections,
+      monthlyStats
+    };
+  };
+
+  const getCollectionsByDate = (date: string) => {
+    return collections.filter(c => c.date === date);
   };
 
   // Calculate statistics
   const stats = {
     totalMembers: members.length,
-    activeMembers: members.filter(m => m.status === 'active').length,
-    totalDeposits: members.reduce((sum, member) => sum + member.totalDeposits, 0),
-    totalLoans: members.reduce((sum, member) => sum + member.outstandingLoan, 0),
-    availableFunds: members.reduce((sum, member) => sum + member.totalDeposits, 0) - 
-                   members.reduce((sum, member) => sum + member.outstandingLoan, 0),
-    totalShares: members.reduce((sum, member) => sum + member.shares, 0)
+    totalWorkers: workers.length,
+    todayCollection: collections
+      .filter(c => c.date === new Date().toISOString().split('T')[0])
+      .reduce((sum, c) => sum + c.installmentCollected + c.savingsCollected, 0),
+    monthlyTarget: members.reduce((sum, m) => sum + m.installmentAmount + m.savingsAmount, 0) * 30
   };
 
   return (
@@ -406,17 +539,17 @@ export default function SocietyManager() {
                 <BarChart3 className="w-4 h-4 mr-2" />
                 {currentText.dashboard}
               </TabsTrigger>
+              <TabsTrigger value="workers" className="flex items-center">
+                <User className="w-4 h-4 mr-2" />
+                {currentText.workers}
+              </TabsTrigger>
               <TabsTrigger value="members" className="flex items-center">
                 <Users className="w-4 h-4 mr-2" />
                 {currentText.members}
               </TabsTrigger>
-              <TabsTrigger value="finance" className="flex items-center">
-                <Wallet className="w-4 h-4 mr-2" />
-                {currentText.finance}
-              </TabsTrigger>
-              <TabsTrigger value="meetings" className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                {currentText.meetings}
+              <TabsTrigger value="collection" className="flex items-center">
+                <FileSpreadsheet className="w-4 h-4 mr-2" />
+                {currentText.collection}
               </TabsTrigger>
               <TabsTrigger value="reports" className="flex items-center">
                 <FileText className="w-4 h-4 mr-2" />
@@ -440,256 +573,163 @@ export default function SocietyManager() {
                   <CardContent>
                     <div className="text-2xl font-bold">{stats.totalMembers}</div>
                     <p className="text-xs text-muted-foreground">
-                      <TrendingUp className="inline w-3 h-3 mr-1 text-green-500" />
-                      {stats.activeMembers} {language === 'bn' ? 'সক্রিয়' : 'active'}
+                      {language === 'bn' ? '৫টি এলাকায় বিভক্ত' : 'Across 5 areas'}
                     </p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{currentText.totalDeposits}</CardTitle>
+                    <CardTitle className="text-sm font-medium">{currentText.totalWorkers}</CardTitle>
+                    <User className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{stats.totalWorkers}</div>
+                    <p className="text-xs text-muted-foreground">
+                      {language === 'bn' ? 'দৈনিক কালেকশনকারী' : 'Daily collectors'}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">{currentText.todayCollection}</CardTitle>
                     <Banknote className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{formatCurrency(stats.totalDeposits)}</div>
+                    <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.todayCollection)}</div>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'সকল সদস্যের জমা' : 'From all members'}
+                      {language === 'bn' ? 'কিস্তি ও সঞ্চয়' : 'Installment & Savings'}
                     </p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{currentText.totalLoans}</CardTitle>
-                    <CreditCard className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">{currentText.monthlyTarget}</CardTitle>
+                    <Target className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{formatCurrency(stats.totalLoans)}</div>
+                    <div className="text-2xl font-bold">{formatCurrency(stats.monthlyTarget)}</div>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'বকেয়া ঋণের পরিমাণ' : 'Outstanding loan amount'}
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{currentText.availableFunds}</CardTitle>
-                    <Wallet className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.availableFunds)}</div>
-                    <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'ঋণ প্রদানের জন্য উপলব্ধ' : 'Available for loans'}
+                      {language === 'bn' ? 'মাসিক সংগ্রহ লক্ষ্য' : 'Monthly collection target'}
                     </p>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Recent Activities */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Recent Transactions */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{currentText.recentTransactions}</CardTitle>
-                    <CardDescription>
-                      {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন' : 'Latest financial transactions'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {transactions.slice(0, 5).map((transaction) => (
-                        <div key={transaction.id} className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            {getTransactionIcon(transaction.type)}
-                            <div>
-                              <p className="font-medium">{transaction.memberName}</p>
-                              <p className="text-sm text-muted-foreground">{transaction.description}</p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-medium">{formatCurrency(transaction.amount)}</p>
-                            <p className="text-sm text-muted-foreground">{transaction.date}</p>
+              {/* Worker Performance */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{language === 'bn' ? 'কর্মী কর্মক্ষমতা' : 'Worker Performance'}</CardTitle>
+                  <CardDescription>
+                    {language === 'bn' ? 'প্রতিটি এলাকার দৈনিক কালেকশন' : 'Daily collection by area'}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {workers.map((worker) => (
+                      <div key={worker.id} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <Avatar>
+                            <AvatarFallback>{worker.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium">{worker.name}</p>
+                            <p className="text-sm text-muted-foreground">{worker.area}</p>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Upcoming Meetings */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{currentText.upcomingMeetings}</CardTitle>
-                    <CardDescription>
-                      {language === 'bn' ? 'আসন্ন সভাসমূহ' : 'Scheduled meetings'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {meetings.filter(m => m.status === 'scheduled').map((meeting) => (
-                        <div key={meeting.id} className="border rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium">{meeting.title}</h4>
-                            <Badge className={`${getStatusColor(meeting.status)} text-white`}>
-                              {meeting.status}
-                            </Badge>
-                          </div>
-                          <div className="space-y-1 text-sm text-muted-foreground">
-                            <div className="flex items-center">
-                              <Calendar className="w-3 h-3 mr-1" />
-                              {meeting.date} - {meeting.time}
-                            </div>
-                            <div className="flex items-center">
-                              <MapPin className="w-3 h-3 mr-1" />
-                              {meeting.venue}
-                            </div>
-                            <div className="flex items-center">
-                              <Users className="w-3 h-3 mr-1" />
-                              {meeting.attendees} {language === 'bn' ? 'জন' : 'attendees'}
-                            </div>
-                          </div>
+                        <div className="text-right">
+                          <p className="font-medium">{formatCurrency(worker.dailyCollection)}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {worker.totalMembers} {language === 'bn' ? 'সদস্য' : 'members'}
+                          </p>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Performance Metrics */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base">
-                      {language === 'bn' ? 'সদস্যপদের বিতরণ' : 'Membership Distribution'}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {['regular', 'premium', 'life'].map(type => {
-                        const count = members.filter(m => m.membershipType === type).length;
-                        const percentage = (count / members.length) * 100;
-                        return (
-                          <div key={type}>
-                            <div className="flex justify-between text-sm">
-                              <span className="capitalize">{currentText[type as keyof typeof currentText]}</span>
-                              <span>{count} ({percentage.toFixed(0)}%)</span>
-                            </div>
-                            <Progress value={percentage} className="h-2" />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base">
-                      {language === 'bn' ? 'আর্থিক স্বাস্থ্য' : 'Financial Health'}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm">{language === 'bn' ? 'তহবিল ব্যবহার' : 'Fund Utilization'}</span>
-                        <span className="text-sm font-medium">
-                          {((stats.totalLoans / stats.totalDeposits) * 100).toFixed(1)}%
-                        </span>
                       </div>
-                      <Progress value={(stats.totalLoans / stats.totalDeposits) * 100} className="h-2" />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Workers Tab */}
+            <TabsContent value="workers" className="space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                <div>
+                  <h2 className="text-2xl font-bold tracking-tight">{currentText.workers}</h2>
+                  <p className="text-muted-foreground">
+                    {language === 'bn' ? 'সমিতির কর্মীদের তথ্য ও কর্মক্ষমতা' : 'Worker information and performance'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {workers.map((worker) => (
+                  <Card key={worker.id}>
+                    <CardHeader>
+                      <div className="flex items-center space-x-3">
+                        <Avatar className="w-12 h-12">
+                          <AvatarFallback className="text-lg">{worker.name.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <CardTitle className="text-lg">{worker.name}</CardTitle>
+                          <CardDescription>{worker.area}</CardDescription>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex items-center text-sm">
+                        <Phone className="w-4 h-4 mr-2 text-muted-foreground" />
+                        {worker.phone}
+                      </div>
                       
-                      <div className="flex justify-between">
-                        <span className="text-sm">{language === 'bn' ? 'মোট শেয়ার' : 'Total Shares'}</span>
-                        <span className="text-sm font-medium">{stats.totalShares}</span>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-muted-foreground">{language === 'bn' ? 'মোট সদস্য' : 'Total Members'}</p>
+                          <p className="font-bold text-xl">{worker.totalMembers}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">{language === 'bn' ? 'দৈনিক কালেকশন' : 'Daily Collection'}</p>
+                          <p className="font-bold text-xl text-green-600">{formatCurrency(worker.dailyCollection)}</p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-base">
-                      {language === 'bn' ? 'সদস্য কার্যকলাপ' : 'Member Activity'}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">{language === 'bn' ? 'সক্রিয় সদস্য' : 'Active Members'}</span>
-                        <span className="text-2xl font-bold text-green-600">{stats.activeMembers}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm">{language === 'bn' ? 'গত মাসের লেনদেন' : 'Last Month Transactions'}</span>
-                        <span className="text-lg font-medium">{transactions.length}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                      <Badge className="bg-green-500 text-white">
+                        {language === 'bn' ? 'সক্রিয়' : 'Active'}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
 
             {/* Members Tab */}
             <TabsContent value="members" className="space-y-6">
-              {/* Members Management Header */}
               <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                 <div>
-                  <h2 className="text-2xl font-bold tracking-tight">{currentText.memberManagement}</h2>
+                  <h2 className="text-2xl font-bold tracking-tight">{currentText.members}</h2>
                   <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির সদস্যদের তথ্য ব্যবস্থাপনা করুন' : 'Manage society member information'}
+                    {language === 'bn' ? 'সমিতির সদস্যদের তথ্য ব্যবস্থাপনা' : 'Manage society member information'}
                   </p>
                 </div>
                 
-                <div className="flex items-center space-x-2">
-                  <Button>
-                    <UserPlus className="w-4 h-4 mr-2" />
-                    {currentText.addMember}
-                  </Button>
-                  <Button variant="outline">
-                    <Download className="w-4 h-4 mr-2" />
-                    {language === 'bn' ? 'রপ্তানি' : 'Export'}
-                  </Button>
-                </div>
+                <Button onClick={() => setAddMemberOpen(true)}>
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  {currentText.addMember}
+                </Button>
               </div>
 
-              {/* Search and Filters */}
+              {/* Search */}
               <Card>
                 <CardContent className="pt-6">
-                  <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                    <div className="flex-1">
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                        <Input
-                          placeholder={currentText.searchMembers}
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          className="pl-10"
-                        />
-                      </div>
-                    </div>
-                    
-                    <Select>
-                      <SelectTrigger className="w-48">
-                        <SelectValue placeholder={language === 'bn' ? 'সদস্যপদের ধরন' : 'Membership Type'} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">{language === 'bn' ? 'সকল ধরন' : 'All Types'}</SelectItem>
-                        <SelectItem value="regular">{currentText.regular}</SelectItem>
-                        <SelectItem value="premium">{currentText.premium}</SelectItem>
-                        <SelectItem value="life">{currentText.life}</SelectItem>
-                      </SelectContent>
-                    </Select>
-
-                    <Select>
-                      <SelectTrigger className="w-40">
-                        <SelectValue placeholder={currentText.status} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">{language === 'bn' ? 'সকল অবস্থা' : 'All Status'}</SelectItem>
-                        <SelectItem value="active">{currentText.active}</SelectItem>
-                        <SelectItem value="inactive">{currentText.inactive}</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                    <Input
+                      placeholder={currentText.searchMembers}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10"
+                    />
                   </div>
                 </CardContent>
               </Card>
@@ -703,66 +743,52 @@ export default function SocietyManager() {
                   <Table>
                     <TableHeader>
                       <TableRow>
+                        <TableHead>{currentText.memberCode}</TableHead>
                         <TableHead>{currentText.memberName}</TableHead>
-                        <TableHead>{currentText.memberNumber}</TableHead>
-                        <TableHead>{language === 'bn' ? 'যোগাযোগ' : 'Contact'}</TableHead>
-                        <TableHead>{currentText.membershipType}</TableHead>
-                        <TableHead>{language === 'bn' ? 'জমা' : 'Deposits'}</TableHead>
-                        <TableHead>{language === 'bn' ? 'বকেয়া ঋণ' : 'Outstanding'}</TableHead>
-                        <TableHead>{currentText.status}</TableHead>
+                        <TableHead>{currentText.phoneNumber}</TableHead>
+                        <TableHead>{currentText.workerName}</TableHead>
+                        <TableHead>{currentText.area}</TableHead>
+                        <TableHead>{language === 'bn' ? 'কিস্তি' : 'Installment'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'সঞ্চয়' : 'Savings'}</TableHead>
                         <TableHead>{language === 'bn' ? 'কার্যক্রম' : 'Actions'}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {members.map((member) => (
+                      {members
+                        .filter(member => 
+                          member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          member.memberCode.toLowerCase().includes(searchTerm.toLowerCase())
+                        )
+                        .map((member) => (
                         <TableRow key={member.id}>
+                          <TableCell className="font-mono">{member.memberCode}</TableCell>
                           <TableCell>
-                            <div className="flex items-center space-x-3">
-                              <Avatar>
-                                <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                              </Avatar>
-                              <div>
-                                <div className="font-medium">{member.name}</div>
-                                <div className="text-sm text-muted-foreground">
-                                  {language === 'bn' ? 'যোগদান:' : 'Joined:'} {member.joinDate}
-                                </div>
-                              </div>
+                            <div>
+                              <div className="font-medium">{member.name}</div>
+                              <div className="text-sm text-muted-foreground">NID: {member.nid}</div>
                             </div>
                           </TableCell>
-                          <TableCell className="font-mono">{member.memberNumber}</TableCell>
+                          <TableCell>{member.phone}</TableCell>
+                          <TableCell>{member.workerName}</TableCell>
                           <TableCell>
-                            <div className="space-y-1">
-                              <div className="flex items-center text-sm">
-                                <Phone className="w-3 h-3 mr-1" />
-                                {member.phone}
-                              </div>
-                              {member.email && (
-                                <div className="flex items-center text-sm text-muted-foreground">
-                                  <Mail className="w-3 h-3 mr-1" />
-                                  {member.email}
-                                </div>
-                              )}
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge className={`${getMembershipColor(member.membershipType)} text-white`}>
-                              {currentText[member.membershipType as keyof typeof currentText]}
-                            </Badge>
+                            <Badge variant="outline">{member.area}</Badge>
                           </TableCell>
                           <TableCell className="font-medium">
-                            {formatCurrency(member.totalDeposits)}
+                            {formatCurrency(member.installmentAmount)}
                           </TableCell>
                           <TableCell className="font-medium">
-                            {formatCurrency(member.outstandingLoan)}
-                          </TableCell>
-                          <TableCell>
-                            <Badge className={`${getStatusColor(member.status)} text-white`}>
-                              {currentText[member.status as keyof typeof currentText]}
-                            </Badge>
+                            {formatCurrency(member.savingsAmount)}
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center space-x-2">
-                              <Button variant="outline" size="sm">
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={() => {
+                                  setSelectedMember(member);
+                                  setMemberProfileOpen(true);
+                                }}
+                              >
                                 <Eye className="w-4 h-4" />
                               </Button>
                               <Button variant="outline" size="sm">
@@ -778,155 +804,94 @@ export default function SocietyManager() {
               </Card>
             </TabsContent>
 
-            {/* Finance Tab */}
-            <TabsContent value="finance" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Transaction Summary */}
-                <Card className="lg:col-span-2">
+            {/* Collection Tab */}
+            <TabsContent value="collection" className="space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                <div>
+                  <h2 className="text-2xl font-bold tracking-tight">{currentText.collection}</h2>
+                  <p className="text-muted-foreground">
+                    {language === 'bn' ? 'দৈনিক কালেকশন ব্যবস্থাপনা' : 'Daily collection management'}
+                  </p>
+                </div>
+                
+                <Button onClick={() => setCollectionSheetOpen(true)}>
+                  <PlusCircle className="w-4 h-4 mr-2" />
+                  {currentText.collectionSheet}
+                </Button>
+              </div>
+
+              {/* Collection Summary */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card>
                   <CardHeader>
-                    <CardTitle>{language === 'bn' ? 'আর্থিক লেনদেন' : 'Financial Transactions'}</CardTitle>
-                    <CardDescription>
-                      {language === 'bn' ? 'সকল আর্থিক কার্যক্রমের তালিকা' : 'All financial activities'}
-                    </CardDescription>
+                    <CardTitle className="text-base">{language === 'bn' ? 'আজকের কালেকশন' : "Today's Collection"}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {transactions.map((transaction) => (
-                        <div key={transaction.id} className="flex items-center justify-between p-4 border rounded-lg">
-                          <div className="flex items-center space-x-3">
-                            {getTransactionIcon(transaction.type)}
-                            <div>
-                              <p className="font-medium">{transaction.memberName}</p>
-                              <p className="text-sm text-muted-foreground">{transaction.description}</p>
-                              <p className="text-xs text-muted-foreground">{transaction.date}</p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-medium">{formatCurrency(transaction.amount)}</p>
-                            <Badge className={`${getStatusColor(transaction.status)} text-white`}>
-                              {currentText[transaction.status as keyof typeof currentText]}
-                            </Badge>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="text-2xl font-bold text-green-600">
+                      {formatCurrency(stats.todayCollection)}
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Quick Actions */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>{language === 'bn' ? 'দ্রুত কার্যক্রম' : 'Quick Actions'}</CardTitle>
+                    <CardTitle className="text-base">{language === 'bn' ? 'সংগৃহীত সদস্য' : 'Collected Members'}</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Button className="w-full justify-start">
-                      <TrendingUp className="w-4 h-4 mr-2" />
-                      {language === 'bn' ? 'নতুন জমা' : 'New Deposit'}
-                    </Button>
-                    <Button className="w-full justify-start" variant="outline">
-                      <TrendingDown className="w-4 h-4 mr-2" />
-                      {language === 'bn' ? 'উত্তোলন' : 'Withdrawal'}
-                    </Button>
-                    <Button className="w-full justify-start" variant="outline">
-                      <CreditCard className="w-4 h-4 mr-2" />
-                      {language === 'bn' ? 'ঋণ প্রদান' : 'Grant Loan'}
-                    </Button>
-                    <Button className="w-full justify-start" variant="outline">
-                      <CheckCircle className="w-4 h-4 mr-2" />
-                      {language === 'bn' ? 'ঋণ পরিশোধ' : 'Loan Repayment'}
-                    </Button>
-                    <Button className="w-full justify-start" variant="outline">
-                      <Award className="w-4 h-4 mr-2" />
-                      {language === 'bn' ? 'লভ্যাংশ বিতরণ' : 'Dividend Distribution'}
-                    </Button>
+                  <CardContent>
+                    <div className="text-2xl font-bold">
+                      {collections.filter(c => c.date === new Date().toISOString().split('T')[0]).length}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">{language === 'bn' ? 'বাকি সদস্য' : 'Pending Members'}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-orange-600">
+                      {members.length - collections.filter(c => c.date === new Date().toISOString().split('T')[0]).length}
+                    </div>
                   </CardContent>
                 </Card>
               </div>
-            </TabsContent>
 
-            {/* Meetings Tab */}
-            <TabsContent value="meetings" className="space-y-6">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-                <div>
-                  <h2 className="text-2xl font-bold tracking-tight">
-                    {language === 'bn' ? 'সভা ব্যবস্থাপনা' : 'Meeting Management'}
-                  </h2>
-                  <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির সভাসমূহ পরিচালনা করুন' : 'Manage society meetings'}
-                  </p>
-                </div>
-                
-                <Button>
-                  <PlusCircle className="w-4 h-4 mr-2" />
-                  {language === 'bn' ? 'নতুন সভা' : 'Schedule Meeting'}
-                </Button>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {meetings.map((meeting) => (
-                  <Card key={meeting.id}>
-                    <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <CardTitle className="text-lg">{meeting.title}</CardTitle>
-                        <Badge className={`${getStatusColor(meeting.status)} text-white`}>
-                          {meeting.status === 'scheduled' && (language === 'bn' ? 'নির্ধারিত' : 'Scheduled')}
-                          {meeting.status === 'completed' && (language === 'bn' ? 'সম্পন্ন' : 'Completed')}
-                          {meeting.status === 'cancelled' && (language === 'bn' ? 'বাতিল' : 'Cancelled')}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="space-y-2">
-                        <div className="flex items-center text-sm">
-                          <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
-                          {meeting.date} - {meeting.time}
-                        </div>
-                        <div className="flex items-center text-sm">
-                          <MapPin className="w-4 h-4 mr-2 text-muted-foreground" />
-                          {meeting.venue}
-                        </div>
-                        <div className="flex items-center text-sm">
-                          <Users className="w-4 h-4 mr-2 text-muted-foreground" />
-                          {meeting.attendees} {language === 'bn' ? 'জন উপস্থিতি' : 'attendees'}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 className="font-medium mb-2">
-                          {language === 'bn' ? 'আলোচ্যসূচি:' : 'Agenda:'}
-                        </h4>
-                        <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                          {meeting.agenda.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {meeting.minutes && (
-                        <div>
-                          <h4 className="font-medium mb-2">
-                            {language === 'bn' ? 'সভার কার্যবিবরণী:' : 'Meeting Minutes:'}
-                          </h4>
-                          <p className="text-sm text-muted-foreground">{meeting.minutes}</p>
-                        </div>
-                      )}
-
-                      <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm">
-                          <Eye className="w-4 h-4 mr-2" />
-                          {currentText.viewDetails}
-                        </Button>
-                        {meeting.status === 'scheduled' && (
-                          <Button variant="outline" size="sm">
-                            <Edit className="w-4 h-4 mr-2" />
-                            {language === 'bn' ? 'সম্পাদনা' : 'Edit'}
-                          </Button>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              {/* Recent Collections */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{language === 'bn' ? 'সাম্প্রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>{language === 'bn' ? 'তারিখ' : 'Date'}</TableHead>
+                        <TableHead>{currentText.memberCode}</TableHead>
+                        <TableHead>{currentText.memberName}</TableHead>
+                        <TableHead>{currentText.workerName}</TableHead>
+                        <TableHead>{language === 'bn' ? 'কিস্তি' : 'Installment'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'সঞ্চয়' : 'Savings'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'মোট' : 'Total'}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {collections.slice(-10).reverse().map((collection) => (
+                        <TableRow key={collection.id}>
+                          <TableCell>{collection.date}</TableCell>
+                          <TableCell className="font-mono">{collection.memberCode}</TableCell>
+                          <TableCell>{collection.memberName}</TableCell>
+                          <TableCell>{collection.workerName}</TableCell>
+                          <TableCell>{formatCurrency(collection.installmentCollected)}</TableCell>
+                          <TableCell>{formatCurrency(collection.savingsCollected)}</TableCell>
+                          <TableCell className="font-medium">
+                            {formatCurrency(collection.installmentCollected + collection.savingsCollected)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
             </TabsContent>
 
             {/* Reports Tab */}
@@ -936,12 +901,12 @@ export default function SocietyManager() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <BarChart3 className="w-5 h-5 mr-2" />
-                      {language === 'bn' ? 'আর্থিক প্রতিবেদন' : 'Financial Report'}
+                      {language === 'bn' ? 'দৈনিক রিপোর্ট' : 'Daily Report'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {language === 'bn' ? 'সমিতির আর্থিক অবস্থার বিস্তারিত প্রতিবেদন' : 'Detailed financial status report'}
+                      {language === 'bn' ? 'দৈনিক কালেকশন ও কর্মক্ষমতা রিপোর্ট' : 'Daily collection and performance report'}
                     </p>
                     <Button className="w-full">
                       <Download className="w-4 h-4 mr-2" />
@@ -954,12 +919,12 @@ export default function SocietyManager() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <Users className="w-5 h-5 mr-2" />
-                      {language === 'bn' ? 'সদস্য প্রতিবেদন' : 'Member Report'}
+                      {language === 'bn' ? 'সদস্য রিপোর্ট' : 'Member Report'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {language === 'bn' ? 'সদস্যদের তথ্য ও কার্যক্রমের প্রতিবেদন' : 'Member information and activity report'}
+                      {language === 'bn' ? 'সদস্যদের তথ্য ও কার্যক্রমের রিপোর্ট' : 'Member information and activity report'}
                     </p>
                     <Button className="w-full" variant="outline">
                       <Download className="w-4 h-4 mr-2" />
@@ -971,13 +936,13 @@ export default function SocietyManager() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center">
-                      <Calendar className="w-5 h-5 mr-2" />
-                      {language === 'bn' ? 'সভার প্রতিবেদন' : 'Meeting Report'}
+                      <FileSpreadsheet className="w-5 h-5 mr-2" />
+                      {language === 'bn' ? 'কালেকশন রিপোর্ট' : 'Collection Report'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {language === 'bn' ? 'সকল সভার কার্যবিবরণী ও উপস্থিতি' : 'All meeting minutes and attendance'}
+                      {language === 'bn' ? 'মাসিক কালেকশন ও আয়ের রিপোর্ট' : 'Monthly collection and income report'}
                     </p>
                     <Button className="w-full" variant="outline">
                       <Download className="w-4 h-4 mr-2" />
@@ -1013,54 +978,381 @@ export default function SocietyManager() {
                     </Button>
                   </CardContent>
                 </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{language === 'bn' ? 'সিস্টেম সেটিংস' : 'System Settings'}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label>{language === 'bn' ? 'ইমেইল বিজ্ঞপ্তি' : 'Email Notifications'}</Label>
-                        <p className="text-sm text-muted-foreground">
-                          {language === 'bn' ? 'গুরুত্বপূর্ণ আপডেটের জন্য ইমেইল পাঠান' : 'Send emails for important updates'}
-                        </p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        {language === 'bn' ? 'সক্রিয়' : 'Enabled'}
-                      </Button>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label>{language === 'bn' ? 'SMS বিজ্ঞপ্তি' : 'SMS Notifications'}</Label>
-                        <p className="text-sm text-muted-foreground">
-                          {language === 'bn' ? 'জরুরি বিষয়ের জন্য SMS পাঠান' : 'Send SMS for urgent matters'}
-                        </p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        {language === 'bn' ? 'নিষ্ক্রিয়' : 'Disabled'}
-                      </Button>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <Label>{language === 'bn' ? 'ডেটা ব্যাকআপ' : 'Data Backup'}</Label>
-                        <p className="text-sm text-muted-foreground">
-                          {language === 'bn' ? 'স্বয়ংক্রিয় দৈনিক ব্যাকআপ' : 'Automatic daily backup'}
-                        </p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        {language === 'bn' ? 'সক্রিয়' : 'Enabled'}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </TabsContent>
           </Tabs>
         </div>
       </div>
+
+      {/* Add Member Dialog */}
+      <Dialog open={addMemberOpen} onOpenChange={setAddMemberOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{currentText.addMember}</DialogTitle>
+            <DialogDescription>
+              {language === 'bn' ? 'নতুন সদস্যের তথ্য প্রবেশ করান' : 'Enter new member information'}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="memberCode">{currentText.memberCode}</Label>
+              <Input
+                id="memberCode"
+                value={newMember.memberCode}
+                onChange={(e) => setNewMember({...newMember, memberCode: e.target.value})}
+                placeholder="SM001"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="memberName">{currentText.memberName}</Label>
+              <Input
+                id="memberName"
+                value={newMember.name}
+                onChange={(e) => setNewMember({...newMember, name: e.target.value})}
+                placeholder={language === 'bn' ? 'সদস্যের নাম' : 'Member name'}
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="nid">{currentText.nidNumber}</Label>
+              <Input
+                id="nid"
+                value={newMember.nid}
+                onChange={(e) => setNewMember({...newMember, nid: e.target.value})}
+                placeholder="1234567890123"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="phone">{currentText.phoneNumber}</Label>
+              <Input
+                id="phone"
+                value={newMember.phone}
+                onChange={(e) => setNewMember({...newMember, phone: e.target.value})}
+                placeholder="01712345678"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="worker">{currentText.workerName}</Label>
+              <Select
+                value={newMember.workerName}
+                onValueChange={(value) => setNewMember({...newMember, workerName: value})}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={currentText.selectWorker} />
+                </SelectTrigger>
+                <SelectContent>
+                  {workers.map((worker) => (
+                    <SelectItem key={worker.id} value={worker.name}>
+                      {worker.name} - {worker.area}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="installment">{currentText.installmentAmount}</Label>
+              <Input
+                id="installment"
+                type="number"
+                value={newMember.installmentAmount}
+                onChange={(e) => setNewMember({...newMember, installmentAmount: Number(e.target.value)})}
+                placeholder="500"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="savings">{currentText.savingsAmount}</Label>
+              <Input
+                id="savings"
+                type="number"
+                value={newMember.savingsAmount}
+                onChange={(e) => setNewMember({...newMember, savingsAmount: Number(e.target.value)})}
+                placeholder="200"
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="loan">{currentText.loanAmount}</Label>
+              <Input
+                id="loan"
+                type="number"
+                value={newMember.loanAmount}
+                onChange={(e) => setNewMember({...newMember, loanAmount: Number(e.target.value)})}
+                placeholder="25000"
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-end space-x-2 mt-6">
+            <Button variant="outline" onClick={() => setAddMemberOpen(false)}>
+              {currentText.cancel}
+            </Button>
+            <Button onClick={handleAddMember}>
+              <Save className="w-4 h-4 mr-2" />
+              {currentText.save}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Collection Sheet Dialog */}
+      <Dialog open={collectionSheetOpen} onOpenChange={setCollectionSheetOpen}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{currentText.collectionSheet}</DialogTitle>
+            <DialogDescription>
+              {language === 'bn' ? 'দৈনিক কালেকশন রেকর্ড করুন' : 'Record daily collection'}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label>{currentText.selectWorker}</Label>
+                <Select value={selectedWorker} onValueChange={setSelectedWorker}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={currentText.selectWorker} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {workers.map((worker) => (
+                      <SelectItem key={worker.id} value={worker.name}>
+                        {worker.name} - {worker.area}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label>{currentText.selectDate}</Label>
+                <Input
+                  type="date"
+                  value={selectedDate.toISOString().split('T')[0]}
+                  onChange={(e) => setSelectedDate(new Date(e.target.value))}
+                />
+              </div>
+            </div>
+
+            {selectedWorker && (
+              <div>
+                <h4 className="font-medium mb-4">
+                  {language === 'bn' ? 'সদস্য তালিকা:' : 'Member List:'} {selectedWorker}
+                </h4>
+                
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{currentText.memberCode}</TableHead>
+                      <TableHead>{currentText.memberName}</TableHead>
+                      <TableHead>{language === 'bn' ? 'কিস্তি সংগ্রহ' : 'Installment Collection'}</TableHead>
+                      <TableHead>{language === 'bn' ? 'সঞ্চয় সংগ্রহ' : 'Savings Collection'}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {getWorkerMembers(selectedWorker).map((member) => (
+                      <TableRow key={member.id}>
+                        <TableCell className="font-mono">{member.memberCode}</TableCell>
+                        <TableCell>{member.name}</TableCell>
+                        <TableCell>
+                          <Input
+                            type="number"
+                            placeholder={String(member.installmentAmount)}
+                            value={dailyCollectionData[member.id]?.installment || ''}
+                            onChange={(e) => setDailyCollectionData({
+                              ...dailyCollectionData,
+                              [member.id]: {
+                                ...dailyCollectionData[member.id],
+                                installment: Number(e.target.value) || 0,
+                                savings: dailyCollectionData[member.id]?.savings || 0
+                              }
+                            })}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Input
+                            type="number"
+                            placeholder={String(member.savingsAmount)}
+                            value={dailyCollectionData[member.id]?.savings || ''}
+                            onChange={(e) => setDailyCollectionData({
+                              ...dailyCollectionData,
+                              [member.id]: {
+                                ...dailyCollectionData[member.id],
+                                savings: Number(e.target.value) || 0,
+                                installment: dailyCollectionData[member.id]?.installment || 0
+                              }
+                            })}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex justify-end space-x-2 mt-6">
+            <Button variant="outline" onClick={() => setCollectionSheetOpen(false)}>
+              {currentText.cancel}
+            </Button>
+            <Button onClick={handleSaveCollection} disabled={!selectedWorker}>
+              <Save className="w-4 h-4 mr-2" />
+              {currentText.save}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Member Profile Dialog */}
+      <Dialog open={memberProfileOpen} onOpenChange={setMemberProfileOpen}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{currentText.memberProfile}</DialogTitle>
+            <DialogDescription>
+              {selectedMember?.name} - {selectedMember?.memberCode}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {selectedMember && (
+            <div className="space-y-6">
+              {/* Member Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">{language === 'bn' ? 'সদস্যের তথ্য' : 'Member Information'}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground">{currentText.memberCode}</p>
+                      <p className="font-medium">{selectedMember.memberCode}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">{currentText.phoneNumber}</p>
+                      <p className="font-medium">{selectedMember.phone}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">{currentText.workerName}</p>
+                      <p className="font-medium">{selectedMember.workerName}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">{currentText.area}</p>
+                      <p className="font-medium">{selectedMember.area}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Monthly Stats */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">{language === 'bn' ? 'মাসিক পরিসংখ্যান' : 'Monthly Statistics'}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-green-600">
+                        {formatCurrency(getMemberProfileData(selectedMember).monthlyStats.totalInstallment)}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{currentText.totalInstallment}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-blue-600">
+                        {formatCurrency(getMemberProfileData(selectedMember).monthlyStats.totalSavings)}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{currentText.totalSavings}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-green-600">
+                        {getMemberProfileData(selectedMember).monthlyStats.collectedDays}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{currentText.collectedDays}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-red-600">
+                        {getMemberProfileData(selectedMember).monthlyStats.missedDays}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{currentText.missedDays}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Date Search */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">{currentText.searchByDate}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex space-x-4">
+                    <Input
+                      type="date"
+                      value={searchDate}
+                      onChange={(e) => setSearchDate(e.target.value)}
+                      placeholder={language === 'bn' ? 'তারিখ নির্বাচন করুন' : 'Select date'}
+                    />
+                    <Button onClick={() => {
+                      if (searchDate) {
+                        const dateCollections = getCollectionsByDate(searchDate);
+                        const memberCollection = dateCollections.find(c => c.memberId === selectedMember.id);
+                        if (memberCollection) {
+                          alert(`${language === 'bn' ? 'এই তারিখের কালেকশন:' : 'Collection for this date:'}\n${language === 'bn' ? 'কিস্তি:' : 'Installment:'} ${formatCurrency(memberCollection.installmentCollected)}\n${language === 'bn' ? 'সঞ্চয়:' : 'Savings:'} ${formatCurrency(memberCollection.savingsCollected)}`);
+                        } else {
+                          alert(language === 'bn' ? 'এই তারিখে কোন কালেকশন পাওয়া যায়নি' : 'No collection found for this date');
+                        }
+                      }
+                    }}>
+                      <Search className="w-4 h-4 mr-2" />
+                      {language === 'bn' ? 'খুঁজুন' : 'Search'}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Collection History */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">{currentText.monthlyCalendar}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>{language === 'bn' ? 'তারিখ' : 'Date'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'কিস্তি' : 'Installment'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'সঞ্চয়' : 'Savings'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'মোট' : 'Total'}</TableHead>
+                        <TableHead>{language === 'bn' ? 'অবস্থা' : 'Status'}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {getMemberCollections(selectedMember.id).slice(-10).reverse().map((collection) => (
+                        <TableRow key={collection.id}>
+                          <TableCell>{collection.date}</TableCell>
+                          <TableCell>{formatCurrency(collection.installmentCollected)}</TableCell>
+                          <TableCell>{formatCurrency(collection.savingsCollected)}</TableCell>
+                          <TableCell className="font-medium">
+                            {formatCurrency(collection.installmentCollected + collection.savingsCollected)}
+                          </TableCell>
+                          <TableCell>
+                            <Badge className="bg-green-500 text-white">
+                              {currentText.collected}
+                            </Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }
