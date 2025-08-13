@@ -47,19 +47,19 @@
 - **📊 Loan Calculator** - ঋণ ক্যালকুলেটর
 - **🔒 Secure Authentication** - নিরাপদ প্রমাণীকরণ
 - **🌐 Responsive Design** - রেসপন্সিভ ডিজাইন
-- **🇧🇩 Bengali Language Support** - ���াংলা ভাষা সাপোর্ট
+- **🇧🇩 Bengali Language Support** - বাংলা ভাষা সাপোর্ট
 
 ## 🚀 Quick Start
 
 ### 🌐 Web Application
 
-Visit: [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash.github.io/loanbondhu/)
+Visit: [https://nishojibon5-hash.github.io/builder-spark-works/](https://nishojibon5-hash.github.io/builder-spark-works/)
 
 ### 📱 Android Installation
 
 1. **Download APK:**
 
-   - Go to [Releases](https://github.com/nishojibon5-hash/loanbondhu/releases/latest)
+   - Go to [Releases](https://github.com/nishojibon5-hash/builder-spark-works/releases/latest)
    - Download `LoanBondhu-release.apk`
 
 2. **Install:**
@@ -85,8 +85,8 @@ Visit: [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash
 
 ```bash
 # Clone repository
-git clone https://github.com/nishojibon5-hash/loanbondhu.git
-cd loanbondhu
+git clone https://github.com/nishojibon5-hash/builder-spark-works.git
+cd builder-spark-works
 
 # Install dependencies
 npm install
@@ -114,7 +114,7 @@ npm run build:server
 ### Automatic Build (GitHub Actions)
 
 - Android APKs are automatically built on every push to main branch
-- Download from [GitHub Releases](https://github.com/nishojibon5-hash/loanbondhu/releases)
+- Download from [GitHub Releases](https://github.com/nishojibon5-hash/builder-spark-works/releases)
 - Both Debug and Release APKs are available
 
 ### Manual Build
@@ -237,8 +237,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Issues:** [GitHub Issues](https://github.com/nishojibon5-hash/loanbondhu/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/nishojibon5-hash/loanbondhu/discussions)
+- **Issues:** [GitHub Issues](https://github.com/nishojibon5-hash/builder-spark-works/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/nishojibon5-hash/builder-spark-works/discussions)
 - **Email:** support@loanbondhu.com
 
 ## 📞 Contact
