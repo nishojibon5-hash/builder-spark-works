@@ -2,170 +2,170 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
-      - 'README.md'
-      - '.gitignore'
-      - 'docs/**'
+      - "README.md"
+      - ".gitignore"
+      - "docs/**"
   pull_request:
-    branches: [ main ]
-  
+    branches: [main]
+
   # Allow manual trigger
   workflow_dispatch:
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-    - name: Setup Java JDK
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build web application
-      run: npm run build:client
+      - name: Build web application
+        run: npm run build:client
 
-    - name: Create Android assets directory
-      run: |
-        mkdir -p android/app/src/main/assets
-        mkdir -p android/app/src/main/res/mipmap-hdpi
-        mkdir -p android/app/src/main/res/mipmap-mdpi
-        mkdir -p android/app/src/main/res/mipmap-xhdpi
-        mkdir -p android/app/src/main/res/mipmap-xxhdpi
-        mkdir -p android/app/src/main/res/mipmap-xxxhdpi
+      - name: Create Android assets directory
+        run: |
+          mkdir -p android/app/src/main/assets
+          mkdir -p android/app/src/main/res/mipmap-hdpi
+          mkdir -p android/app/src/main/res/mipmap-mdpi
+          mkdir -p android/app/src/main/res/mipmap-xhdpi
+          mkdir -p android/app/src/main/res/mipmap-xxhdpi
+          mkdir -p android/app/src/main/res/mipmap-xxxhdpi
 
-    - name: Copy web assets to Android
-      run: |
-        cp -r dist/spa/* android/app/src/main/assets/ 2>/dev/null || true
+      - name: Copy web assets to Android
+        run: |
+          cp -r dist/spa/* android/app/src/main/assets/ 2>/dev/null || true
 
-    - name: Make gradlew executable
-      run: chmod +x android/gradlew
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
 
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    - name: Build Debug APK
-      working-directory: android
-      run: ./gradlew assembleDebug
+      - name: Build Debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug
 
-    - name: Build Release APK
-      working-directory: android
-      run: ./gradlew assembleRelease
+      - name: Build Release APK
+        working-directory: android
+        run: ./gradlew assembleRelease
 
-    - name: Copy APKs to public directory
-      run: |
-        mkdir -p public
-        cp android/app/build/outputs/apk/debug/app-debug.apk public/LoanBondhu-debug.apk || echo "Debug APK not found"
-        cp android/app/build/outputs/apk/release/app-release-unsigned.apk public/LoanBondhu-release.apk || echo "Release APK not found"
+      - name: Copy APKs to public directory
+        run: |
+          mkdir -p public
+          cp android/app/build/outputs/apk/debug/app-debug.apk public/LoanBondhu-debug.apk || echo "Debug APK not found"
+          cp android/app/build/outputs/apk/release/app-release-unsigned.apk public/LoanBondhu-release.apk || echo "Release APK not found"
 
-    - name: Upload Debug APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: LoanBondhu-Debug-APK
-        path: android/app/build/outputs/apk/debug/app-debug.apk
-        retention-days: 30
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: LoanBondhu-Debug-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
 
-    - name: Upload Release APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: LoanBondhu-Release-APK
-        path: android/app/build/outputs/apk/release/app-release-unsigned.apk
-        retention-days: 30
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: LoanBondhu-Release-APK
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
+          retention-days: 30
 
-    - name: Create Release
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: v1.0.${{ github.run_number }}
-        name: LoanBondhu v1.0.${{ github.run_number }}
-        body: |
-          ## LoanBondhu Android App Build
+      - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: LoanBondhu v1.0.${{ github.run_number }}
+          body: |
+            ## LoanBondhu Android App Build
 
-          ### Features:
-          - 🏦 Loan Management System
-          - 👥 Society Member Management
-          - 💰 Collection Tracking
-          - 📊 Financial Reports
-          - 📱 Responsive Design
-          - 🌐 Bengali Language Support
+            ### Features:
+            - 🏦 Loan Management System
+            - 👥 Society Member Management
+            - 💰 Collection Tracking
+            - 📊 Financial Reports
+            - 📱 Responsive Design
+            - 🌐 Bengali Language Support
 
-          ### APK Information:
-          - **Minimum Android Version:** 5.0 (API 21)
-          - **Target Android Version:** 14 (API 34)
-          - **Architecture:** Universal APK
-          - **Size:** ~10MB
+            ### APK Information:
+            - **Minimum Android Version:** 5.0 (API 21)
+            - **Target Android Version:** 14 (API 34)
+            - **Architecture:** Universal APK
+            - **Size:** ~10MB
 
-          ### Installation:
-          1. Download the APK file
-          2. Enable "Unknown Sources" in Android settings
-          3. Install the APK
-          4. Open LoanBondhu app
-
-          ### Admin Access:
-          - Phone: 01650074073
-          - Default admin password: admin123
-
-          ---
-          
-          **Debug APK:** For testing and development
-          **Release APK:** For production use (unsigned)
-        files: |
-          android/app/build/outputs/apk/debug/app-debug.apk
-          android/app/build/outputs/apk/release/app-release-unsigned.apk
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Comment on PR
-      if: github.event_name == 'pull_request'
-      uses: actions/github-script@v7
-      with:
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: `## 🤖 Android APK Build Complete
-
-            ✅ **Debug APK:** Successfully built
-            ✅ **Release APK:** Successfully built
-
-            📱 APK files are available in the workflow artifacts.
-            
-            ### Download Links:
-            - [Debug APK Artifact](https://github.com/nishojibon5-hash/loanbondhu/actions/runs/${context.runId})
-            - [Release APK Artifact](https://github.com/nishojibon5-hash/loanbondhu/actions/runs/${context.runId})
-
-            ### Installation Instructions:
-            1. Download the APK from artifacts
+            ### Installation:
+            1. Download the APK file
             2. Enable "Unknown Sources" in Android settings
-            3. Install the APK file
-            4. Launch LoanBondhu app
+            3. Install the APK
+            4. Open LoanBondhu app
 
-            **Admin Phone:** 01650074073`
-          })
+            ### Admin Access:
+            - Phone: 01650074073
+            - Default admin password: admin123
+
+            ---
+
+            **Debug APK:** For testing and development
+            **Release APK:** For production use (unsigned)
+          files: |
+            android/app/build/outputs/apk/debug/app-debug.apk
+            android/app/build/outputs/apk/release/app-release-unsigned.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🤖 Android APK Build Complete
+
+              ✅ **Debug APK:** Successfully built
+              ✅ **Release APK:** Successfully built
+
+              📱 APK files are available in the workflow artifacts.
+              
+              ### Download Links:
+              - [Debug APK Artifact](https://github.com/nishojibon5-hash/loanbondhu/actions/runs/${context.runId})
+              - [Release APK Artifact](https://github.com/nishojibon5-hash/loanbondhu/actions/runs/${context.runId})
+
+              ### Installation Instructions:
+              1. Download the APK from artifacts
+              2. Enable "Unknown Sources" in Android settings
+              3. Install the APK file
+              4. Launch LoanBondhu app
+
+              **Admin Phone:** 01650074073`
+            })

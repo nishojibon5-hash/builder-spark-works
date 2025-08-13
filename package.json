@@ -7,7 +7,14 @@
     "type": "git",
     "url": "https://github.com/nishojibon5-hash/loanbondhu.git"
   },
-  "keywords": ["loan", "society", "management", "bangladesh", "bengali", "finance"],
+  "keywords": [
+    "loan",
+    "society",
+    "management",
+    "bangladesh",
+    "bengali",
+    "finance"
+  ],
   "author": "LoanBondhu Team",
   "license": "MIT",
   "private": false,
