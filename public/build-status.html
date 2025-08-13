@@ -147,19 +147,19 @@
       <div class="badges">
         <div class="badge">
           <img
-            src="https://img.shields.io/github/actions/workflow/status/nishojibon5-hash/builder-spark-works/deploy.yml?branch=main&label=Website&style=flat-square"
+            src="https://img.shields.io/github/actions/workflow/status/nishojibon5-hash/loanbondhu/deploy.yml?branch=main&label=Website&style=flat-square"
             alt="Website Status"
           />
         </div>
         <div class="badge">
           <img
-            src="https://img.shields.io/github/actions/workflow/status/nishojibon5-hash/builder-spark-works/android-build.yml?branch=main&label=Android&style=flat-square"
+            src="https://img.shields.io/github/actions/workflow/status/nishojibon5-hash/loanbondhu/android-build.yml?branch=main&label=Android&style=flat-square"
             alt="Android Status"
           />
         </div>
         <div class="badge">
           <img
-            src="https://img.shields.io/github/v/release/nishojibon5-hash/builder-spark-works?style=flat-square"
+            src="https://img.shields.io/github/v/release/nishojibon5-hash/loanbondhu?style=flat-square"
             alt="Version"
           />
         </div>
@@ -171,7 +171,7 @@
           <div class="status-title">Website Deploy</div>
           <div class="status-desc">GitHub Pages automatic deployment</div>
           <a
-            href="https://nishojibon5-hash.github.io/builder-spark-works/"
+            href="https://nishojibon5-hash.github.io/loanbondhu/"
             class="btn"
             >Open Website</a
           >
@@ -182,7 +182,7 @@
           <div class="status-title">Android APK</div>
           <div class="status-desc">Latest Android application build</div>
           <a
-            href="https://github.com/nishojibon5-hash/builder-spark-works/releases/latest"
+            href="https://github.com/nishojibon5-hash/loanbondhu/releases/latest"
             class="btn"
             >Download APK</a
           >
@@ -193,7 +193,7 @@
           <div class="status-title">Build Actions</div>
           <div class="status-desc">GitHub Actions workflow status</div>
           <a
-            href="https://github.com/nishojibon5-hash/builder-spark-works/actions"
+            href="https://github.com/nishojibon5-hash/loanbondhu/actions"
             class="btn"
             >View Actions</a
           >
@@ -204,7 +204,7 @@
           <div class="status-title">Source Code</div>
           <div class="status-desc">GitHub repository and documentation</div>
           <a
-            href="https://github.com/nishojibon5-hash/builder-spark-works"
+            href="https://github.com/nishojibon5-hash/loanbondhu"
             class="btn"
             >View Repository</a
           >
@@ -244,7 +244,7 @@
       async function checkBuildStatus() {
         try {
           const response = await fetch(
-            "https://api.github.com/repos/nishojibon5-hash/builder-spark-works/actions/runs?status=in_progress",
+            "https://api.github.com/repos/nishojibon5-hash/loanbondhu/actions/runs?status=in_progress",
           );
           const data = await response.json();
 
