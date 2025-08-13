@@ -330,7 +330,7 @@ export default function SocietyManager() {
       addWorker: "নতুন কর্মী যোগ করুন",
       collectionSheet: "কালেকশন শীট",
       memberProfile: "সদস্যের প্রোফাইল",
-      searchMembers: "সদস্য খু���জুন...",
+      searchMembers: "সদস্য খুঁজুন...",
       memberCode: "সদস্য কোড",
       memberName: "সদস্যের নাম",
       nidNumber: "এনআইডি নম্বর",
@@ -368,7 +368,7 @@ export default function SocietyManager() {
       cannotDelete: "শুধুমাত্র অ্যাডমিন ডেটা মুছতে পারবেন",
       dataProtected: "ডেটা সুরক্ষিত",
       memberProfilePDF: "সদস্যের প্রোফাইল পিডিএফ",
-      collectionCalendarPDF: "কালেকশন ক্যালেন্ডার পিডিএফ",
+      collectionCalendarPDF: "কালেকশন ক্যালেন্ডার প��ডিএফ",
       completeDatabasePDF: "সম্পূর্ণ ডেটাবেস পিডিএফ",
       generating: "তৈরি করা হচ্ছে...",
       noDataFound: "কোনো ডেটা পাওয়া যায়নি",
@@ -394,7 +394,7 @@ export default function SocietyManager() {
       cancelled: "বাতিল",
       totalIncome: "মোট আয়",
       totalExpense: "মোট ব্যয়",
-      netIncome: "নিট আয়",
+      netIncome: "নিট আয��",
       salaryPaid: "বেতন প্রদত্ত",
       selectMonth: "মাস নির্বাচন করুন"
     },
@@ -541,7 +541,7 @@ export default function SocietyManager() {
     }
     
     // Extra confirmation for data protection
-    if (window.confirm(language === 'bn' ? 'আপনি কি সত্যিই এই সদস্যকে মুছে ফেলতে চান? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।' : 'Are you sure you want to delete this member? This action cannot be undone.')) {
+    if (window.confirm(language === 'bn' ? 'আপনি কি সত্যিই এই সদস্যকে মুছে ফেলতে চান? এই কাজটি পূর্বাবস��থায় ফেরানো যাবে না।' : 'Are you sure you want to delete this member? This action cannot be undone.')) {
       const member = members.find(m => m.id === memberId);
       if (member) {
         // Update worker's total members count
@@ -882,7 +882,7 @@ export default function SocietyManager() {
         </table>
 
         <div class="footer">
-          <p>আমাদের সমিতি - সদস্য প্রোফাইল রিপোর্ট</p>
+          <p>আমাদে�� সমিতি - সদস্য প্রোফাইল রিপোর্ট</p>
           <p>এই রিপোর্টটি ${new Date().toLocaleString('bn-BD')} এ তৈরি করা হয়েছে</p>
         </div>
 
@@ -1044,7 +1044,7 @@ export default function SocietyManager() {
 
         <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #666;">
           <p>আমাদের সমিতি - কালেকশন ক্যালেন্ডার রিপোর্ট</p>
-          <p>রিপোর্��� তৈরির তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
+          <p>রিপোর্ট তৈরির তারিখ: ${new Date().toLocaleString('bn-BD')}</p>
         </div>
 
         <script>
@@ -1127,7 +1127,7 @@ export default function SocietyManager() {
                 <th>এলাকা</th>
                 <th>মোবাইল</th>
                 <th>মোট সদস্য</th>
-                <th>দৈনিক কালেকশন</th>
+                <th>দৈনিক কা��েকশন</th>
                 <th>অবস্থা</th>
                 <th>যোগদানের তারিখ</th>
               </tr>
@@ -1200,7 +1200,7 @@ export default function SocietyManager() {
                 <th>সঞ্চয়</th>
                 <th>মোট</th>
                 <th>অবস্থা</th>
-                <th>এন্ট্রির তা���িখ</th>
+                <th>এন্ট্রির তারিখ</th>
               </tr>
             </thead>
             <tbody>
@@ -1222,7 +1222,7 @@ export default function SocietyManager() {
         </div>
 
         <div class="section page-break">
-          <h2>এলাকাভিত্তিক পরিসংখ্যান</h2>
+          <h2>এলাক���ভিত্তিক পরিসংখ্যান</h2>
           <table>
             <thead>
               <tr>
@@ -1450,34 +1450,119 @@ export default function SocietyManager() {
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{currentText.totalWorkers}</CardTitle>
-                    <User className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">{currentText.monthlyInstallment}</CardTitle>
+                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{stats.totalWorkers}</div>
+                    <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.monthlyInstallment)}</div>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'দৈনিক কালেকশনকারী' : 'Daily collectors'}
+                      {language === 'bn' ? 'চলতি মাসের কিস্তি' : 'Current month installments'}
                     </p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{currentText.todayCollection}</CardTitle>
-                    <Banknote className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">{currentText.monthlySavings}</CardTitle>
+                    <Wallet className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.todayCollection)}</div>
+                    <div className="text-2xl font-bold text-blue-600">{formatCurrency(stats.monthlySavings)}</div>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'কিস্তি ও সঞ্চয়' : 'Installment & Savings'}
+                      {language === 'bn' ? 'চলতি মাসের সঞ্চয়' : 'Current month savings'}
                     </p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{currentText.dataBackup}</CardTitle>
-                    <Database className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium">{currentText.netIncome}</CardTitle>
+                    <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className={`text-2xl font-bold ${stats.netIncome >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {formatCurrency(stats.netIncome)}
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {language === 'bn' ? 'নিট আয়' : 'Net income'}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Financial Overview Section */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between">
+                      <span>{currentText.incomeExpense}</span>
+                      <Button size="sm" onClick={() => setIncomeExpenseOpen(true)}>
+                        <PlusCircle className="w-4 h-4 mr-2" />
+                        {currentText.addIncomeExpense}
+                      </Button>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-sm">{currentText.totalIncome}:</span>
+                        <span className="font-medium text-green-600">{formatCurrency(stats.totalIncome)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">{currentText.totalExpense}:</span>
+                        <span className="font-medium text-red-600">{formatCurrency(stats.totalExpense)}</span>
+                      </div>
+                      <Separator />
+                      <div className="flex justify-between">
+                        <span className="font-medium">{currentText.netIncome}:</span>
+                        <span className={`font-bold ${stats.netIncome >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          {formatCurrency(stats.netIncome)}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between">
+                      <span>{currentText.workerSalary}</span>
+                      <Button size="sm" onClick={() => setWorkerSalaryOpen(true)} disabled={workers.length === 0}>
+                        <PlusCircle className="w-4 h-4 mr-2" />
+                        {currentText.addWorkerSalary}
+                      </Button>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-sm">{currentText.totalWorkers}:</span>
+                        <span className="font-medium">{stats.totalWorkers}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">{currentText.salaryPaid}:</span>
+                        <span className="font-medium text-blue-600">{formatCurrency(stats.salaryPaid)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">{language === 'bn' ? 'এই মাসে:' : 'This month:'}:</span>
+                        <span className="font-medium text-orange-600">
+                          {formatCurrency(
+                            workerSalaries
+                              .filter(ws => ws.year === currentYear && parseInt(ws.month) === currentMonth + 1)
+                              .reduce((sum, ws) => sum + ws.totalSalary, 0)
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Database className="w-5 h-5 mr-2" />
+                      {currentText.dataBackup}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
@@ -1508,7 +1593,7 @@ export default function SocietyManager() {
                       <div className="text-center py-8">
                         <FileSpreadsheet className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                         <p className="text-muted-foreground">
-                          {language === 'bn' ? 'এখনো কোনো কালেকশন নেই। প্রথমে কর্মী এবং সদস্য যোগ করুন।' : 'No collections yet. Add workers and members first.'}
+                          {language === 'bn' ? 'এখনো কোনো কালেকশন নেই। প্রথমে কর্মী এবং সদস্য য���গ করুন।' : 'No collections yet. Add workers and members first.'}
                         </p>
                       </div>
                     ) : (
@@ -1559,7 +1644,7 @@ export default function SocietyManager() {
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight">{currentText.workers}</h2>
                   <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির কর্ম��দের তথ্য ও কর্মক্ষমতা ব্যবস্থাপনা' : 'Manage worker information and performance'}
+                    {language === 'bn' ? 'সমিতির কর্মীদের তথ্য ও কর্মক্ষমতা ব্যবস্থাপনা' : 'Manage worker information and performance'}
                   </p>
                 </div>
                 
@@ -1662,7 +1747,7 @@ export default function SocietyManager() {
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight">{currentText.members}</h2>
                   <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির সদস্যদের তথ্য ব্যবস্থাপনা ও প্রোফাইল' : 'Manage member information and profiles'}
+                    {language === 'bn' ? 'সমিতির সদস্যদের তথ্য ব্যব���্থাপনা ও প্রোফাইল' : 'Manage member information and profiles'}
                   </p>
                 </div>
                 
@@ -1886,7 +1971,7 @@ export default function SocietyManager() {
                     <div className="text-center py-8">
                       <FileSpreadsheet className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                       <p className="text-muted-foreground">
-                        {language === 'bn' ? 'এখনো ক��নো কালেকশন রেকর্ড নেই।' : 'No collection records yet.'}
+                        {language === 'bn' ? 'এখনো কোনো কালেকশন রেকর্ড নেই।' : 'No collection records yet.'}
                       </p>
                     </div>
                   ) : (
@@ -2029,7 +2114,7 @@ export default function SocietyManager() {
                       </div>
                       <p className="text-sm text-green-700 mt-2">
                         {language === 'bn' 
-                          ? 'সকল ডেটা স্থ���নীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
+                          ? 'সকল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
                           : 'All data is stored locally and never automatically deleted.'
                         }
                       </p>
@@ -2369,9 +2454,9 @@ export default function SocietyManager() {
                         </span>
                       </TableHead>
                       <TableHead>
-                        {language === 'bn' ? 'সঞ্চয় সংগ্রহ' : 'Savings Collection'}
+                        {language === 'bn' ? 'সঞ��চয় সংগ্রহ' : 'Savings Collection'}
                         <span className="text-xs text-green-600 block">
-                          {language === 'bn' ? '(যেকোনো পরিমাণ ��া খালি)' : '(any amount or empty)'}
+                          {language === 'bn' ? '(যেকোনো পরিমাণ বা খালি)' : '(any amount or empty)'}
                         </span>
                       </TableHead>
                     </TableRow>
