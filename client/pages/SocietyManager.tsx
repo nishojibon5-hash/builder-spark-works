@@ -324,7 +324,7 @@ export default function SocietyManager() {
       societyName: "আমাদের সমিতি",
       totalMembers: "মোট সদস্য",
       totalWorkers: "মোট কর্মী",
-      todayCollection: "আজকের কালে���শন",
+      todayCollection: "আজকের কালেকশন",
       monthlyTarget: "মাসিক লক্ষ্য",
       addMember: "নতুন সদস্য যোগ করুন",
       addWorker: "নতুন কর্মী যোগ করুন",
@@ -371,7 +371,32 @@ export default function SocietyManager() {
       collectionCalendarPDF: "কালেকশন ক্যালেন্ডার পিডিএফ",
       completeDatabasePDF: "সম্পূর্ণ ডেটাবেস পিডিএফ",
       generating: "তৈরি করা হচ্ছে...",
-      noDataFound: "কোনো ডেটা পাওয়া যায়নি"
+      noDataFound: "কোনো ডেটা পাওয়া যায়নি",
+      monthlyInstallment: "মাসিক কিস্তি",
+      monthlySavings: "মাসিক সঞ্চয়",
+      incomeExpense: "আয় ব্যয়",
+      workerSalary: "কর্মীর বেতন",
+      addIncomeExpense: "আয় ব্যয় যোগ করুন",
+      addWorkerSalary: "বেতন প্রদান করুন",
+      income: "আয়",
+      expense: "ব্যয়",
+      category: "বিভাগ",
+      amount: "পরিমাণ",
+      description: "বিবরণ",
+      date: "তারিখ",
+      baseSalary: "মূল বেতন",
+      bonus: "বোনাস",
+      deductions: "কর্তন",
+      totalSalary: "মোট বেতন",
+      month: "মাস",
+      paid: "প্রদত্ত",
+      pending: "অপেক্ষমান",
+      cancelled: "বাতিল",
+      totalIncome: "মোট আয়",
+      totalExpense: "মোট ব্যয়",
+      netIncome: "নিট আয়",
+      salaryPaid: "বেতন প্রদত্ত",
+      selectMonth: "মাস নির্বাচন করুন"
     },
     en: {
       dashboard: "Dashboard",
@@ -699,7 +724,7 @@ export default function SocietyManager() {
             <p><strong>সদস্য কোড:</strong> ${member.memberCode}</p>
             <p><strong>নাম:</strong> ${member.name}</p>
             <p><strong>এনআইডি:</strong> ${member.nid}</p>
-            <p><strong>মোবাইল:</strong> ${member.phone}</p>
+            <p><strong>মোবাই��:</strong> ${member.phone}</p>
             <p><strong>যোগদানের তারিখ:</strong> ${member.joinDate}</p>
             <p><strong>অবস্থা:</strong> ${member.status === 'active' ? 'সক্রিয়' : 'নিষ্ক্রিয়'}</p>
           </div>
@@ -711,7 +736,7 @@ export default function SocietyManager() {
             <p><strong>দৈনিক কিস্তি:</strong> ${formatCurrency(member.installmentAmount)}</p>
             <p><strong>দৈনিক সঞ্চয়:</strong> ${formatCurrency(member.savingsAmount)}</p>
             <p><strong>গৃহীত ঋণ:</strong> ${formatCurrency(member.loanAmount)}</p>
-            <p><strong>সদস্যপদ:</strong> ${member.membershipType === 'regular' ? 'নিয়মিত' : member.membershipType === 'premium' ? 'প��রিমিয়াম' : 'আজীবন'}</p>
+            <p><strong>সদস্যপদ:</strong> ${member.membershipType === 'regular' ? 'নিয়মিত' : member.membershipType === 'premium' ? 'প্রিমিয়াম' : 'আজীবন'}</p>
           </div>
         </div>
 
@@ -896,7 +921,7 @@ export default function SocietyManager() {
               <div style="font-size: 20px; font-weight: bold; color: #059669;">
                 ${formatCurrency(getMemberProfileData(member).monthlyStats.totalInstallment)}
               </div>
-              <div style="font-size: 12px; color: #666;">ম���ট কিস্তি</div>
+              <div style="font-size: 12px; color: #666;">মোট কিস্তি</div>
             </div>
             <div style="text-align: center;">
               <div style="font-size: 20px; font-weight: bold; color: #0284c7;">
@@ -995,7 +1020,7 @@ export default function SocietyManager() {
         </div>
 
         <div class="section">
-          <h2>কর্মী তালিকা</h2>
+          <h2>কর্মী তাল���কা</h2>
           <table>
             <thead>
               <tr>
@@ -1105,7 +1130,7 @@ export default function SocietyManager() {
               <tr>
                 <th>এলাকা</th>
                 <th>কর্মী</th>
-                <th>���োট সদস্য</th>
+                <th>মোট সদস্য</th>
                 <th>সক্রিয় সদস্য</th>
                 <th>মোট কালেকশন</th>
                 <th>দৈনিক গড় কালেকশন</th>
@@ -1361,7 +1386,7 @@ export default function SocietyManager() {
                 <CardHeader>
                   <CardTitle>{language === 'bn' ? 'সাম্প্রতিক কালেকশন' : 'Recent Collections'}</CardTitle>
                   <CardDescription>
-                    {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন - বিস্তারিত দেখতে ক���লিক করুন' : 'Latest financial transactions - click for details'}
+                    {language === 'bn' ? 'সাম্প্রতিক আর্থিক লেনদেন - বিস্তারিত দেখতে ক্লিক করুন' : 'Latest financial transactions - click for details'}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -1595,7 +1620,7 @@ export default function SocietyManager() {
                           <TableHead>{currentText.area}</TableHead>
                           <TableHead>{language === 'bn' ? 'কিস্তি' : 'Installment'}</TableHead>
                           <TableHead>{language === 'bn' ? 'সঞ্চয়' : 'Savings'}</TableHead>
-                          <TableHead>{language === 'bn' ? 'কার্যক্রম' : 'Actions'}</TableHead>
+                          <TableHead>{language === 'bn' ? 'কা���্যক্রম' : 'Actions'}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -1810,7 +1835,7 @@ export default function SocietyManager() {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <HardDrive className="w-5 h-5 mr-2" />
-                      {language === 'bn' ? 'ডেটা ব্যাকআপ' : 'Data Backup'}
+                      {language === 'bn' ? 'ডেটা ব্যাকআ��' : 'Data Backup'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -1834,7 +1859,7 @@ export default function SocietyManager() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground mb-4">
-                        {language === 'bn' ? 'পূর্বের ব্যাকআপ ফাইল ইমপোর্ট করুন (শুধুমাত্র অ্যাডমিন)' : 'Import previous backup file (admin only)'}
+                        {language === 'bn' ? 'পূর্বের ব্যাক���প ফাইল ইমপোর্ট করুন (শুধুমাত্র অ্যাডমিন)' : 'Import previous backup file (admin only)'}
                       </p>
                       <Input
                         type="file"
@@ -2053,7 +2078,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.addMember}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'নতুন সদস্যের সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new member information'}
+              {language === 'bn' ? 'নতুন সদস্যের সম্প���র্ণ তথ্য প্রবেশ করান' : 'Enter complete new member information'}
             </DialogDescription>
           </DialogHeader>
           
