@@ -2,14 +2,14 @@
 
 **সমিতি ব্যবস্থাপনা সিস্টেম | Society Management System**
 
-[![Deploy to GitHub Pages](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/deploy.yml/badge.svg)](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/deploy.yml)
-[![Build Android APK](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/android-build.yml/badge.svg)](https://github.com/nishojibon5-hash/builder-spark-works/actions/workflows/android-build.yml)
+[![Deploy to GitHub Pages](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/deploy.yml/badge.svg)](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/deploy.yml)
+[![Build Android APK](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/android-build.yml/badge.svg)](https://github.com/nishojibon5-hash/loanbondhu/actions/workflows/android-build.yml)
 
 ## 🌟 Live Demo
 
-🌐 **Website:** [https://nishojibon5-hash.github.io/builder-spark-works/](https://nishojibon5-hash.github.io/builder-spark-works/)
+🌐 **Website:** [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash.github.io/loanbondhu/)
 
-📱 **Android APK:** [Download Latest Release](https://github.com/nishojibon5-hash/builder-spark-works/releases/latest)
+📱 **Android APK:** [Download Latest Release](https://github.com/nishojibon5-hash/loanbondhu/releases/latest)
 
 ## 📱 Features | ফিচারসমূহ
 
