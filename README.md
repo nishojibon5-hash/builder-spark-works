@@ -26,7 +26,7 @@
 - **👨‍💼 Worker Management** - কর্মী ব্যবস্থাপনা
 - **👥 Member Registration** - সদস্য নিবন্ধন
 - **💵 Collection Tracking** - কালেকশন ট্র্যাকিং
-- **📋 Income/Expense Management** - আয়-ব্যয় ব্যবস্থাপনা
+- **📋 Income/Expense Management** - আয়-ব্যয় ব্যব��্থাপনা
 - **💰 Salary Management** - বেতন ব্যবস্থাপনা
 - **📄 PDF Reports** - পিডিএফ রিপোর্ট
 - **📅 Collection Calendar** - কালেকশন ক্যালেন্ডার
@@ -77,8 +77,8 @@ Visit: [https://nishojibon5-hash.github.io/loanbondhu/](https://nishojibon5-hash
 
 ```bash
 # Clone repository
-git clone https://github.com/nishojibon5-hash/builder-spark-works.git
-cd builder-spark-works
+git clone https://github.com/nishojibon5-hash/loanbondhu.git
+cd loanbondhu
 
 # Install dependencies
 npm install
