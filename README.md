@@ -26,7 +26,7 @@
 - **👨‍💼 Worker Management** - কর্মী ব্যবস্থাপনা
 - **👥 Member Registration** - সদস্য নিবন্ধন
 - **💵 Collection Tracking** - কালেকশন ট্র্যাকিং
-- **📋 Income/Expense Management** - আয়-ব্যয় ব্যব��্থাপনা
+- **📋 Income/Expense Management** - আয়-ব্যয় ব্যবস্থাপনা
 - **💰 Salary Management** - বেতন ব্যবস্থাপনা
 - **📄 PDF Reports** - পিডিএফ রিপোর্ট
 - **📅 Collection Calendar** - কালেকশন ক্যালেন্ডার
@@ -105,7 +105,7 @@ npm run build:server
 
 ### Automatic Build (GitHub Actions)
 - Android APKs are automatically built on every push to main branch
-- Download from [GitHub Releases](https://github.com/nishojibon5-hash/builder-spark-works/releases)
+- Download from [GitHub Releases](https://github.com/nishojibon5-hash/loanbondhu/releases)
 - Both Debug and Release APKs are available
 
 ### Manual Build
