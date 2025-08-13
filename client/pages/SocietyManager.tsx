@@ -341,7 +341,7 @@ export default function SocietyManager() {
       savingsAmount: "সঞ্চয়ের পরিমাণ",
       loanAmount: "ঋণের পরিমাণ",
       save: "সংরক্ষণ করুন",
-      cancel: "বাতিল",
+      cancel: "বাতি��",
       dailyCollection: "দৈনিক কালেকশন",
       selectWorker: "কর্মী নির্বাচন করুন",
       selectDate: "তারিখ নির্বাচন করুন",
@@ -633,7 +633,7 @@ export default function SocietyManager() {
   const handleSaveCollection = () => {
     const newCollections: DailyCollection[] = [];
     const selectedDateStr = selectedDate.toISOString().split('T')[0];
-    
+
     Object.entries(dailyCollectionData).forEach(([memberId, data]) => {
       const member = members.find(m => m.id === memberId);
       if (member) {
@@ -655,14 +655,14 @@ export default function SocietyManager() {
     });
 
     setCollections([...collections, ...newCollections]);
-    
+
     // Update worker's daily collection
-    const totalCollection = newCollections.reduce((sum, c) => 
+    const totalCollection = newCollections.reduce((sum, c) =>
       sum + c.installmentCollected + c.savingsCollected, 0
     );
-    
-    const updatedWorkers = workers.map(w => 
-      w.name === selectedWorker 
+
+    const updatedWorkers = workers.map(w =>
+      w.name === selectedWorker
         ? { ...w, dailyCollection: w.dailyCollection + totalCollection }
         : w
     );
@@ -670,6 +670,79 @@ export default function SocietyManager() {
 
     setDailyCollectionData({});
     setCollectionSheetOpen(false);
+  };
+
+  // Income/Expense management functions
+  const handleAddIncomeExpense = () => {
+    const incomeExpense: IncomeExpense = {
+      id: `IE${String(incomeExpenses.length + 1).padStart(3, '0')}`,
+      type: newIncomeExpense.type,
+      category: newIncomeExpense.category,
+      amount: newIncomeExpense.amount,
+      description: newIncomeExpense.description,
+      date: newIncomeExpense.date,
+      createdAt: new Date().toISOString(),
+      createdBy: isAdmin ? 'admin' : 'user'
+    };
+
+    setIncomeExpenses([...incomeExpenses, incomeExpense]);
+    setNewIncomeExpense({
+      type: 'income',
+      category: '',
+      amount: 0,
+      description: '',
+      date: new Date().toISOString().split('T')[0]
+    });
+    setIncomeExpenseOpen(false);
+  };
+
+  // Worker Salary management functions
+  const handleAddWorkerSalary = () => {
+    const worker = workers.find(w => w.id === newWorkerSalary.workerId);
+    if (!worker) return;
+
+    const totalSalary = newWorkerSalary.baseSalary + newWorkerSalary.bonus - newWorkerSalary.deductions;
+
+    const salary: WorkerSalary = {
+      id: `WS${String(workerSalaries.length + 1).padStart(3, '0')}`,
+      workerId: newWorkerSalary.workerId,
+      workerName: worker.name,
+      month: newWorkerSalary.month.split('-')[1],
+      year: parseInt(newWorkerSalary.month.split('-')[0]),
+      baseSalary: newWorkerSalary.baseSalary,
+      bonus: newWorkerSalary.bonus,
+      deductions: newWorkerSalary.deductions,
+      totalSalary,
+      status: 'paid',
+      paidDate: new Date().toISOString().split('T')[0],
+      createdAt: new Date().toISOString(),
+      createdBy: isAdmin ? 'admin' : 'user'
+    };
+
+    setWorkerSalaries([...workerSalaries, salary]);
+
+    // Add salary as expense
+    const salaryExpense: IncomeExpense = {
+      id: `IE${String(incomeExpenses.length + 1).padStart(3, '0')}`,
+      type: 'expense',
+      category: 'বেতন',
+      amount: totalSalary,
+      description: `${worker.name} - ${newWorkerSalary.month} মাসের বেতন`,
+      date: new Date().toISOString().split('T')[0],
+      createdAt: new Date().toISOString(),
+      createdBy: isAdmin ? 'admin' : 'user'
+    };
+    setIncomeExpenses([...incomeExpenses, salaryExpense]);
+
+    setNewWorkerSalary({
+      workerId: '',
+      workerName: '',
+      month: new Date().toISOString().split('T')[0].substring(0, 7),
+      baseSalary: 0,
+      bonus: 0,
+      deductions: 0
+    });
+    setWorkerSalaryOpen(false);
   };
 
   const getWorkerMembers = (workerName: string) => {
@@ -768,7 +841,7 @@ export default function SocietyManager() {
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-value">${formatCurrency(memberProfile.monthlyStats.totalInstallment)}</div>
-            <div class="stat-label">মা��িক মোট কিস্তি</div>
+            <div class="stat-label">মাসিক মোট কিস্তি</div>
           </div>
           <div class="stat-card">
             <div class="stat-value">${formatCurrency(memberProfile.monthlyStats.totalSavings)}</div>
@@ -927,7 +1000,7 @@ export default function SocietyManager() {
             <tr>
               <th>রবিবার</th>
               <th>সোমবার</th>
-              <th>মঙ্গল���ার</th>
+              <th>��ঙ্গলবার</th>
               <th>বুধবার</th>
               <th>বৃহস্পতিবার</th>
               <th>শুক্রবার</th>
@@ -1368,7 +1441,7 @@ export default function SocietyManager() {
                   <CardContent>
                     <div className="text-2xl font-bold">{stats.totalWorkers}</div>
                     <p className="text-xs text-muted-foreground">
-                      {language === 'bn' ? 'দৈনিক কালেকশনকারী' : 'Daily collectors'}
+                      {language === 'bn' ? 'দৈনিক কালেকশন���ারী' : 'Daily collectors'}
                     </p>
                   </CardContent>
                 </Card>
@@ -1471,7 +1544,7 @@ export default function SocietyManager() {
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight">{currentText.workers}</h2>
                   <p className="text-muted-foreground">
-                    {language === 'bn' ? 'সমিতির কর্মীদের তথ্য ও কর্মক্ষমতা ব্যবস্থাপনা' : 'Manage worker information and performance'}
+                    {language === 'bn' ? 'সমিতির কর্মীদের তথ্য ও কর্মক্ষমতা ব্য��স্থাপনা' : 'Manage worker information and performance'}
                   </p>
                 </div>
                 
@@ -1632,7 +1705,7 @@ export default function SocietyManager() {
               ) : (
                 <Card>
                   <CardHeader>
-                    <CardTitle>{language === 'bn' ? 'সদস্য তালিকা' : 'Members List'} ({members.length})</CardTitle>
+                    <CardTitle>{language === 'bn' ? 'সদস্য তা���িকা' : 'Members List'} ({members.length})</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Table>
@@ -1919,7 +1992,7 @@ export default function SocietyManager() {
                       <Textarea id="address" rows={3} />
                     </div>
                     <Button>
-                      {language === 'bn' ? '��ংরক্ষণ করুন' : 'Save Changes'}
+                      {language === 'bn' ? 'সংরক্ষণ করুন' : 'Save Changes'}
                     </Button>
                   </CardContent>
                 </Card>
@@ -1941,7 +2014,7 @@ export default function SocietyManager() {
                       </div>
                       <p className="text-sm text-green-700 mt-2">
                         {language === 'bn' 
-                          ? 'সকল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখনো অটোমেটিক মুছে যায় না।'
+                          ? 'সকল ডেটা স্থানীয়ভাবে সংরক্ষিত এবং কখ��ো অটোমেটিক মুছে যায় না।'
                           : 'All data is stored locally and never automatically deleted.'
                         }
                       </p>
@@ -1965,7 +2038,7 @@ export default function SocietyManager() {
                           <span className="font-medium">{collections.length}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>{language === 'bn' ? 'মোট সংগ্রহ:' : 'Total Amount:'}</span>
+                          <span>{language === 'bn' ? 'মোট সংগ��রহ:' : 'Total Amount:'}</span>
                           <span className="font-medium">{formatCurrency(collections.reduce((sum, c) => sum + c.installmentCollected + c.savingsCollected, 0))}</span>
                         </div>
                       </div>
@@ -2027,7 +2100,7 @@ export default function SocietyManager() {
           <DialogHeader>
             <DialogTitle>{currentText.addWorker}</DialogTitle>
             <DialogDescription>
-              {language === 'bn' ? 'নতুন কর্মীর সম্পূর্ণ তথ্য প্রবেশ করান' : 'Enter complete new worker information'}
+              {language === 'bn' ? 'নতুন কর্মীর সম্পূর্��� তথ্য প্রবেশ করান' : 'Enter complete new worker information'}
             </DialogDescription>
           </DialogHeader>
           
