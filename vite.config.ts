@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist/spa",
   },
-  base: mode === "production" ? "/builder-spark-works/" : "/",
+  base: mode === "production" ? "/loanbondhu/" : "/",
   plugins: [react(), expressPlugin()],
   resolve: {
     alias: {

@@ -2,10 +2,10 @@
   "name": "loanbondhu",
   "version": "1.0.0",
   "description": "LoanBondhu - সমিতি ব্যবস্থাপনা সিস্টেম (Society Management System)",
-  "homepage": "https://nishojibon5-hash.github.io/builder-spark-works/",
+  "homepage": "https://nishojibon5-hash.github.io/loanbondhu/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nishojibon5-hash/builder-spark-works.git"
+    "url": "https://github.com/nishojibon5-hash/loanbondhu.git"
   },
   "keywords": [
     "loan",
