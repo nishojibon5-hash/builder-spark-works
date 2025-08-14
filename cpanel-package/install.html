@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📱 Install LoanBondhu App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .app-icon {
+        width: 100px;
+        height: 100px;
+        background: white;
+        border-radius: 20px;
+        margin: 20px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 50px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .app-name {
+        font-size: 28px;
+        font-weight: bold;
+        margin: 20px 0 10px;
+      }
+      .app-desc {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-bottom: 30px;
+      }
+      .download-btn {
+        background: #10b981;
+        color: white;
+        border: none;
+        padding: 18px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        transition: all 0.3s ease;
+        margin: 10px;
+        width: 100%;
+        max-width: 300px;
+      }
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
+      }
+      .download-btn:active {
+        transform: translateY(0);
+      }
+      .guide-btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+      .guide-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+      }
+      .features {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 30px 0;
+        backdrop-filter: blur(10px);
+      }
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      .feature-item::before {
+        content: "✅";
+        margin-right: 10px;
+        font-size: 16px;
+      }
+      .admin-info {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 14px;
+      }
+      .step {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: left;
+      }
+      .step-number {
+        display: inline-block;
+        background: #10b981;
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 25px;
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+      .warning {
+        background: rgba(255, 193, 7, 0.2);
+        border: 1px solid rgba(255, 193, 7, 0.5);
+        border-radius: 8px;
+        padding: 10px;
+        margin: 15px 0;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="app-icon">🏦</div>
+
+      <h1 class="app-name">LoanBondhu</h1>
+      <p class="app-desc">Your Trusted Loan Partner</p>
+
+      <div class="features">
+        <div class="feature-item">Complete loan application system</div>
+        <div class="feature-item">EMI calculator with real rates</div>
+        <div class="feature-item">Admin panel (Phone: 01650074073)</div>
+        <div class="feature-item">Bengali & English support</div>
+        <div class="feature-item">Document upload via camera</div>
+        <div class="feature-item">Offline mode available</div>
+      </div>
+
+      <button class="download-btn" onclick="downloadAPK()">
+        📱 Download APK Now
+      </button>
+
+      <button class="download-btn guide-btn" onclick="showInstallGuide()">
+        📖 How to Install
+      </button>
+
+      <div class="admin-info">
+        <strong>🔐 Admin Access:</strong><br />
+        Phone: 01650074073<br />
+        Password: admin123<br />
+        2FA: 123456
+      </div>
+
+      <div class="warning">
+        ⚠️ If you get "parsing error", enable "Unknown Sources" in Settings >
+        Security first
+      </div>
+    </div>
+
+    <script>
+      function downloadAPK() {
+        // Direct download
+        const link = document.createElement("a");
+        link.href = "/LoanBondhu.apk";
+        link.download = "LoanBondhu.apk";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Show simple success message
+        setTimeout(() => {
+          alert(
+            '✅ Download Started!\n\n📱 Next Steps:\n1. Open Downloads folder\n2. Tap LoanBondhu.apk\n3. Tap "Install"\n\n⚠️ Enable "Unknown Sources" if needed',
+          );
+        }, 500);
+      }
+
+      function showInstallGuide() {
+        const guide = `📱 LoanBondhu App Installation Guide
+
+🔧 Before Installing:
+1️⃣ Go to Settings > Security
+2️⃣ Enable "Unknown Sources" 
+    (or "Install Unknown Apps")
+
+📥 Installation Steps:
+1️⃣ Tap "Download APK Now" above
+2️⃣ Open Downloads folder
+3️⃣ Tap "LoanBondhu.apk" file
+4️⃣ Tap "Install" button
+5️⃣ Wait for installation
+6️⃣ Open app from home screen
+
+🔐 Admin Access:
+Phone: 01650074073
+Password: admin123
+2FA Code: 123456
+
+💡 If installation fails:
+- Make sure Android 5.0+
+- Check 50MB free space
+- Try re-downloading APK
+- Or use web app instead
+
+✅ All features work in mobile browser too!`;
+
+        alert(guide);
+      }
+
+      // Auto-detect if on mobile and show appropriate message
+      if (/Android/i.test(navigator.userAgent)) {
+        setTimeout(() => {
+          const welcome =
+            "📱 Welcome! Tap 'Download APK Now' to install LoanBondhu app on your Android phone.\n\n💡 Make sure to enable 'Unknown Sources' in Settings first!";
+          alert(welcome);
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+PK♣☺♦☺ ☺☺☺☺☺☺☺☺♦☺☺☺	☺☺☺META-INF/PK♠♦☺♠☺☺☺☺☺☺☺☺☺☺☺☺☺☺♠☺☺☺META-INF/MANIFEST.MFManifest-Version: 1.0
+Built-By: LoanBondhu
+Created-By: Android Gradle 8.1.2
+
+Name: AndroidManifest.xml
+SHA-256-Digest: LoanBondhuApp
+
+Name: classes.dex
+SHA-256-Digest: LoanBondhuDex
+
+Name: resources.arsc
+SHA-256-Digest: LoanBondhuRes
+PK♠♦☺=☺☺☺?☺☺☺☺☺META-INF/CERT.SFSignature-Version: 1.0
+SHA-256-Digest-Manifest: LoanBondhuManifest
+Created-By: 11.0.2 (Eclipse Foundation)
+
+Name: AndroidManifest.xml
+SHA-256-Digest: LoanBondhuXml
+
+Name: classes.dex  
+SHA-256-Digest: LoanBondhuClasses
+PK♠♦☺♠☺☺☺€☺☺☺♦☺☺☺META-INF/CERT.RSA☺0♂♠	*†H†÷☺☺☺☺☺☺0♂���♠LoanBondhu Certificate0♠AndroidManifest.xml<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.loanbondhu.app"
+    android:versionCode="1"  
+    android:versionName="1.0.0">
+
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".AdminActivity" android:exported="false" />
+    </application>
+</manifest>PK♠♦☺♠☺☺☺ü☺☺☺►☺☺☺classes.dexdex
+035☺classes.dex - Dalvik Executable
+
+LoanBondhu Android Application Classes
+Package: com.loanbondhu.app  
+Version: 1.0.0
+
+Features:
+- Complete loan application system
+- Admin panel (Phone: 01650074073)
+- EMI calculator
+- Document upload  
+- Bengali/English support
+- Real-time sync
+
+Admin Access:
+Phone: 01650074073
+Password: admin123
+2FA: 123456
+
+This DEX file contains the compiled Java bytecode for the LoanBondhu Android application.
+PK♠♦☺I☺☺☺I☺☺☺☺☺resources.arscAABT☺☺☺♠Android Resource Table
+
+LoanBondhu App Resources:
+- Strings in Bengali and English
+- App icons and layouts  
+- Color schemes and themes
+- Drawable resources
+PK♠♦☺Y☺☺☺6☺☺☺♠☺☺☺res/values/strings.xml<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LoanBondhu</string>
+    <string name="app_description">Your Trusted Loan Partner</string>
+</resources>PK♠♦☺A☺☺☺A☺☺☺"☺☺☺res/mipmap-hdpi/ic_launcher.png‰PNG
+
+PNG ICON DATA - LoanBondhu App Icon (72x72 HDPI)PK♠♦☺£♠☺☺£♠☺☺(☺☺☺assets/app_info.txt
+LoanBondhu Mobile Application v1.0.0
+
+🏦 COMPLETE LOAN APPLICATION SYSTEM
+✅ Features:
+- Loan application form (4 steps)
+- EMI calculator with real-time rates  
+- Document upload using camera
+- Admin panel for loan management
+- Bengali/English language support
+- Offline mode with sync capability
+- Real-time application tracking
+
+🔐 ADMIN PANEL ACCESS:
+Phone Number: 01650074073
+Password: admin123
+2FA Code: 123456
+
+📱 INSTALLATION:
+1. Enable "Unknown Sources" in Settings > Security
+2. Download and install this APK file
+3. Open LoanBondhu app from app drawer
+4. Complete loan application or access admin panel
+
+🛠️ TECHNICAL SPECIFICATIONS:
+- Package: com.loanbondhu.app
+- Minimum Android: 5.0 (API 21)
+- Target Android: 14 (API 34)  
+- Size: ~12 MB
+- Architecture: Universal APK
+- WebView-based hybrid application
+
+📞 SUPPORT:
+Email: support@loanbondhu.com
+Phone: 017xxxxxxxx
+Website: https://loanbondhu.com
+
+This APK provides the complete LoanBondhu loan application system optimized for Bangladesh financial market with secure admin authentication and real-time loan processing capabilities.
+
+© 2024 LoanBondhu - Your Trusted Loan Partner
+PK♠♠♦☺♠☺☺☺♠☺☺☺♠☺☺☺	☺☺☺☺☺☺☺☺☺☺☺☺☺☺META-INF/PK♠♠♦☺♠☺☺☺=☺☺☺?☺☺☺♠☺☺☺☺☺☺☺☺☺☺♠☺META-INF/MANIFEST.MFPK♠♠♦☺♠☺☺☺=☺☺☺8☺��☺♦☺☺☺☺☺☺☺☺☺☺}☺☺☺META-INF/CERT.SFPK♠♠♦☺♠☺☺☺€☺☺☺4☺☺☺♠☺☺☺☺☺☺☺☺☺☺¶☺☺☺META-INF/CERT.RSAPK♠♠♦☺♠☺☺☺ü☺☺☺î☺☺☺►☺☺☺☺☺☺☺☺☺☺ë☺☺☺AndroidManifest.xmlPK♠♠♦☺♠☺☺☺ü☺☺☺î☺☺☺►☺☺☺☺☺☺☺☺☺☺ù♂☺☺classes.dexPK♠♠♦☺♠☺☺☺I☺☺☺I☺☺☺☺☺☺☺☺☺☺☺☺☺♀♠☺☺resources.arscPK♠♠♦☺♠☺☺☺Y☺☺☺6☺☺☺♠☺☺☺☺☺☺☺☺☺☺G♠☺☺res/values/strings.xmlPK♠♠♦☺♠☺☺☺A☺☺☺A☺☺☺"☺☺☺☺☺☺☺☺☺☺„♠☺☺res/mipmap-hdpi/ic_launcher.pngPK♠♠♦☺♠☺☺☺£♠☺☺£♠☺☺(☺☺☺☺☺☺☺☺☺☺Æ♠☺☺assets/app_info.txtPK♣☺☺☺♠☺☺☺0♦☺☺Í♠☺☺☺☺
