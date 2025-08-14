@@ -64,28 +64,45 @@ const instructions = `
 - Set permissions for PHP files: 644
 - Set permissions for directories: 755
 
-### 4. Configuration
+### 4. Builder.io Auto-Update Setup (Optional)
+- Follow instructions in: BUILDER_WEBHOOK_SETUP.md
+- Configure webhook in Builder.io: https://yourdomain.com/api/webhook
+- Enable automatic updates when Builder.io content changes
+
+### 5. Configuration
 - Update database credentials in: config/database.php (if needed)
 - Update domain in .htaccess CORS settings
+- Configure webhook secret in: config/webhook-config.php
 
 ## 📱 Access Your Application
 - Main App: http://yourdomain.com/
 - Admin Login: Phone & Password (set during installation)
 - API Base: http://yourdomain.com/api/
+- Webhook Endpoint: http://yourdomain.com/api/webhook
+- Deployment Status: http://yourdomain.com/api/deployment-status
+
+## 🔄 Auto-Update Features
+- ✅ Builder.io webhook integration
+- ✅ Automatic GitHub code pulling
+- ✅ Automatic deployment and backup
+- ✅ Rollback capability
+- ✅ Status monitoring
 
 ## 🔧 Troubleshooting
 - Check PHP error logs in cPanel
 - Ensure mod_rewrite is enabled
 - Verify database connection
 - Check file permissions
+- Review webhook logs: logs/webhook.log
+- Check deployment logs: logs/auto-deploy.log
 
 ## 📞 Support
-- Documentation: README.md
+- Documentation: README.md and BUILDER_WEBHOOK_SETUP.md
 - Issues: GitHub repository
 
 ---
 Generated on: ${new Date().toLocaleDateString()}
-Package Version: 1.0.0
+Package Version: 1.0.0 (with Auto-Update System)
 `;
 
 fs.writeFileSync(path.resolve(packageDir, 'DEPLOYMENT_INSTRUCTIONS.txt'), instructions);
