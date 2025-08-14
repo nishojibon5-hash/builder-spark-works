@@ -9,49 +9,49 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-    - name: Setup JDK
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-    - name: Install npm dependencies
-      run: npm ci
+      - name: Install npm dependencies
+        run: npm ci
 
-    - name: Build React app
-      run: |
-        npm run build:client
-        ls -la dist/
+      - name: Build React app
+        run: |
+          npm run build:client
+          ls -la dist/
 
-    - name: Prepare Android
-      run: |
-        mkdir -p android/app/src/main/assets
-        cp -r dist/spa/* android/app/src/main/assets/ || echo "Assets copied"
-        chmod +x android/gradlew
+      - name: Prepare Android
+        run: |
+          mkdir -p android/app/src/main/assets
+          cp -r dist/spa/* android/app/src/main/assets/ || echo "Assets copied"
+          chmod +x android/gradlew
 
-    - name: Build APK
-      working-directory: android
-      run: |
-        ./gradlew assembleDebug --no-daemon
-        ls -la app/build/outputs/apk/debug/
+      - name: Build APK
+        working-directory: android
+        run: |
+          ./gradlew assembleDebug --no-daemon
+          ls -la app/build/outputs/apk/debug/
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: LoanBondhu-APK
-        path: android/app/build/outputs/apk/debug/app-debug.apk
-        retention-days: 7
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: LoanBondhu-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
