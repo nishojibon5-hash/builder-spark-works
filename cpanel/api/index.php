@@ -136,6 +136,20 @@ switch (true) {
         require_once '../api/deployment.php';
         break;
 
+    // Webhook endpoint for Builder.io
+    case $path === '/webhook' && $method === 'POST':
+        require_once '../api/webhook.php';
+        break;
+
+    // Auto-deployment endpoints
+    case preg_match('/\/auto-deploy$/', $path) && $method === 'POST':
+        require_once '../api/auto-deploy.php';
+        break;
+
+    case preg_match('/\/deployment-status$/', $path) && $method === 'GET':
+        require_once '../api/auto-deploy.php';
+        break;
+
     default:
         http_response_code(404);
         echo json_encode(['error' => 'Route not found']);
