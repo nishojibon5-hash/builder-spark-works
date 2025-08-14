@@ -120,7 +120,22 @@ switch (true) {
         require_once '../routes/dashboard.php';
         handleGetDashboardStats();
         break;
-    
+
+    // Health check route
+    case $path === '/health' && $method === 'GET':
+        require_once '../api/health.php';
+        break;
+
+    // Migration route
+    case $path === '/migrate' && $method === 'POST':
+        require_once '../api/migrate.php';
+        break;
+
+    // Deployment routes
+    case preg_match('/^\/deployment\//', $path):
+        require_once '../api/deployment.php';
+        break;
+
     default:
         http_response_code(404);
         echo json_encode(['error' => 'Route not found']);
