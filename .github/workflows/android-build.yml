@@ -20,7 +20,7 @@ env:
 jobs:
   build-android:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: 📥 Checkout Code
@@ -43,9 +43,14 @@ jobs:
       - name: 📱 Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          api-level: 34
-          build-tools: 34.0.0
-          ndk-version: "25.1.8937393"
+          cmdline-tools-version: "10406996"
+          accept-android-sdk-licenses: true
+          log-accepted-android-sdk-licenses: false
+          packages: |
+            platforms;android-34
+            build-tools;34.0.0
+            platform-tools
+            tools
 
       - name: 📦 Install Dependencies
         run: |
@@ -76,7 +81,7 @@ jobs:
           mkdir -p android/app/src/main/res/mipmap-xhdpi
           mkdir -p android/app/src/main/res/mipmap-xxhdpi
           mkdir -p android/app/src/main/res/mipmap-xxxhdpi
-
+          
           echo "📋 Directory structure created:"
           find android/app/src/main/ -type d
 
@@ -99,7 +104,7 @@ jobs:
           cd android
           chmod +x gradlew
           echo "✅ Gradle wrapper permissions set"
-
+          
           echo "📋 Gradle version:"
           ./gradlew --version
 
@@ -133,7 +138,7 @@ jobs:
         run: |
           echo "🛠️ Building Debug APK..."
           ./gradlew assembleDebug --stacktrace --info --no-daemon
-
+          
           echo "📋 Checking Debug APK output..."
           if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
             echo "✅ Debug APK built successfully!"
@@ -149,7 +154,7 @@ jobs:
         run: |
           echo "🚀 Building Release APK..."
           ./gradlew assembleRelease --stacktrace --info --no-daemon
-
+          
           echo "📋 Checking Release APK output..."
           if [ -f "app/build/outputs/apk/release/app-release-unsigned.apk" ]; then
             echo "✅ Release APK built successfully!"
@@ -165,13 +170,13 @@ jobs:
           echo "📱 Verifying APK files..."
           DEBUG_APK="android/app/build/outputs/apk/debug/app-debug.apk"
           RELEASE_APK="android/app/build/outputs/apk/release/app-release-unsigned.apk"
-
+          
           if [ -f "$DEBUG_APK" ]; then
             echo "✅ Debug APK: $(du -h $DEBUG_APK | cut -f1)"
           else
             echo "❌ Debug APK not found!"
           fi
-
+          
           if [ -f "$RELEASE_APK" ]; then
             echo "✅ Release APK: $(du -h $RELEASE_APK | cut -f1)"
           else
@@ -214,7 +219,7 @@ jobs:
 
             ### 📋 APK Information:
             - **📱 Minimum Android Version:** 5.0 (API 21)
-            - **🎯 Target Android Version:** 14 (API 34)
+            - **�� Target Android Version:** 14 (API 34)
             - **🏗️ Architecture:** Universal APK
             - **📦 Size:** ~12MB
             - **🔐 Signing:** Debug signed (for testing)
@@ -236,7 +241,7 @@ jobs:
             ---
 
             **🏦 LoanBondhu - সমিতি ব্যবস্থাপনা সিস্টেম**
-
+            
             Built with ❤️ for Bangladesh 🇧🇩
           files: |
             android/app/build/outputs/apk/debug/app-debug.apk
